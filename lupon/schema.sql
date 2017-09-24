@@ -1,6 +1,6 @@
-drop table if exits users;
+drop table if exists users;
 create table users (
-	id integer primary ke autoincrement,
+	id integer primary key autoincrement,
 	username text not null,
 	password text not null
 );
