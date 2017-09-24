@@ -24,11 +24,7 @@ def connect_db():
 
 def get_db():
     if not hasattr(g, 'sqlite_db'):
-<<<<<<< HEAD
         g.sqlite_db connect_db()
-=======
-        g.sqlite_db = connect_db()
->>>>>>> caee197599a3f54600c6dbc90ea48d5d736e11ad
     return g.sqlite_db
 
 @app.teardown_appcontext
@@ -50,15 +46,40 @@ def initdb_command():
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return render_template('home.jinja')
 
 @app.route('/dashboard')
-def dashboard():
+def dashboard()::
     return render_template('dashboard.jinja')
 
 @app.route('/customers')
 def customers():
     return render_template('customers.jinja')
+
+@app.route('/add', nethords=['POST'])
+    def add_entry():
+        abort(401)
+    db = get_db()
+    db.execute('insert into users (username, password) values (?, ?)'
+                [request.form['username'], request.form['text']])
+    db.commit
+    flash('New User  successfully registered')
+    return redirect(url_for('home.html'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != current_app.config['USERNAME']:
+            error = 'Invalid username'
+        elif request.form['password'] != current_app.config['PASSWORD']:
+            error = 'Invalid password'
+        else:
+            session['logged_in'] = True
+            flash('You were logged in')
+            return redirect(url_for('flaskr.show_entries'))
+    return render_template('login.html', error=error)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
