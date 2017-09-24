@@ -1,44 +1,33 @@
 {% extends 'layout.jinja' %}
 {% block body %}
-<div class="container-fluid pt-2">
+<div class="container-fluid">
     <div class="row">
-        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+        <!--nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar"-->
+        <nav class="col-12 col-md-3 col-xl-2 bg-light bd-sidebar">
+	  <form class="bd-search d-flex align-items-center p-2 m-2">
+  		<input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+  		<button class="btn-link bd-search-docs-toggle d-md-none p-0 ml-3" type="button" data-toggle="collapse" data-target="#bd-docs-nav" aria-controls="bd-docs-nav" aria-expanded="false" aria-label="Toggle docs avigation">
+    <svg class="" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 30 30" width="30" height="30" focusable="false"><title>Menu</title><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/></svg>
+  		</button>
+	  </form>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href="#">Hans Muster <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Reports</a>
+              <a class="nav-link" href="#">Adam Eva</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Analytics</a>
+              <a class="nav-link" href="#">Dr. Rolf Hirsch</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Export</a>
+              <a class="nav-link" href="#">Mr. TTY</a>
             </li>
           </ul>
         </nav>
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 	{% include 'includes/sub_navbar.jinja' %}
           <h1>Customer Overview</h1>
-
-          <section class="row text-center placeholders">
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail" width="200" height="200">
-              <h4>Label</h4>
-              <div class="text-muted">Something else</div>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail" width="200" height="200">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail" width="200" height="200">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </section>
         </main>
       </div>
     </div>
