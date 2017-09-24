@@ -1,1 +1,0 @@
-from .lupon import app
