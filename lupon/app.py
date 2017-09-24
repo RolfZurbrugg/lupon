@@ -24,7 +24,11 @@ def connect_db():
 
 def get_db():
     if not hasattr(g, 'sqlite_db'):
+<<<<<<< HEAD
         g.sqlite_db connect_db()
+=======
+        g.sqlite_db = connect_db()
+>>>>>>> caee197599a3f54600c6dbc90ea48d5d736e11ad
     return g.sqlite_db
 
 @app.teardown_appcontext
@@ -46,7 +50,7 @@ def initdb_command():
 
 @app.route('/')
 def index():
-    return render_template('home.jinja')
+    return render_template('home.html')
 
 @app.route('/dashboard')
 def dashboard():
