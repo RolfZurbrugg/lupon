@@ -24,7 +24,7 @@ def connect_db():
 
 def get_db():
     if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db connect_db()
+        g.sqlite_db = connect_db()
     return g.sqlite_db
 
 @app.teardown_appcontext
@@ -46,33 +46,34 @@ def initdb_command():
 
 @app.route('/')
 def index():
-    return render_template('home.jinja')
+    return render_template('customers.html')
 
 @app.route('/dashboard')
-def dashboard()::
+def dashboard():
     return render_template('dashboard.jinja')
 
 @app.route('/customers')
 def customers():
     return render_template('customers.jinja')
 
-@app.route('/add', nethords=['POST'])
-    def add_entry():
+@app.route('/add', methods=['POST'])
+def add_user():
+    if not session.get('logged_in'):
         abort(401)
     db = get_db()
     db.execute('insert into users (username, password) values (?, ?)'
                 [request.form['username'], request.form['text']])
     db.commit
     flash('New User  successfully registered')
-    return redirect(url_for('home.html'))
+    return redirect(url_for('login.html'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != current_app.config['USERNAME']:
+        if request.form['username'] != app.config['USERNAME']:
             error = 'Invalid username'
-        elif request.form['password'] != current_app.config['PASSWORD']:
+        elif request.form['password'] != app.config['PASSWORD']:
             error = 'Invalid password'
         else:
             session['logged_in'] = True
