@@ -1,0 +1,33 @@
+ToDo
+
+Start with DB model
+    User, Company, Customers, Services
+
+@Rolf
+User Login
+User Creation Form (signup)
+Sessionhandeling
+
+@Flo
+Basic Layout for menus
+Mailing funktion
+Start multilingual
+
+
+Burndown
+
+Forms
+    Add Customer
+    Add Service
+    Form validation -> wtforms
+    Showroom html page
+
+Billing
+    Create Opportunity
+    Create Offer
+    Create Bill
+    PDF Export
+
+Setup
+    Server @Rolf server von BFH bestellen
+    Project Setup -> Lupon 3.0 until 22.10.17
