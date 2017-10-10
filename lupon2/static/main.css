@@ -1,0 +1,59 @@
+* * {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+
+}
+
+h2 {
+
+}
+
+h3{
+
+}
+
+.nav {
+    background-color: #595959;
+    color: #ffffff;
+    list-style: none;
+    text-align: center;
+    padding: 20px 0 20px 0;
+}
+
+.nav > li {
+    display: inline;
+    padding: 0 25px 0 25px;
+    align-content: center;
+    display: inline;
+    text-indent: 0%;
+    margin: 0cm;
+}
+
+.nav > li > a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.nav > li > a:hover {
+    color: #c1c1c1;
+    text-decoration: underline;
+}
+
+#login {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+}
+
+#login > input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-color: green;
+}
+

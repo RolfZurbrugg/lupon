@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main.css')}}">
+
+<body>
+<input type="text" name="lastName" value="Lastname">
+<input type="text" name="firstName" value="Firstname">
+<input type="text" name="street" value="Street">
+<input type="text" name="houseNumber" value="Housnumber">
+<input type="text" name="zipcode" value="Zipcode">
+<input type="text" name="city" value="City">
+<input type="submit" value="add customer">
+
+<br><br>
+
+<table style="width:100%">
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Street</th>
+        <th>Housnumber</th>
+        <th>Zipcode</th>
+        <th>City</th>
+    </tr>
+</table>
+
+
+</body>
+{% endblock %}
