@@ -17,12 +17,18 @@ class User(db.Model):
 
 class Test(db.Model):
     __tablename__ = 'Test'
-    id = db.Column('ID', db.Integer, primary_key=True)
-    text = db.Column('Text', db.Unicode)
+    id = db.Column('id', db.Integer, primary_key=True)
+    text = db.Column('text', db.Unicode)
 
 
 test = Test.query.all()
 
-#for t in test:
-#    print(t.data)
+test2 = Test.query.filter_by(id=1).first()
+print(test2.text)
+
+test3 = Test.query.first()
+print(test3.text)
+
+for t in test:
+    print(t.text)
 
