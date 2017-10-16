@@ -1,0 +1,9 @@
+Flask
+Flask-Babel
+Flask-Cache
+Flask-Mail
+Flask-WTF
+Flask-MySQLdb
+Flask-SQLAlchemy
+Flask-Login
+requests
