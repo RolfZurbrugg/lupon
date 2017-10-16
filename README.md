@@ -1,3 +1,4 @@
+
 # Installation
 ```shell
 virtualenv -p python3 flask
@@ -45,3 +46,13 @@ MAIL_USE_SSL = True
 MAIL_USERNAME = 'MAIL_USERNAME'
 MAIL_PASSWORD = 'MAIL_PASSWORD'
 ```
+#Dependencies
+* Flask
+* Flask-Babel
+* Flask-Mail
+* Flask-Cache
+* Flask-WTF
+* Flask-SQLAlchemy
+* Flask-MySQLdb
+* Flask-Login
+* requests

@@ -7,3 +7,5 @@ Flask-MySQLdb
 Flask-SQLAlchemy
 Flask-Login
 requests
+psycopg2
+SQLAlchemy

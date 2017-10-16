@@ -20,7 +20,8 @@ setup(
         'Flask-MySQLdb',
         'Flask-SQLAlchemy',
         'Flask-Login',
-        'requests'
+        'requests',
+        'psycopg2'
     ],
     classifiers=[
         'Environment :: Web Environment',
