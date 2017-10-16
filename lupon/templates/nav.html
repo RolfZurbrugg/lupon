@@ -1,0 +1,51 @@
+<navbar>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="navbar-header"><a class="navbar-brand" href="/">LuponCRM</a></div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/dashboard" id="navDropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; {{ _('Dashboard') }}</a>
+                        <div class="dropdown-menu" aria-labelledby="navDropdown01">
+                            <a class="dropdown-item" href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; {{ _('Opportunities') }}</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-car" aria-hidden="true"></i>&nbsp; {{ _('Offers') }}</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp; {{ _('Bills') }}</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; {{ _('Customers') }}</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-car" aria-hidden="true"></i>&nbsp; {{ _('Services') }}</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-car" aria-hidden="true"></i>&nbsp; {{ _('Reports') }}</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav my-2 my-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navDropdown02" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navDropdown02">
+                            {% for lang in config.LANGUAGES %}
+                                <a class="dropdown-item" href="?lang={{ lang }}">{{ config.LANGUAGES[lang] }}</a>
+                                {# NOT WORKING if lang is equalto 'en' %}<i class="fa fa-check" aria-hidden="true"></i>{% endif #}
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navDropdown03" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navDropdown03">
+                            <a class="dropdown-item" href="#">{{ _('User Profil') }}</a>
+                            <a class="dropdown-item" href="#">{{ _('Password Reset') }}</a>
+                            <a class="dropdown-item" href="/login">{{ _('Logout') }}</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </nav>
+</navbar>

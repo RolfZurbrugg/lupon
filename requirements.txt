@@ -1,0 +1,16 @@
+# base
+Babel
+Flask
+Flask-Babel
+Flask-Mail
+# Flask-Script
+Flask-Cache
+Flask-WTF
+Flask-SQLAlchemie
+Flask-MySQLdb
+
+jinja2
+Werkzeug
+
+# auth 
+Flask-Login
