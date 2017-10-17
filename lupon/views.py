@@ -1,12 +1,13 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required
 # from flask_babel import gettext
-from .extensions import babel
+from lupon import babel
 
 
 from config import LANGUAGES
-from lupon import app
-from .forms import EmailPasswordForm
+from lupon import app, db, csrf
+from .models import Contact
+from .forms import ContactForm
 
 @babel.localeselector
 def get_locale():
@@ -25,11 +26,23 @@ def get_timezone():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    flash("TEST")
     form = EmailPasswordForm()
     if form.validate_on_submit():
-        return redirect(url_for('index'))
+        flash('SUCCESS')
+        return redirect(url_for('/index'))
     return render_template('login.html', form=form)
+
+@app.route('/contact', methods=["GET", "POST"])
+def contact():
+    # form = ContactForm()
+    if form.validate_on_submit():
+      flash('SUCCESS')
+      contact = Contact(firstname = form.name.data)
+      db.session.add(contact)
+      db.session.commit()
+      return redirect(url_for('contact'))
+    return render_template('contact.html', form=form)
+
 
 @app.route('/', methods=['GET','POST'])
 def index():

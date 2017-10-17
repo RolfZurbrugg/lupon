@@ -7,10 +7,11 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import requests
 
-from .extensions import db
-from lupon import app
+from . import app
+from . import db
 
-''' DEV '''
+
+''' DEV 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -18,34 +19,29 @@ app = Flask(__name__)
 app.config.from_object('config')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://127.0.0.1/lupon'
 db = SQLAlchemy(app)
-'''END DEV '''
+END DEV '''
 
 # Base = declarative_base()
 
-class Customer(db.Model):
-    ''' Customer Contact Datatable '''
-    __tablename__ = 'customer'
+class Contact(db.Model):
+    ''' Contact Contact Datatable '''
+    __tablename__ = 'contact'
     id = Column(Integer, primary_key=True)
-    is_active = Column(Boolean)
-    firstname = Column(String(256), nullable=False)
-    lastname = Column(String(256), nullable=False)
-    email = Column(String(256))
-    phone = Column(String(256))
-    locations = relationship('Location', backref='customer', lazy='dynamic')
+    name = Column(String(256), nullable=False)
+    # lastname = Column(String(256), nullable=False)
+    # email = Column(String(256))
+    # phone = Column(String(256))
+    # locations = relationship('Location', backref='contact', lazy='dynamic')
     
     def __repr__(self):
         ''' DEBUG PRINT OUTPUT'''
-        return '<Customer %r>' % (self.firstname+" "+self.lastname)
+        return '<Contact %r>' % (self.name)
 
-    def __init__(self, firstname, lastname, email, phone, location):
-        self.firstname = firstname
-        self.lastname = lastname
-        self.email = email
-        self.phone = phone
-        self.location = location
-        
+    def __init__(self, name):
+        self.name = name
+'''        
 class Location(db.Model):
-    '''
+    
      Methods defined here:
 
     __init__(self, firstname, lastname, email, phone, locations):
@@ -58,7 +54,7 @@ class Location(db.Model):
         // in developent
         GoogleMaps API Request to get geolocation data as JSON
          # address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
-    '''
+
     __tablename__ = 'location'
     id = Column(Integer, primary_key=True)
     street = Column(String(256))
@@ -86,7 +82,7 @@ class Location(db.Model):
         return response.json()
 
 class Company(db.Model):
-    ''' Add Company attributes if customer is a company '''
+    Add Company attributes if customer is a company
     __tablename__ = 'company'
     id = Column(Integer, primary_key=True)
     customer_id = Column(Integer, ForeignKey('customer.id'))
@@ -109,3 +105,4 @@ class Service(object):
 
 class Task(object):
     pass
+'''
