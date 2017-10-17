@@ -1,4 +1,7 @@
 __pycache__
+lupon.egg.info
 .vscode
 instance
 config.py
+venv
+_old
