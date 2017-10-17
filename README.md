@@ -1,23 +1,38 @@
+# Requirements
+
+- python3
+- virtualenv
+- git
+
 # Installation
-```shell
-virtualenv -p python3 flask
-cd flask
+
+```Bash
+virtualenv -p python3 venv
+cd venv
 scource bin/activate
 ```
 
-```shell
+```Bash
 git clone https://github.com/RolfZurbrugg/lupon.git
 cd lupon
 pip install --editable .
 ```
 
+## Run Application
+
 ```shell
-## run Luopn
 export FLASK_APP=lupon
 flask run
 ```
 
+## Run in Developer mode
+
+````shell
+python run.py
+````
+
 # Configuration
+
 ```shell
 cp config-example.py config.py
 ```
@@ -45,3 +60,16 @@ MAIL_USE_SSL = True
 MAIL_USERNAME = 'MAIL_USERNAME'
 MAIL_PASSWORD = 'MAIL_PASSWORD'
 ```
+
+## Database
+
+```Bash
+sudo yum -y install mysql
+mysql -u root -p
+```
+
+```sql
+CREATE DATABASE lupon;
+CREATE USER lupon@localhost IDENTIFIED BY 'lupon';
+GRANT ALL PRIVILEGES ON  lupon to 'lupon'@'localhost'
+````
