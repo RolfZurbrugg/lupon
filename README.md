@@ -1,10 +1,12 @@
-# Requirements
+# LuponCRM
+
+## Requirements
 
 - python3
 - virtualenv
 - git
 
-# Installation
+## Installation
 
 ```Bash
 virtualenv -p python3 venv
@@ -18,20 +20,20 @@ cd lupon
 pip install --editable .
 ```
 
-## Run Application
+### Run Application
 
 ```shell
 export FLASK_APP=lupon
 flask run
 ```
 
-## Run in Developer mode
+### Run in Developer mode
 
 ````shell
 python run.py
 ````
 
-# Configuration
+## Configuration
 
 ```shell
 cp config-example.py config.py
@@ -61,7 +63,7 @@ MAIL_USERNAME = 'MAIL_USERNAME'
 MAIL_PASSWORD = 'MAIL_PASSWORD'
 ```
 
-## Database
+### Database
 
 ```Bash
 sudo yum -y install mysql
