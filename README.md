@@ -5,8 +5,14 @@
 - python3
 - virtualenv
 - git
+- PostgreSQL or MySQL
 
 ## Installation
+
+```bash
+sudo useradd lupon
+su lupon
+```
 
 ```Bash
 virtualenv -p python3 venv
@@ -82,3 +88,47 @@ from lupon import app, db
 app.app_context().push()
 db.create_all()
 ```
+
+```bash
+pacuar -S postgresql
+sudo useradd lupon
+su lupon
+```
+
+#### PostgreSQL
+
+Create Database and Database User
+
+```bash
+## ARCHLinux spesific??
+initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'
+sudo -u postgres -i
+# add user to psql
+createuser --interactive lupon
+# create database lupon
+createdb lupon
+# drop database lupon 
+dropdb lupon
+```
+
+Verify:
+
+```bash
+psql -U lupon -d lupon -h 127.0.0.1 -W
+```
+
+## Dependencies
+
+* Flask
+* Flask-Babel
+* Flask-Mail
+* Flask-Cache
+* Flask-WTF
+* Flask-Login
+* requests
+* ...
+## Database
+* Psycopg2
+* Flask-MySQLdb
+* Flask-SQLAlchemy
+* Flask-Migrate
