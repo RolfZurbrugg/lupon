@@ -1,0 +1,22 @@
+{# lupon/templates/login.html #}
+
+{% extends "base.html" %}
+
+{% block content %}
+<form action="{{ url_for('register') }}"  method="POST">
+   <h2 class="form-signin-heading">Create new Account</h2>            
+   {% for field in form %}
+   <label class="{{ field.class }}" for="event_{{ field.id }}">{{ field.label }}</label>
+   {{ field }}
+   {% endfor %}
+   <p><input type="Submit" value="Register Now!"></p>
+   {{ form.csrf_token }}
+</form>
+
+<dl>
+    {% for user in users %}
+    <dt>ID: {{ user.id }}</dt>
+    <dd>Username: {{ user }}</dd>
+    {% endfor %}
+</dl>
+{% endblock %}
