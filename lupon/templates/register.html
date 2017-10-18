@@ -14,9 +14,30 @@
 </form>
 
 <dl>
-    {% for user in users %}
-    <dt>ID: {{ user.id }}</dt>
-    <dd>Username: {{ user }}</dd>
+    <dt>USER</dt>
+    {% for user in json %}
+        <dd> {{ user|string }}</dd>
     {% endfor %}
 </dl>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Email</th>
+            <th>Password</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for row in json %}
+        <tr>
+        <td>{{ row.id|safe }}</td>
+        <td>{{ row.email|safe }}</td>
+        <td>{{ row.password|safe }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

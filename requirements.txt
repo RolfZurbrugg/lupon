@@ -7,4 +7,5 @@ Flask-WTF
 Flask-SQLAlchemy
 Flask-MySQLdb
 Flask-Login
+Flask-RESTful
 requests

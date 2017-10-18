@@ -22,7 +22,10 @@ setup(
         'Flask-Login',
         'Flask-Bcrypt==0.6.0',
         'WTFlorms-Alchemy'
-        'requests'
+        'requests',
+        'Flask-RESTful',
+        'Flask-HTTPAuth',
+        'marshmallow'
     ],
     classifiers=[
         'Environment :: Web Environment',

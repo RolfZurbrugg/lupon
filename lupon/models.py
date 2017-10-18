@@ -25,26 +25,27 @@ END DEV '''
 class User(db.Model):
     id = Column(db.Integer, primary_key=True, autoincrement=True)
     email = Column(
-        EmailType, 
-        unique=True, 
-        nullable=False, 
-        info={
-            'label': 'Name'  
-        }
+            String(120), 
+            unique=True, 
+            nullable=False, 
+            info={'validators': Email(),
+                'label': 'Name' 
+            }
     )
     # name = Column(Unicode(100), nullable=False)
     password = Column(
-        PasswordType(
-            schemes=['pbkdf2_sha512']
-            ),
-        info={ 'label': 'Password' },
-        nullable=False
+            String(80),
+            nullable=False,
+            info={ 'label': 'Password' }
     )
+    
+    posts = db.relationship('Post', backref='user', lazy='dynamic')
+    
     # locations = relationship('Location', backref='user', lazy='dynamic')
      
     def __init__(self, email, password):
         self.email = email
-        self.password = password
+        self.password = flask_bcrypt.generate_password_hash(password)
  
     def __repr__(self):
         return '<User %r>' % self.email
@@ -54,6 +55,8 @@ class User(db.Model):
             return False
         else:
             return True
+
+    
 
 class Customer(db.Model):
     ''' Customer Contact Datatable '''
@@ -139,3 +142,22 @@ class Service(object):
 
 class Task(object):
     pass
+
+'''
+@SOURCE http://zqsmm.qiniucdn.com/data/20140904220136/index.html
+'''
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), nullable=False)
+    body = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    created_at = db.Column(db.DateTime, default=db.func.now())
+ 
+    def __init__(self, title, body):
+        self.title = title
+        self.body = body
+        self.user_id = g.user.id
+ 
+    def __repr__(self):
+        return '<Post %r>' % self.title
