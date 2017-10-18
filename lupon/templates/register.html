@@ -13,15 +13,6 @@
    {{ form.csrf_token }}
 </form>
 
-<dl>
-    <dt>USER</dt>
-    {% for user in json %}
-        <dd> {{ user|string }}</dd>
-    {% endfor %}
-</dl>
-
-
-
 <table class="table">
     <thead>
         <tr>
@@ -31,7 +22,7 @@
             </tr>
     </thead>
     <tbody>
-        {% for row in json %}
+        {% for row in user %}
         <tr>
         <td>{{ row.id|safe }}</td>
         <td>{{ row.email|safe }}</td>

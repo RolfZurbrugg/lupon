@@ -30,9 +30,7 @@ def get_timezone():
 @app.route('/register', methods=["GET", "POST"])
 def register():
   form = CreateForm()
-  # schema = UserSerializer()
   user = User.query.all()
-  # json_string = schema.dump(user).data
   if form.validate_on_submit():
     user = User(
                 form.email.data, 
@@ -42,8 +40,7 @@ def register():
     db.session.commit()
     flash("User successflly created!")
     return redirect(url_for('register'))
-  return render_template('register.html', form=form, json=user)
-
+  return render_template('register.html', form=form, user=user)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
