@@ -7,4 +7,5 @@ Flask-MySQLdb
 Flask-SQLAlchemy
 Flask-Login
 Flask-Bcrypt==0.6.0
+WTForms-Alchemy
 requests

@@ -74,4 +74,11 @@ mysql -u root -p
 CREATE DATABASE lupon;
 CREATE USER lupon@localhost IDENTIFIED BY 'lupon';
 GRANT ALL PRIVILEGES ON  lupon to 'lupon'@'localhost'
-````
+```
+
+```Python
+from lupon import app, db
+
+app.app_context().push()
+db.create_all()
+```
