@@ -5,8 +5,9 @@ from .extensions import babel
 
 
 from config import LANGUAGES
-from lupon import app
-from .forms import EmailPasswordForm
+from lupon import app, db
+from .models import User
+from .forms import EmailPasswordForm, UserCreateForm
 
 @babel.localeselector
 def get_locale():
@@ -23,11 +24,27 @@ def get_timezone():
     if user is not None:
         return user.timezone
 
+@app.route('/register', methods=["GET", "POST"])
+def register():
+  form = UserCreateForm()
+  users = User.query.all()
+  if form.validate_on_submit():
+    user = User(
+                form.email.data, 
+                form.password.data
+              )
+    db.session.add(user)
+    db.session.commit()
+    flash("User successflly created!")
+    return redirect(url_for('register'))
+  return render_template('register.html', form=form, users=users)
+
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    flash("TEST")
-    form = EmailPasswordForm()
+    form = UserCreateForm()
     if form.validate_on_submit():
+        flash("SUCCESS")
         return redirect(url_for('index'))
     return render_template('login.html', form=form)
 
@@ -35,9 +52,12 @@ def login():
 def index():
   app.config['BABEL_DEFAULT_LOCALE'] = get_locale()
   return render_template("index.html")
-'''
-@app.route('/dashboard')
-@login_required
-def account():
-  return render_template("account.html")
-'''
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html'), 500

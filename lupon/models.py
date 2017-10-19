@@ -2,13 +2,16 @@
 This module contains all classes requeried for Database Model
 
 '''
-from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode
+
 import requests
 
-from .extensions import db
-from lupon import app
+from flask import g
+
+from wtforms.validators import Email
+from sqlalchemy_utils import EmailType, PasswordType
+
+from lupon import app, flask_bcrypt, db
 
 ''' DEV
 from flask import Flask
@@ -18,7 +21,39 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 END DEV '''
-# Base = declarative_base()
+
+class User(db.Model):
+    id = Column(db.Integer, primary_key=True, autoincrement=True)
+    email = Column(
+        EmailType, 
+        unique=True, 
+        nullable=False, 
+        info={
+            'label': 'Name'  
+        }
+    )
+    # name = Column(Unicode(100), nullable=False)
+    password = Column(
+        PasswordType(
+            schemes=['pbkdf2_sha512']
+            ),
+        info={ 'label': 'Password' },
+        nullable=False
+    )
+    # locations = relationship('Location', backref='user', lazy='dynamic')
+     
+    def __init__(self, email, password):
+        self.email = email
+        self.password = password
+ 
+    def __repr__(self):
+        return '<User %r>' % self.email
+
+    def email_exists(self):
+        if db.session.query(User.id).filter_by(name=self.email).scalar() is not None:
+            return False
+        else:
+            return True
 
 class Customer(db.Model):
     ''' Customer Contact Datatable '''
@@ -29,18 +64,16 @@ class Customer(db.Model):
     lastname = Column(String(256), nullable=False)
     email = Column(String(256))
     phone = Column(String(256))
-    locations = relationship('Location', backref='customer', lazy='dynamic')
     
     def __repr__(self):
         ''' DEBUG PRINT OUTPUT'''
         return '<Customer %r>' % (self.firstname+" "+self.lastname)
 
-    def __init__(self, firstname, lastname, email, phone, location):
+    def __init__(self, firstname, lastname, email, phone):
         self.firstname = firstname
         self.lastname = lastname
         self.email = email
         self.phone = phone
-        self.location = location
         
 class Location(db.Model):
     '''
@@ -64,9 +97,9 @@ class Location(db.Model):
     city = Column(String(256))
     state = Column(String(256))
     plz = Column(String(256))
-    coordinates = Column(JSON)
-    customer_id = Column(Integer, ForeignKey('customer.id'))
-    company = relationship('Company', uselist=False, back_populates="location")
+    # coordinates = Column(JSON)
+    #customer_id = Column(Integer, ForeignKey('customer.id'))
+    #user_id = Column(Integer, ForeignKey('user.id'))
 
     def __repr__(self):
         pass
@@ -88,9 +121,8 @@ class Company(db.Model):
     __tablename__ = 'company'
     id = Column(Integer, primary_key=True)
     customer_id = Column(Integer, ForeignKey('customer.id'))
-    employees = relationship('Customer', backref='employee', lazy='dynamic')
-    location_id = Column(Integer, ForeignKey('location.id'))
-    location = relationship('Location', back_populates="company")
+    # employees = relationship('Customer', backref='employee')
+
     
     def __repr__(self):
         pass

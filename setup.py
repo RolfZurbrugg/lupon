@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name="lupon",
-    version='0.3',
+    version='0.3.1',
     url='https://www.lupon.ch',
     description='',
     author='Florian Rindlisbacher',
@@ -20,6 +20,8 @@ setup(
         'Flask-MySQLdb',
         'Flask-SQLAlchemy',
         'Flask-Login',
+        'Flask-Bcrypt==0.6.0',
+        'WTFlorms-Alchemy'
         'requests'
     ],
     classifiers=[
