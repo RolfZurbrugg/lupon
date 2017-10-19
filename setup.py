@@ -22,7 +22,8 @@ setup(
         'Flask-Login',
         'Flask-Bcrypt==0.6.0',
         'WTFlorms-Alchemy'
-        'requests'
+        'requests',
+        'passlib'
     ],
     classifiers=[
         'Environment :: Web Environment',
