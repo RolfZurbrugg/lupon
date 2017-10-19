@@ -37,3 +37,12 @@
    bottom:0;
    height:60px;
 }
+
+#map {
+  width:300px;
+  height:300px;
+  border-radius:150px;
+  font-size:20px;
+  line-height:100px;
+  text-align:center;
+ }

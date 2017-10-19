@@ -2,13 +2,13 @@
 This module contains all classes requeried for Database Model
 
 '''
-from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean
+from sqlalchemy import Column, String, ForeignKey, Integer, JSON, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import requests
 
-from .extensions import db
-from lupon import app
+
+from lupon import app, db
 
 ''' DEV
 from flask import Flask
@@ -20,27 +20,26 @@ db = SQLAlchemy(app)
 END DEV '''
 # Base = declarative_base()
 
-class Customer(db.Model):
-    ''' Customer Contact Datatable '''
-    __tablename__ = 'customer'
+class Contact(db.Model):
+    ''' Contact Contact Datatable '''
+    __tablename__ = 'contact'
     id = Column(Integer, primary_key=True)
     is_active = Column(Boolean)
     firstname = Column(String(256), nullable=False)
     lastname = Column(String(256), nullable=False)
     email = Column(String(256))
     phone = Column(String(256))
-    locations = relationship('Location', backref='customer', lazy='dynamic')
+    # locations = relationship('Location', backref='contact', lazy='dynamic')
     
     def __repr__(self):
         ''' DEBUG PRINT OUTPUT'''
-        return '<Customer %r>' % (self.firstname+" "+self.lastname)
+        return '<Contact %r>' % (self.firstname+" "+self.lastname)
 
-    def __init__(self, firstname, lastname, email, phone, location):
+    def __init__(self, firstname, lastname, email, phone):
         self.firstname = firstname
         self.lastname = lastname
         self.email = email
         self.phone = phone
-        self.location = location
         
 class Location(db.Model):
     '''
@@ -48,7 +47,7 @@ class Location(db.Model):
 
     __init__(self, firstname, lastname, email, phone, locations):
         initialize class
-    
+
     __repr__(self)
         pass
 
@@ -65,13 +64,13 @@ class Location(db.Model):
     state = Column(String(256))
     plz = Column(String(256))
     coordinates = Column(JSON)
-    customer_id = Column(Integer, ForeignKey('customer.id'))
-    company = relationship('Company', uselist=False, back_populates="location")
+    #contact_id = Column(Integer, ForeignKey('contact.id'))
+    #company = relationship('Company', uselist=False, back_populates="location")
 
     def __repr__(self):
         pass
 
-    def __init__(self, street, city, plz, customer_id):
+    def __init__(self, street, city, plz, contact_id):
         self.street = street
         self.city = city
         self.plz = plz
@@ -84,13 +83,13 @@ class Location(db.Model):
         return response.json()
 
 class Company(db.Model):
-    ''' Add Company attributes if customer is a company '''
+    ''' Add Company attributes if contact is a company '''
     __tablename__ = 'company'
     id = Column(Integer, primary_key=True)
-    customer_id = Column(Integer, ForeignKey('customer.id'))
-    employees = relationship('Customer', backref='employee', lazy='dynamic')
-    location_id = Column(Integer, ForeignKey('location.id'))
-    location = relationship('Location', back_populates="company")
+    contact_id = Column(Integer, ForeignKey('contact.id'))
+    #employees = relationship('Contact', backref='employee', lazy='dynamic')
+    #location_id = Column(Integer, ForeignKey('location.id'))
+    #location = relationship('Location', back_populates="company")
     
     def __repr__(self):
         pass
