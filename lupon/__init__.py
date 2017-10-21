@@ -1,7 +1,9 @@
 # __init__.py
 from flask import Flask
-from flask_babel import Babel, gettext
-from .extensions import babel, mail
+from flask_babel import Babel
+from flask_babel import gettext
+from .extensions import babel
+from .extensions import mail
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
@@ -11,7 +13,7 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config')
-    
+
     db.init_app(app)
     babel.init_app(app)
     db.init_app(app)

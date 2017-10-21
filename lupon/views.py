@@ -1,7 +1,8 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required
-# from flask_babel import gettext
+from flask_babel import gettext
 from .extensions import babel
+
 
 
 from config import LANGUAGES
@@ -47,6 +48,7 @@ def login():
         flash("SUCCESS")
         return redirect(url_for('index'))
     return render_template('login.html', form=form)
+
 
 @app.route('/', methods=['GET','POST'])
 def index():
