@@ -17,11 +17,12 @@ setup(
         'Flask-Cache',
         'Flask-Mail',
         'Flask-WTF',
-        'Flask-MySQLdb',
+#        'Flask-MySQLdb',
         'Flask-SQLAlchemy',
         'Flask-Login',
-        'Flask-Bcrypt==0.6.0',
-        'WTFlorms-Alchemy'
+        'Flask-Bcrypt',
+        'WTForms-Alchemy',
+	'Psycopg2',
         'requests'
     ],
     classifiers=[
