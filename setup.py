@@ -21,7 +21,7 @@ setup(
         'Flask-SQLAlchemy',
         'Flask-Login',
         'Flask-Bcrypt==0.6.0',
-        'WTFlorms-Alchemy'
+        'WTForms-Alchemy',
         'requests'
     ],
     classifiers=[
