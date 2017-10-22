@@ -20,9 +20,14 @@ setup(
 #        'Flask-MySQLdb',
         'Flask-SQLAlchemy',
         'Flask-Login',
+<<<<<<< HEAD
         'Flask-Bcrypt',
         'WTForms-Alchemy',
 	'Psycopg2',
+=======
+        'Flask-Bcrypt==0.6.0',
+        'WTForms-Alchemy',
+>>>>>>> c4f91ad7b24b8a04ad99cd42e544b4a60ea62144
         'requests'
     ],
     classifiers=[
