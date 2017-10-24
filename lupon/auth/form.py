@@ -1,6 +1,6 @@
 from flask_wtf import Form
 from wtforms_alchemy import model_form_factory
-from wtforms import StringField, PasswordField, TextField, SubmitField, BooleanField, HiddenField
+from wtforms import StringField, PasswordField, TextField
 from wtforms.validators import DataRequired, Email, Length
 
 from .models import Customer, User, Location
@@ -16,6 +16,9 @@ class ModelForm(BaseModelForm):
 class UserCreateForm(ModelForm):
     class Meta:
         model = User
+        login = TextField
+        
+        
         email = TextField(
             validators=[
                 Email(),
@@ -23,39 +26,15 @@ class UserCreateForm(ModelForm):
                 Length(max=255)
             ]
         )
-        name = TextField(
+        password = PasswordField(
             validators=[
                 DataRequired(),
                 Length(max=255, min=6)
             ]
         ),
-
-class LoginForm(ModelForm):
-    class Meta:
-        model = User
-        email = TextField(
+        username = TextField(
             validators=[
-                Email(),
                 DataRequired(),
-                Length(max=255)
+                Length(max=255, min=6)
             ]
         ),
-
-        password = TextField(
-            validators=[
-                DataRequired(),
-                Length(max=255)
-            ]
-        )
-
-        
-
-
-class LocationForm(ModelForm):
-    class Meta:
-        model = Location
-
-''' DEPRECATED '''
-class EmailPasswordForm(Form):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])

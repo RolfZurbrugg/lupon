@@ -1,9 +1,8 @@
 from sqlalchemy import Column, Integer, String
-from .extensions import db
 from .utils import create_salt, create_password_hash
+from lupon import login_manager, db
 
-
-class User(db):
+class User(db.Model):
 
     def __init__(self, user_name, user_password, user_email):
         """user created salt should be created automaticaly hear at user creation, the password should be hasched"""
@@ -23,6 +22,21 @@ class User(db):
     user_password = Column(String(255))
     user_salt = Column(String(255))
     user_email = Column(String(120))
+
+    @login_manager.request_loader
+    def load_user(request):
+        token = request.headers.get('Authorization')
+        if token is None:
+            token = request.args.get('token')
+
+        if token is not None:
+            username,password = token.split(":") # naive token
+            user_entry = User.get(username)
+            if (user_entry is not None):
+                user = User(user_entry[0],user_entry[1])
+                if (user.password == password):
+                    return user
+        return None 
 
     def save(self, user):
 

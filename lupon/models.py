@@ -7,20 +7,26 @@ from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, B
 import requests
 
 from flask import g
-
 from wtforms.validators import Email
 from sqlalchemy_utils import EmailType, PasswordType
 
-from lupon import app, flask_bcrypt, db
+from . import app, flask_bcrypt, db, login_manager
 
-''' DEV
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+@login_manager.request_loader
+def load_user(request):
+    token = request.headers.get('Authorization')
+    if token is None:
+        token = request.args.get('token')
 
-app = Flask(__name__)
-app.config.from_object('config')
-db = SQLAlchemy(app)
-END DEV '''
+    if token is not None:
+        username,password = token.split(":") # naive token
+        user_entry = User.get(username)
+        if (user_entry is not None):
+            user = User(user_entry[0],user_entry[1])
+            if (user.password == password):
+                return user
+    return None 
+
 
 class User(db.Model):
     id = Column(db.Integer, primary_key=True, autoincrement=True)
@@ -40,20 +46,49 @@ class User(db.Model):
         info={ 'label': 'Password' },
         nullable=False
     )
+
+    # username
+    username = Column(
+        Unicode(),
+        info={ 'label': 'Username' },
+        nullable=False
+    )
+
     # locations = relationship('Location', backref='user', lazy='dynamic')
      
-    def __init__(self, email, password):
+    def __init__(self, email, password, username):
         self.email = email
         self.password = password
- 
+        self.username = username
+    
     def __repr__(self):
         return '<User %r>' % self.email
 
     def email_exists(self):
-        if db.session.query(User.id).filter_by(name=self.email).scalar() is not None:
+        if db.session.query(User.id).filter_by(username=self.email).scalar() is not None:
             return False
         else:
             return True
+    
+
+    @classmethod
+    def authenticate(cls, login, password):
+        user = cls.query.filter(db.or_(
+            User.username == login, User.email == login)).first()
+
+        if user:
+            authenticated = user.check_password(password)
+        else:
+            authenticated = False
+
+        return user, authenticated
+
+    def check_password(self, password):
+        if self.password == password:
+            return True
+        else:
+            return False
+
 
 class Customer(db.Model):
     ''' Customer Contact Datatable '''

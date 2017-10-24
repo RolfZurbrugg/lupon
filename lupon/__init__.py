@@ -6,6 +6,7 @@ from .extensions import babel
 from .extensions import mail
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 db = SQLAlchemy()
 
@@ -25,6 +26,12 @@ app = create_app()
 app.app_context().push()
 # INIT EXTENSIONS
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+#@login_manager.user_loader
+#def load_user(user_id):
+#    return User.get(user_id)
 
 # flask-bcrypt
 flask_bcrypt = Bcrypt(app)
