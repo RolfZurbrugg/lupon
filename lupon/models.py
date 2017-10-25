@@ -3,48 +3,13 @@ This module contains all classes requeried for Database Model
 
 '''
 from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode
-
 import requests
-
 from flask import g
 from flask_sqlalchemy import Model, SQLAlchemy
 import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declared_attr, has_inherited_table
+from . import app, flask_bcrypt, db
 
-# from sqlalchemy_utils import EmailType, PasswordType
-
-from . import app, flask_bcrypt, db, login_manager
-
-@login_manager.request_loader
-def load_user(request):
-    token = request.headers.get('Authorization')
-    if token is None:
-        token = request.args.get('token')
-
-
-class IdModel(Model):
-    '''
-    SOURCE@ http://flask-sqlalchemy.pocoo.org/2.3/customizing/#model-class
-
-    Model Class
-    SQLAlchemy models all inherit from a declarative base class. This is exposed as db.Model in Flask-SQLAlchemy, which all models extend. This can be customized by subclassing the default and passing the custom class to model_class.
-    The following example gives every model an integer primary key, or a foreign key for joined-table inheritance
-    
-    Note
-    Integer primary keys for everything is not necessarily the best database design (that’s up to your project’s requirements), this is only an example.
-
-    '''
-    @classmethod
-    @declared_attr
-    def id(cls):
-        for base in cls.__mro__[1:-1]:
-            if getattr(base, '__table__', None) is not None:
-                type = sa.ForeignKey(base.id)
-                break
-        else:
-            type = sa.Integer
-
-        return sa.Column(type, primary_key=True)
 
 
 class User(db.Model):
@@ -54,25 +19,18 @@ class User(db.Model):
     id = Column(Integer, primary_key=True)
 
     email = Column(
-            Unicode(), 
+            String(100), 
             unique=True, 
-            nullable=False, 
-            info={
-                'label': 'Name' 
-            }
+            nullable=False
     )
     password = Column(
-            Unicode(),
-            nullable=False,
-            info={ 
-                'label': 'Password' }                                
+            String(100),
+            nullable=False                              
     )
 
-    # username
     username = Column(
-        Unicode(),
-        info={ 'label': 'Username' },
-        nullable=False
+            String(100),
+            nullable=False
     )
    
     def __init__(self, email, password, username):
@@ -88,7 +46,6 @@ class User(db.Model):
             return False
         else:
             return True
-    
 
     @classmethod
     def authenticate(cls, login, password):
@@ -193,6 +150,3 @@ class Service(object):
 
 class Task(object):
     pass
-
-
-db = SQLAlchemy(model_class=IdModel)

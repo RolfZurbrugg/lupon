@@ -5,6 +5,16 @@ from wtforms.validators import DataRequired, Email, Length
 from .models import Customer, User, Location
 from lupon import db
 
+class LoginForm(FlaskForm):
+    email = TextField(
+        validators=[
+            Email(),
+            DataRequired(),
+            Length(max=255)
+        ]
+    )
+    password = PasswordField(validators=[DataRequired(), Length(max=255)])
+
 class UserCreateForm(FlaskForm):
     email = TextField(
         validators=[
