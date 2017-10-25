@@ -1,0 +1,13 @@
+{% macro formValid(field) %}
+<div class="form-group{% if field.errors %} has-error{% endif %} row">
+    <label for="event_{{ field.id }}" class="col-2 col-form-label">{{ field.label }}</label>
+    <div class="col-10">    
+        {{ field(class_="form-control") }}
+    </div>
+    <div class="form-control-feedback">
+        {% if field.errors %}
+        {% for error in field.errors %}{{ error }}{% endfor %}
+        {% endif %}  
+    </div>
+</div>
+{% endmacro %}

@@ -10,7 +10,7 @@ import logging
 from config import LANGUAGES
 from lupon import app, db, flask_bcrypt
 from lupon.models import User
-from .forms import EmailPasswordForm, UserCreateForm, LoginForm
+from .forms import EmailPasswordForm, UserForm, LoginForm
 
 @babel.localeselector
 def get_locale():
@@ -35,7 +35,7 @@ def index():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
-  form = UserCreateForm()
+  form = UserForm()
   user = User.query.all()
   if form.validate_on_submit():
     user = User(
@@ -47,7 +47,7 @@ def register():
     db.session.add(user)
     db.session.commit()
     flash("User successflly created!")
-    return redirect(url_for('register'))
+    return redirect(url_for('index'))
   return render_template('register.html', form=form, user=user)
 
 @app.route('/register/<id>', methods=["GET", "POST"])
@@ -56,7 +56,7 @@ def edit(id):
   message="123456"
   flash("User selected"+message)
   user = User.query.get(id)
-  form = UserCreateForm(obj=user)
+  form = UserForm(obj=user)
   if form.validate_on_submit():
     form.populate_obj(user)
     user.passwd(form.password.data)
@@ -74,7 +74,7 @@ def login():
 
     form = LoginForm()
 
-    #flash('not authenticated')
+    flash('not authenticated')
 
     if form.validate_on_submit():
         flash('form is valide')
