@@ -38,12 +38,8 @@ def register():
   form = UserForm()
   user = User.query.all()
   if form.validate_on_submit():
-    user = User(
-                form.email.data, 
-                form.password.data,
-                form.username.data
-              )
-
+    user = User()
+    form.populate_obj(user)
     db.session.add(user)
     db.session.commit()
     flash("User successflly created!")

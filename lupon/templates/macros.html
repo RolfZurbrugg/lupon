@@ -1,4 +1,5 @@
-{% macro formValid(field) %}
+{# Renders input field types with error messages #}
+{% macro inputField(field) %}
 <div class="form-group{% if field.errors %} has-error{% endif %} row">
     <label for="event_{{ field.id }}" class="col-2 col-form-label">{{ field.label }}</label>
     <div class="col-10">    
@@ -10,4 +11,9 @@
         {% endif %}  
     </div>
 </div>
+{% endmacro %}
+
+{# Renders Action #}
+{% macro submitForm(field) %}
+    {{ field(class_="btn btn-primary") }}
 {% endmacro %}

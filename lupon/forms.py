@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextField
+from wtforms import StringField, PasswordField, TextField, ValidationError, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
 from .models import Customer, User, Location
@@ -35,13 +35,18 @@ class UserForm(FlaskForm):
     city = TextField('City',validators=[Length(max=255)], render_kw={"placeholder": "City"})
     state = TextField('State',validators=[Length(max=255)], render_kw={"placeholder": "State"})
     number = TextField('Street No.',validators=[Length(max=255)], render_kw={"placeholder": "Street No."})
-    zip_code = TextField('Zip',validators=[Length(max=255)], render_kw={"placeholder": "Zip", "class": "form-control is-valid"})
+    zip_code = TextField('Zip',validators=[Length(max=255)], render_kw={"placeholder": "Zip"})
 
-    def validate_username(self, parameter_list):
-        pass
+    eula = BooleanField('Accept License Agreement')
+    submit = SubmitField('Signup!')
+
+    def validate_username(self, field):
+        if User.query.filter_by(username=field.data).first() is not None:
+            raise ValidationError(u'This username is taken')
     
-    def validate_email(self, parameter_list):
-        pass
+    def validate_email(self, field):
+        if User.query.filter_by(email=field.data).first() is not None:
+            raise ValidationError(u'This email is taken')
     
  
 class LocationForm(FlaskForm):

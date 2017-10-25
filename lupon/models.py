@@ -32,12 +32,12 @@ class User(db.Model):
             String(100),
             nullable=False
     )
-   
+    '''
     def __init__(self, email, password, username):
         self.email = email
         self.password = password
         self.username = username
-    
+    '''  
     def __repr__(self):
         return '<User %r>' % self.email
 

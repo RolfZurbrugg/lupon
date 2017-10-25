@@ -1,24 +1,26 @@
 {# lupon/templates/register.html #}
 
-{% from "macros.html" import formValid %}
+{% from "macros.html" import inputField, submitForm %}
 
 {% extends "base.html" %}
 
 {% block content %}
 <form class="form" action="{{ url_for('register') }}" method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
-    {{ formValid(form.email) }}
-    {{ formValid(form.username) }}
-    {{ formValid(form.password) }}
-    {{ formValid(form.password_repeat) }}
-    {{ formValid(form.firstname) }}
-    {{ formValid(form.lastname) }}
-    {{ formValid(form.street) }}
-    {{ formValid(form.number) }}
-    {{ formValid(form.city) }}
-    {{ formValid(form.zip_code) }}
-    {{ formValid(form.state) }}
-  <button class="btn btn-primary" type="submit">Submit</button>
+    {{ inputField(form.email) }}
+    {{ inputField(form.username) }}
+    {{ inputField(form.password) }}
+    {{ inputField(form.password_repeat) }}
+    {{ inputField(form.firstname) }}
+    {{ inputField(form.lastname) }}
+    {{ inputField(form.street) }}
+    {{ inputField(form.number) }}
+    {{ inputField(form.city) }}
+    {{ inputField(form.zip_code) }}
+    {{ inputField(form.state) }}
+    {{ form.eula}}
+    {{ submitForm(form.submit)}}
+
 </form>
 
 {% endblock %}
