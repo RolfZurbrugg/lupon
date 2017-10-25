@@ -1,14 +1,16 @@
 from flask import g
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_required
-# from flask_babel import gettext
+from flask_login import login_required, login_user, current_user
+from flask_babel import gettext
 from .extensions import babel
+import logging
+
 
 
 from config import LANGUAGES
-from lupon import app, db
-from .models import User
-from .forms import EmailPasswordForm, UserCreateForm
+from lupon import app, db, flask_bcrypt
+from lupon.models import User
+from .forms import EmailPasswordForm, UserCreateForm, LoginForm
 
 @babel.localeselector
 def get_locale():
@@ -38,8 +40,10 @@ def register():
   if form.validate_on_submit():
     user = User(
                 form.email.data, 
-                form.password.data
+                form.password.data,
+                form.username.data
               )
+
     db.session.add(user)
     db.session.commit()
     flash("User successflly created!")
@@ -65,13 +69,27 @@ def edit(id):
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    form = UserCreateForm()
+    if current_user.is_authenticated:
+        return redirect(url_for('user.profile'))
+
+    form = LoginForm()
+
+    #flash('not authenticated')
+
     if form.validate_on_submit():
-        flash("SUCCESS")
-        return redirect(url_for('index'))
+        flash('form is valide')
+        user, authenticated = User.authenticate(form.email.data,
+                                    form.password.data)
+
+        if user and authenticated:
+            remember = request.form.get('remember') == 'y'
+            if login_user(user, remember=remember):
+                flash("Logged in", 'success')
+            return redirect(form.next.data or url_for('user.profile'))
+        else:
+            flash('Sorry, invalid login', 'danger')
+
     return render_template('login.html', form=form)
-
-
 
 @app.errorhandler(404)
 def not_found_error(error):

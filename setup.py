@@ -17,13 +17,13 @@ setup(
         'Flask-Cache',
         'Flask-Mail',
         'Flask-WTF',
-        'Flask-MySQLdb',
         'Flask-SQLAlchemy',
         'Flask-Login',
-        'Flask-Bcrypt==0.6.0',
-        'WTFlorms-Alchemy'
+        'Flask-Bcrypt',
+	'Psycopg2',
         'requests',
         'passlib'
+        'requests'
     ],
     classifiers=[
         'Environment :: Web Environment',

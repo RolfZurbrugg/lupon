@@ -13,18 +13,13 @@ from sqlalchemy.ext.declarative import declared_attr, has_inherited_table
 
 # from sqlalchemy_utils import EmailType, PasswordType
 
-from lupon import app, flask_bcrypt, db
+from . import app, flask_bcrypt, db, login_manager
 
-
-
-''' DEV
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-app.config.from_object('config')
-db = SQLAlchemy(app)
-END DEV '''
+@login_manager.request_loader
+def load_user(request):
+    token = request.headers.get('Authorization')
+    if token is None:
+        token = request.args.get('token')
 
 
 class IdModel(Model):
@@ -52,7 +47,6 @@ class IdModel(Model):
         return sa.Column(type, primary_key=True)
 
 
-
 class User(db.Model):
    
     __tablename__ = 'user'
@@ -73,11 +67,19 @@ class User(db.Model):
             info={ 
                 'label': 'Password' }                                
     )
+
+    # username
+    username = Column(
+        Unicode(),
+        info={ 'label': 'Username' },
+        nullable=False
+    )
    
-    def __init__(self, email, password):
+    def __init__(self, email, password, username):
         self.email = email
         self.password = password
- 
+        self.username = username
+    
     def __repr__(self):
         return '<User %r>' % self.email
 
@@ -87,22 +89,24 @@ class User(db.Model):
         else:
             return True
     
-    def passwd(self, password):
-        self.password = password
-        return True
 
-    def is_authenticated(self):
-        return True
- 
-    def is_active(self):
-        return True
- 
-    def is_anonymous(self):
-        return False
- 
-    def get_id(self):
-        return unicode(self.id)
+    @classmethod
+    def authenticate(cls, login, password):
+        user = cls.query.filter(db.or_(
+            User.username == login, User.email == login)).first()
 
+        if user:
+            authenticated = user.check_password(password)
+        else:
+            authenticated = False
+
+        return user, authenticated
+
+    def check_password(self, password):
+        if self.password == password:
+            return True
+        else:
+            return False
 
 
 class Customer(db.Model):

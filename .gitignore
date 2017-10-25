@@ -5,3 +5,20 @@ instance
 config.py
 venv
 _old
+
+target/*
+.settings/*
+.project
+.classpath
+stefan ;-)
+# More...
+/target/
+.idea/
+*.iml
+.metadata/*
+log/*
+nbactions.xml
+/bin/
+hibernate.cfg.xml
+/nbproject/
+src/main/resources/hibernate.cfg.xml

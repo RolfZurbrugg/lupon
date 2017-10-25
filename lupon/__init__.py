@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from .extensions import babel, mail
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 db = SQLAlchemy()
 

@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<<<<<<< HEAD
 <form class="form-signin" id="login" action="{{ url_for('login') }}" method="POST">
     {{ form.csrf_token }}
     <h2 class="form-signin-heading">Please sign in</h2>
@@ -11,11 +12,25 @@
     {{ form.email(class="form-control", placeholder="eMail address") }}
     <label for="password" class="sr-only">Password</label>
     {{ form.password(class="form-control", placeholder="Password") }}
+=======
+<form class="form-signin" id="login" action="{{ url_for('login') }}" method="post">
+    <h2 class="form-signin-heading">Please sign in</h2>   
+    <label class="{{ form.email.class }}" for="event_{{ form.email.id }}">{{ form.email.label }}</label>
+    {{ form.email }}
+    <label class="{{ form.password.class }}" for="event_{{ form.password.id }}">{{ form.password.label }}</label>
+    {{ form.password }}
+>>>>>>> 913cf0ebe50a0a686868db1062a87472b59f3b1a
     <div class="checkbox">
         <label>
         <input type="checkbox" value="remember-me"> Remember me
         </label>
     </div>
+<<<<<<< HEAD
     <button class="btn btn-block btn-secondary" type="submit">Sign in</button>
+=======
+    {{ form.submit }}
+    <p><input type="Submit" value="Login"></p>  
+    {{ form.csrf_token }}
+>>>>>>> 913cf0ebe50a0a686868db1062a87472b59f3b1a
 </form>
 {% endblock %}
