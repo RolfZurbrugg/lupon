@@ -7,11 +7,15 @@ from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, B
 import requests
 
 from flask import g
+from flask_sqlalchemy import Model, SQLAlchemy
+import sqlalchemy as sa
+from sqlalchemy.ext.declarative import declared_attr, has_inherited_table
 
-from wtforms.validators import Email
-from sqlalchemy_utils import EmailType, PasswordType
+# from sqlalchemy_utils import EmailType, PasswordType
 
 from lupon import app, flask_bcrypt, db
+
+
 
 ''' DEV
 from flask import Flask
@@ -22,26 +26,54 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 END DEV '''
 
+
+class IdModel(Model):
+    '''
+    SOURCE@ http://flask-sqlalchemy.pocoo.org/2.3/customizing/#model-class
+
+    Model Class
+    SQLAlchemy models all inherit from a declarative base class. This is exposed as db.Model in Flask-SQLAlchemy, which all models extend. This can be customized by subclassing the default and passing the custom class to model_class.
+    The following example gives every model an integer primary key, or a foreign key for joined-table inheritance
+    
+    Note
+    Integer primary keys for everything is not necessarily the best database design (that’s up to your project’s requirements), this is only an example.
+
+    '''
+    @classmethod
+    @declared_attr
+    def id(cls):
+        for base in cls.__mro__[1:-1]:
+            if getattr(base, '__table__', None) is not None:
+                type = sa.ForeignKey(base.id)
+                break
+        else:
+            type = sa.Integer
+
+        return sa.Column(type, primary_key=True)
+
+
+
 class User(db.Model):
-    id = Column(db.Integer, primary_key=True, autoincrement=True)
+   
+    __tablename__ = 'user'
+
+    id = Column(Integer, primary_key=True)
+
     email = Column(
-        EmailType, 
-        unique=True, 
-        nullable=False, 
-        info={
-            'label': 'Name'  
-        }
+            Unicode(), 
+            unique=True, 
+            nullable=False, 
+            info={
+                'label': 'Name' 
+            }
     )
-    # name = Column(Unicode(100), nullable=False)
     password = Column(
-        PasswordType(
-            schemes=['pbkdf2_sha512']
-            ),
-        info={ 'label': 'Password' },
-        nullable=False
+            Unicode(),
+            nullable=False,
+            info={ 
+                'label': 'Password' }                                
     )
-    # locations = relationship('Location', backref='user', lazy='dynamic')
-     
+   
     def __init__(self, email, password):
         self.email = email
         self.password = password
@@ -50,10 +82,28 @@ class User(db.Model):
         return '<User %r>' % self.email
 
     def email_exists(self):
-        if db.session.query(User.id).filter_by(name=self.email).scalar() is not None:
+        if db.session.query(User.id).filter_by(email=self.email).scalar() is not None:
             return False
         else:
             return True
+    
+    def passwd(self, password):
+        self.password = password
+        return True
+
+    def is_authenticated(self):
+        return True
+ 
+    def is_active(self):
+        return True
+ 
+    def is_anonymous(self):
+        return False
+ 
+    def get_id(self):
+        return unicode(self.id)
+
+
 
 class Customer(db.Model):
     ''' Customer Contact Datatable '''
@@ -139,3 +189,6 @@ class Service(object):
 
 class Task(object):
     pass
+
+
+db = SQLAlchemy(model_class=IdModel)

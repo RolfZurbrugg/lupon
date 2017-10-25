@@ -8,15 +8,95 @@
    {% for field in form %}
    <label class="{{ field.class }}" for="event_{{ field.id }}">{{ field.label }}</label>
    {{ field }}
+   {% if form.errors %}
+       <ul class="errors">{% for error in field.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+   {% endif %}
    {% endfor %}
    <p><input type="Submit" value="Register Now!"></p>
-   {{ form.csrf_token }}
+   {# form.csrf_token #}
 </form>
 
-<dl>
-    {% for user in users %}
-    <dt>ID: {{ user.id }}</dt>
-    <dd>Username: {{ user }}</dd>
-    {% endfor %}
-</dl>
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Email</th>
+            <th>Password</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for row in user %}
+        <tr>
+        <td><a href="{{ url_for('edit', id=row.id) }}">{{ row.id|safe }}</a></td>
+        <td>{{ row.email|safe }}</td>
+        <td>{{ row.password|safe }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<form>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="validationServer01">First name</label>
+        {{ form.email(class="form-control is-valid") }}
+        <div class="invalid-feedback">
+            {% if form.errors %}
+            {% for error in form.firstname.errors %}{{ error }}{% endfor %}
+            {% endif %}  
+        </div>
+        </div>
+      <div class="col-md-6 mb-3">
+        <label for="validationServer02">Last name</label>
+        <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="validationServer01">Password</label>
+          <input type="text" class="form-control is-valid" id="validationServer01" placeholder="password1" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationServer02">Repeat Password</label>
+          <input type="text" class="form-control is-valid" id="validationServer02" placeholder="password2" value="" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="validationServer01">First name</label>
+            <input type="text" class="form-control is-valid" id="validationServer01" placeholder="E-Mail" value="Mark" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationServer02">Last name</label>
+            <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="validationServer03">City</label>
+        <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
+        <div class="invalid-feedback">
+          Please provide a valid city.
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationServer04">State</label>
+        <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
+        <div class="invalid-feedback">
+          Please provide a valid state.
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationServer05">Zip</label>
+        <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
+        <div class="invalid-feedback">
+          Please provide a valid zip.
+        </div>
+      </div>
+    </div>
+  
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </form>
+
 {% endblock %}

@@ -85,7 +85,6 @@ GRANT ALL PRIVILEGES ON  lupon to 'lupon'@'localhost'
 ```Python
 from lupon import app, db
 
-app.app_context().push()
 db.create_all()
 ```
 
@@ -107,7 +106,7 @@ sudo -u postgres -i
 createuser --interactive lupon
 # create database lupon
 createdb lupon
-# drop database lupon 
+# drop database lupon
 dropdb lupon
 ```
 
@@ -132,3 +131,32 @@ psql -U lupon -d lupon -h 127.0.0.1 -W
 * Flask-MySQLdb
 * Flask-SQLAlchemy
 * Flask-Migrate
+
+
+## Documentation References
+
+### Plugins
+* Flask: http://flask.pocoo.org/docs/0.12/
+* Flask-SQLAlchemy: http://flask-sqlalchemy.pocoo.org/2.3/
+* WTForms: https://wtforms.readthedocs.io/en/latest/index.html
+* Flask-WTF: https://flask-wtf.readthedocs.io/en/stable/index.html
+* WTForms-Alchemy: http://wtforms-alchemy.readthedocs.io/en/latest/index.html
+* Flask-Babel: https://pythonhosted.org/Flask-Babel/
+* SQLAlchemy: http://docs.sqlalchemy.org/en/latest/orm/index.html
+* Twitter Bootstrap: https://getbootstrap.com/docs/4.0/getting-started/introduction/
+* Jinja2 (Templateing): http://jinja.pocoo.org/docs/2.9/templates/#
+
+
+### HowTos & Tutorials
+* Example Flask Project(Template): https://github.com/xen/flask-project-template
+* Flask by Example: https://realpython.com/blog/python/flask-by-example-part-1-project-setup/
+* Flask Mega Tutorial: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+* GoogleMaps API: https://developers.google.com/maps/documentation/javascript/tutorial
+* Explore Flask: http://exploreflask.com/en/latest/index.html
+
+### Snippets
+* Flask-WTF Tricks: https://goonan.io/flask-wtf-tricks/
+*
+*
+*
+*

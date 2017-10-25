@@ -13,3 +13,11 @@ def send_email(subject, sender, recipients, text_body, html_body):
     msg.body = text_body
     msg.html = html_body
     send_async_email(app, msg)
+
+
+
+def initDB():
+    from lupon import app, db
+    from lupon import models
+    db.drop_all()
+    db.create_all()
