@@ -42,7 +42,7 @@ def register():
     form.populate_obj(user)
     db.session.add(user)
     db.session.commit()
-    flash("User successflly created!")
+    flash("User successflly created!", 'success')
     return redirect(url_for('index'))
   return render_template('register.html', form=form, user=user)
 
@@ -69,10 +69,10 @@ def login():
 
     form = LoginForm()
 
-    flash('not authenticated')
+    flash('not authenticated', 'danger')
 
     if form.validate_on_submit():
-        flash('form is valide')
+        flash('form is valide', 'success')
         user, authenticated = User.authenticate(form.email.data,
                                     form.password.data)
 
