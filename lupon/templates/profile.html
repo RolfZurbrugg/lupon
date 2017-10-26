@@ -1,0 +1,23 @@
+{# lupon/templates/register.html #}
+
+{% from "macros.html" import inputField, submitForm %}
+
+{% extends "base.html" %}
+
+{% block content %}
+<form class="form" action="{{ url_for('profile') }}" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ inputField(form.password) }}
+    {{ inputField(form.password_repeat) }}
+    {{ inputField(form.firstname) }}
+    {{ inputField(form.lastname) }}
+    {{ inputField(form.street) }}
+    {{ inputField(form.number) }}
+    {{ inputField(form.city) }}
+    {{ inputField(form.zip_code) }}
+    {{ inputField(form.state) }}
+    {{ form.eula }}
+    {{ submitForm(form.submit)}}
+</form>
+
+{% endblock %}

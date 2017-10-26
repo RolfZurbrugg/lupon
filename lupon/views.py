@@ -36,7 +36,6 @@ def index():
 @app.route('/register', methods=["GET", "POST"])
 def register():
   form = UserForm()
-  user = User.query.all()
   if form.validate_on_submit():
     user = User()
     form.populate_obj(user)
@@ -44,22 +43,19 @@ def register():
     db.session.commit()
     flash("User successflly created!", 'success')
     return redirect(url_for('index'))
-  return render_template('register.html', form=form, user=user)
-
-@app.route('/<id>/profile', methods=["GET", "POST"])
-def edit(id):
-  users = User.query.all()
-  flash("User selected")
-  user = User.query.get(id)
-  form = UserForm(obj=user)
-  if form.validate_on_submit():
-    form.populate_obj(user)
-    user.passwd(form.password.data)
-    print("TEST DEBUG")
-    db.session.commit()
-    flash("User successflly Updated")
-    return redirect(url_for('register'))
   return render_template('register.html', form=form)
+
+@app.route('/profile', methods=["GET", "POST"])
+@login_required
+def profile():
+  form = UserForm(obj=current_user)
+  
+  if form.validate_on_submit():
+    form.populate_obj(current_user)
+    db.session.commit()
+    flash('Profile updated.', 'success')
+
+  return render_template('profile.html', form=form)
 
 
 @app.route('/login', methods=["GET", "POST"])
