@@ -1,6 +1,6 @@
 from flask import g
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_required, login_user, current_user
+from flask_login import login_required, login_user, current_user, logout_user
 from flask_babel import gettext
 from .extensions import babel
 import logging
@@ -66,7 +66,7 @@ def edit(id):
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('user.profile'))
+        return redirect(url_for('index'))
 
     form = LoginForm()
 
@@ -78,14 +78,21 @@ def login():
                                     form.password.data)
 
         if user and authenticated:
-            remember = request.form.get('remember') == 'y'
+            # remember = request.form.get('remember') == 'y'
             if login_user(user, remember=remember):
                 flash("Logged in", 'success')
-            return redirect(form.next.data or url_for('user.profile'))
+            return redirect(url_for('index'))
         else:
             flash('Sorry, invalid login', 'danger')
 
     return render_template('login.html', form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logged out', 'success')
+    return redirect(url_for('index'))
 
 @app.errorhandler(404)
 def not_found_error(error):
