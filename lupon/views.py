@@ -72,7 +72,7 @@ def login():
     flash('not authenticated', 'danger')
 
     if form.validate_on_submit():
-        flash('form is valide', 'success')
+        flash('form is valide', 'info')
         user, authenticated = User.authenticate(form.email.data,
                                     form.password.data)
 
