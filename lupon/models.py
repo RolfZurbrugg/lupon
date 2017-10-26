@@ -5,6 +5,7 @@ This module contains all classes requeried for Database Model
 from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode
 import requests
 from flask import g
+from flask_login import UserMixin
 from flask_sqlalchemy import Model, SQLAlchemy
 import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declared_attr, has_inherited_table
@@ -12,7 +13,7 @@ from . import app, flask_bcrypt, db
 
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
    
     __tablename__ = 'user'
 
