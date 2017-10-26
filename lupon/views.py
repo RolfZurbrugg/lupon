@@ -10,7 +10,7 @@ import logging
 from config import LANGUAGES
 from lupon import app, db, flask_bcrypt
 from lupon.models import User
-from .forms import EmailPasswordForm, UserForm, LoginForm
+from .forms import EmailPasswordForm, UserForm, LoginForm, UserProfileForm
 
 @babel.localeselector
 def get_locale():
@@ -48,8 +48,8 @@ def register():
 @app.route('/profile', methods=["GET", "POST"])
 @login_required
 def profile():
-  form = UserForm(obj=current_user)
-  
+  form = UserProfileForm(obj=current_user)
+
   if form.validate_on_submit():
     form.populate_obj(current_user)
     db.session.commit()

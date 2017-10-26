@@ -33,6 +33,16 @@ class User(db.Model, UserMixin):
             String(100),
             nullable=False
     )
+
+    firstname = Column(String(100))
+    lastname= Column(String(100))
+    street = Column(String(100))
+    city = Column(String(100))
+    state = Column(String(100))
+    number = Column(String(100))
+    zip_code = Column(String(100))
+
+
     '''
     def __init__(self, email, password, username):
         self.email = email

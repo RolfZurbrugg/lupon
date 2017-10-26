@@ -49,6 +49,16 @@ class UserForm(FlaskForm):
             raise ValidationError(u'This email is taken')
     
  
+class UserProfileForm(FlaskForm):
+    firstname = TextField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
+    lastname= TextField('Lastname', validators=[Length(max=255)], render_kw={"placeholder": "Lastname"})
+    street = TextField('Street', validators=[Length(max=255)], render_kw={"placeholder": "Street"})
+    city = TextField('City',validators=[Length(max=255)], render_kw={"placeholder": "City"})
+    state = TextField('State',validators=[Length(max=255)], render_kw={"placeholder": "State"})
+    number = TextField('Street No.',validators=[Length(max=255)], render_kw={"placeholder": "Street No."})
+    zip_code = TextField('Zip',validators=[Length(max=255)], render_kw={"placeholder": "Zip"})
+    submit = SubmitField('Update Profile')
+
 class LocationForm(FlaskForm):
     pass
 

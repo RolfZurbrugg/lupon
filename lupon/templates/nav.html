@@ -27,7 +27,8 @@
                     </li>
                 </ul>
                 
-                <small class="text-light">Logged in as: {{ current_user.email }}</small>
+                <small class="text-light">Logged in as: <a class="text-light" href="{{ url_for('profile') }}">{{ current_user.email }}</a></small>
+
                 <ul class="nav navbar-nav my-2 my-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navDropdown02" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-globe" aria-hidden="true"></i></a>
