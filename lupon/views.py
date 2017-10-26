@@ -46,11 +46,10 @@ def register():
     return redirect(url_for('index'))
   return render_template('register.html', form=form, user=user)
 
-@app.route('/register/<id>', methods=["GET", "POST"])
+@app.route('/<id>/profile', methods=["GET", "POST"])
 def edit(id):
-  # users = User.query.all()
-  message="123456"
-  flash("User selected"+message)
+  users = User.query.all()
+  flash("User selected")
   user = User.query.get(id)
   form = UserForm(obj=user)
   if form.validate_on_submit():
@@ -60,7 +59,7 @@ def edit(id):
     db.session.commit()
     flash("User successflly Updated")
     return redirect(url_for('register'))
-  return render_template('register.html', form=form )
+  return render_template('register.html', form=form)
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -78,7 +77,7 @@ def login():
                                     form.password.data)
 
         if user and authenticated:
-            # remember = request.form.get('remember') == 'y'
+            remember = request.form.get('remember') == 'y'
             if login_user(user, remember=remember):
                 flash("Logged in", 'success')
             return redirect(url_for('index'))
