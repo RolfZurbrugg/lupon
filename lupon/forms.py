@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, TextField, ValidationError, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
-from .models import Customer, User, Location
+from .models import Contact, User, Location
 from lupon import db
 
 from flask_login import current_user
@@ -53,10 +53,10 @@ class UserProfileForm(FlaskForm):
     firstname = TextField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
     lastname= TextField('Lastname', validators=[Length(max=255)], render_kw={"placeholder": "Lastname"})
     street = TextField('Street', validators=[Length(max=255)], render_kw={"placeholder": "Street"})
-    city = TextField('City',validators=[Length(max=255)], render_kw={"placeholder": "City"})
+    city = TextField('City', validators=[Length(max=255)], render_kw={"placeholder": "City"})
     state = TextField('State',validators=[Length(max=255)], render_kw={"placeholder": "State"})
-    number = TextField('Street No.',validators=[Length(max=255)], render_kw={"placeholder": "Street No."})
-    zip_code = TextField('Zip',validators=[Length(max=255)], render_kw={"placeholder": "Zip"})
+    number = TextField('Street No.', validators=[Length(max=255)], render_kw={"placeholder": "Street No."})
+    zip_code = TextField('Zip', validators=[Length(max=255)], render_kw={"placeholder": "Zip"})
     submit = SubmitField('Update Profile')
 
 class LocationForm(FlaskForm):
@@ -65,3 +65,12 @@ class LocationForm(FlaskForm):
 class EmailPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
+
+class ContactForm(FlaskForm):
+    firstname = TextField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
+    lastname= TextField('Lastname', validators=[Length(max=255)], render_kw={"placeholder": "Lastname"})
+    street = TextField('Street', validators=[Length(max=255)], render_kw={"placeholder": "Street"})
+    city = TextField('City', validators=[Length(max=255)], render_kw={"placeholder": "City"})
+    state = TextField('State', validators=[Length(max=255)], render_kw={"placeholder": "State"})
+    number = TextField('Street No.', validators=[Length(max=255)], render_kw={"placeholder": "Street No."})
+    zip_code = TextField('Zip', validators=[Length(max=255)], render_kw={"placeholder": "Zip"})

@@ -4,12 +4,9 @@ from flask_login import login_required, login_user, current_user, logout_user
 from flask_babel import gettext
 from .extensions import babel
 import logging
-
-
-
 from config import LANGUAGES
 from lupon import app, db, flask_bcrypt
-from lupon.models import User
+from lupon.models import User, Contact
 from .forms import EmailPasswordForm, UserForm, LoginForm, UserProfileForm
 
 @babel.localeselector

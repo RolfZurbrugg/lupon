@@ -11,8 +11,6 @@ import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declared_attr, has_inherited_table
 from . import app, flask_bcrypt, db
 
-
-
 class User(db.Model, UserMixin):
    
     __tablename__ = 'user'
@@ -48,7 +46,7 @@ class User(db.Model, UserMixin):
         self.email = email
         self.password = password
         self.username = username
-    '''  
+    '''
     def __repr__(self):
         return '<User %r>' % self.email
 
@@ -77,9 +75,9 @@ class User(db.Model, UserMixin):
             return False
 
 
-class Customer(db.Model):
-    ''' Customer Contact Datatable '''
-    __tablename__ = 'customer'
+class Contact(db.Model):
+    ''' Contact Contact Datatable '''
+    __tablename__ = 'contact'
     id = Column(Integer, primary_key=True)
     is_active = Column(Boolean)
     firstname = Column(String(256), nullable=False)
@@ -89,7 +87,7 @@ class Customer(db.Model):
     
     def __repr__(self):
         ''' DEBUG PRINT OUTPUT'''
-        return '<Customer %r>' % (self.firstname+" "+self.lastname)
+        return '<Contact %r>' % (self.firstname+" "+self.lastname)
 
     def __init__(self, firstname, lastname, email, phone):
         self.firstname = firstname
@@ -120,13 +118,13 @@ class Location(db.Model):
     state = Column(String(256))
     plz = Column(String(256))
     # coordinates = Column(JSON)
-    #customer_id = Column(Integer, ForeignKey('customer.id'))
+    #contact_id = Column(Integer, ForeignKey('contact.id'))
     #user_id = Column(Integer, ForeignKey('user.id'))
 
     def __repr__(self):
         pass
 
-    def __init__(self, street, city, plz, customer_id):
+    def __init__(self, street, city, plz, contact_id):
         self.street = street
         self.city = city
         self.plz = plz
@@ -139,11 +137,11 @@ class Location(db.Model):
         return response.json()
 
 class Company(db.Model):
-    ''' Add Company attributes if customer is a company '''
+    ''' Add Company attributes if contact is a company '''
     __tablename__ = 'company'
     id = Column(Integer, primary_key=True)
-    customer_id = Column(Integer, ForeignKey('customer.id'))
-    # employees = relationship('Customer', backref='employee')
+    contact_id = Column(Integer, ForeignKey('contact.id'))
+    # employees = relationship('Contact', backref='employee')
 
     
     def __repr__(self):
