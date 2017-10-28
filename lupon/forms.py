@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, TextField, ValidationError, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
-from .models import Customer, User, Location
+from .models import Contact, User, Location
 from lupon import db
 
 from flask_login import current_user
