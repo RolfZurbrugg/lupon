@@ -27,7 +27,7 @@ class UserForm(FlaskForm):
         render_kw={"placeholder": "e@ma.il", "type": "email"}
     )
     password = PasswordField('Password', validators=[DataRequired(), Length(max=255)])
-    password_repeat = PasswordField('Confirm Password', validators=[DataRequired(), Length(max=255), EqualTo('password_repeat', message='Passwords must match')])
+    password_repeat = PasswordField('Confirm Password', validators=[DataRequired(), Length(max=255), EqualTo('password', message='Passwords must match')])
     username = TextField('Username',validators=[DataRequired(), Length(max=255)], render_kw={"placeholder": "Username"})
     firstname = TextField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
     lastname= TextField('Lastname', validators=[Length(max=255)], render_kw={"placeholder": "Lastname"})
