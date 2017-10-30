@@ -12,8 +12,6 @@ import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declared_attr, has_inherited_table, declarative_base
 from . import app, flask_bcrypt, db
 
-<<<<<<< HEAD
-=======
 
 association_table = Table('workpackage_task',db.Model.metadata,
     Column('workpackage_id', Integer, ForeignKey('workpackage.id')),
@@ -32,7 +30,6 @@ class CustomBase(object):
 
 
 
->>>>>>> 418741498c91bc8668ced8a8ccf8547d24062f34
 class User(db.Model, UserMixin):
    
     __tablename__ = 'user'
@@ -100,16 +97,9 @@ class User(db.Model, UserMixin):
             return False
 
 
-<<<<<<< HEAD
-class Contact(db.Model):
-    ''' Contact Contact Datatable '''
-    __tablename__ = 'contact'
-    id = Column(Integer, primary_key=True)
-=======
 class Contact(db.Model, CustomBase):
     ''' Contact Contact Datatable '''
     __tablename__ = 'contact'
->>>>>>> 418741498c91bc8668ced8a8ccf8547d24062f34
     is_active = Column(Boolean)
     firstname = Column(String(256), nullable=False)
     lastname = Column(String(256), nullable=False)
@@ -122,7 +112,7 @@ class Contact(db.Model, CustomBase):
     hompage = Column(String(256))
     company = Column(String(256))
     discount = Column(Float)
-    user_id = Column(Integer, ForeignKey('user.id'),nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     adresses = relationship('Location', backref='contact', lazy=True)
 
     def __repr__(self):
@@ -151,16 +141,11 @@ class Location(db.Model, CustomBase):
     streetNumber = Column(Integer)
     city = Column(String(256))
     state = Column(String(256))
-    plz = Column(String(256))
+    zip = Column(String(256))
     # coordinates = Column(JSON)
-<<<<<<< HEAD
-    #contact_id = Column(Integer, ForeignKey('contact.id'))
-    #user_id = Column(Integer, ForeignKey('user.id'))
-=======
     #customer_id = Column(Integer, ForeignKey('customer.id'))
     #user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     contact_id = Column(Integer, ForeignKey('contact.id'), nullable=False)
->>>>>>> 418741498c91bc8668ced8a8ccf8547d24062f34
 
     def __repr__(self):
         pass
@@ -172,15 +157,6 @@ class Location(db.Model, CustomBase):
         self.coordinates = self.get_cordiantes()
 
 
-<<<<<<< HEAD
-class Company(db.Model):
-    ''' Add Company attributes if contact is a company '''
-    __tablename__ = 'company'
-    id = Column(Integer, primary_key=True)
-    contact_id = Column(Integer, ForeignKey('contact.id'))
-    # employees = relationship('Contact', backref='employee')
-=======
->>>>>>> 418741498c91bc8668ced8a8ccf8547d24062f34
 
 class Task(db.Model, CustomBase):
     
