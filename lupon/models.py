@@ -2,15 +2,37 @@
 This module contains all classes requeried for Database Model
 
 '''
-from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode
+from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode, Date, Table
 import requests
 from flask import g
 from flask_login import UserMixin
 from flask_sqlalchemy import Model, SQLAlchemy
+from sqlalchemy.orm import relationship
 import sqlalchemy as sa
-from sqlalchemy.ext.declarative import declared_attr, has_inherited_table
+from sqlalchemy.ext.declarative import declared_attr, has_inherited_table, declarative_base
 from . import app, flask_bcrypt, db
 
+<<<<<<< HEAD
+=======
+
+association_table = Table('workpackage_task',db.Model.metadata,
+    Column('workpackage_id', Integer, ForeignKey('workpackage.id')),
+    Column('task_id', Integer, ForeignKey('task.id'))
+ )
+
+
+class CustomBase(object):
+    ''' Define base atribuetes for all table '''
+    
+    id = Column(Integer, primary_key=True)
+    create_date = Column(Date(), nullable=False)
+    modify_date = Column(Date())
+    creat_by = Column(String(256), nullable=False)
+    modify_by = Column(String(256), nullable=False)
+
+
+
+>>>>>>> 418741498c91bc8668ced8a8ccf8547d24062f34
 class User(db.Model, UserMixin):
    
     __tablename__ = 'user'
@@ -39,6 +61,9 @@ class User(db.Model, UserMixin):
     state = Column(String(100))
     number = Column(String(100))
     zip_code = Column(String(100))
+    workpakages = relationship('Workpackage', backref='user', lazy=True)
+    contacts = relationship('Contact', backref='user', lazy=True)
+
 
 
     '''
@@ -75,27 +100,37 @@ class User(db.Model, UserMixin):
             return False
 
 
+<<<<<<< HEAD
 class Contact(db.Model):
     ''' Contact Contact Datatable '''
     __tablename__ = 'contact'
     id = Column(Integer, primary_key=True)
+=======
+class Contact(db.Model, CustomBase):
+    ''' Contact Contact Datatable '''
+    __tablename__ = 'contact'
+>>>>>>> 418741498c91bc8668ced8a8ccf8547d24062f34
     is_active = Column(Boolean)
     firstname = Column(String(256), nullable=False)
     lastname = Column(String(256), nullable=False)
     email = Column(String(256))
     phone = Column(String(256))
-    
+    mobile = Column(String(256))
+    fax = Column(String(256))
+    title = Column(String(256))
+    sex = Column(String(256))
+    hompage = Column(String(256))
+    company = Column(String(256))
+    discount = Column(Float)
+    user_id = Column(Integer, ForeignKey('user.id'),nullable=False)
+    adresses = relationship('Location', backref='contact', lazy=True)
+
     def __repr__(self):
         ''' DEBUG PRINT OUTPUT'''
         return '<Contact %r>' % (self.firstname+" "+self.lastname)
 
-    def __init__(self, firstname, lastname, email, phone):
-        self.firstname = firstname
-        self.lastname = lastname
-        self.email = email
-        self.phone = phone
-        
-class Location(db.Model):
+
+class Location(db.Model, CustomBase):
     '''
      Methods defined here:
 
@@ -118,8 +153,14 @@ class Location(db.Model):
     state = Column(String(256))
     plz = Column(String(256))
     # coordinates = Column(JSON)
+<<<<<<< HEAD
     #contact_id = Column(Integer, ForeignKey('contact.id'))
     #user_id = Column(Integer, ForeignKey('user.id'))
+=======
+    #customer_id = Column(Integer, ForeignKey('customer.id'))
+    #user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    contact_id = Column(Integer, ForeignKey('contact.id'), nullable=False)
+>>>>>>> 418741498c91bc8668ced8a8ccf8547d24062f34
 
     def __repr__(self):
         pass
@@ -130,32 +171,54 @@ class Location(db.Model):
         self.plz = plz
         self.coordinates = self.get_cordiantes()
 
-    def get_cordiantes(self):
-       
-        address = self.street+'+'+self.streeNumber+',+'+self.city+'+'+self.plz+',+'+self.state
-        response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?'+address+'&'+app.config['GOOGE_API_KEY'])
-        return response.json()
 
+<<<<<<< HEAD
 class Company(db.Model):
     ''' Add Company attributes if contact is a company '''
     __tablename__ = 'company'
     id = Column(Integer, primary_key=True)
     contact_id = Column(Integer, ForeignKey('contact.id'))
     # employees = relationship('Contact', backref='employee')
+=======
+>>>>>>> 418741498c91bc8668ced8a8ccf8547d24062f34
 
+class Task(db.Model, CustomBase):
     
-    def __repr__(self):
-        pass
+    __tablename__ = 'task'
+    name = Column(String(256))
+    description = Column(Text)
+    due_date = Column(Date)
+    start_date = Column(Date)
+    status = Column(String(256))
+    location_id = Column(Integer, ForeignKey('location.id'))
+    discoutn = Column(Float)
+    priority = Column(String(256))
+    comment = Column(Text)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    contact_id = Column(Integer, ForeignKey('contact.id'))
+    tasks = relationship('Task', secondary=association_table)
     
-    def __init__(self, parameter_list):
+
+    def total_houres(self):
+        pass
+
+    def total_value(self):
+        pass
+
+    def get_work_packages(self):
+        #load all workpakages linked to this task
         pass
 
 
-class Contract(object):
-    pass
+class Workpackage(db.Model, CustomBase):
+    
+    __tablename__ = 'workpackage'
+    name = Column(String(256)) #Name of the shit
+    amount = Column(Float)  #How much shit
+    unit = Column(String(256))  #Unit of shit
+    description = Column(Text) # Shiti descripion
+    value = Column(Float) #Cost of shit
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
 
-class Service(object):
-    pass
 
-class Task(object):
-    pass
+
