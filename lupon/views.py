@@ -32,13 +32,25 @@ def index():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
+  if current_user.is_authenticated:
+    return redirect(url_for('index'))
+  
   form = UserForm()
+  
   if form.validate_on_submit():
-    user = User()
-    form.populate_obj(user)
-    db.session.add(user)
-    db.session.commit()
-    flash("User successflly created!", 'success')
+
+    try: 
+        user = User()
+        form.populate_obj(user)
+
+        db.session.add(user)
+        db.session.commit()
+        flash("User successflly created!", 'success')
+    
+    except Exception as e:
+        return e
+
+    
     return redirect(url_for('index'))
   return render_template('register.html', form=form)
 

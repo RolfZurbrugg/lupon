@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name="lupon",
-    version='0.3.1',
+    version='0.3.2',
     url='https://www.lupon.ch',
     description='',
     author='Florian Rindlisbacher',
@@ -20,7 +20,7 @@ setup(
         'Flask-SQLAlchemy',
         'Flask-Login',
         'Flask-Bcrypt',
-	'Psycopg2',
+	    'Psycopg2',
         'requests',
         'passlib'
         'requests'

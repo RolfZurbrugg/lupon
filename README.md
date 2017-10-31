@@ -140,15 +140,17 @@ psql -U lupon -d lupon -h 127.0.0.1 -W
 * Flask-SQLAlchemy: http://flask-sqlalchemy.pocoo.org/2.3/
 * WTForms: https://wtforms.readthedocs.io/en/latest/index.html
 * Flask-WTF: https://flask-wtf.readthedocs.io/en/stable/index.html
-* WTForms-Alchemy: http://wtforms-alchemy.readthedocs.io/en/latest/index.html
 * Flask-Babel: https://pythonhosted.org/Flask-Babel/
 * SQLAlchemy: http://docs.sqlalchemy.org/en/latest/orm/index.html
 * Twitter Bootstrap: https://getbootstrap.com/docs/4.0/getting-started/introduction/
 * Jinja2 (Templateing): http://jinja.pocoo.org/docs/2.9/templates/#
+* Flask-Login: http://flask-login.readthedocs.io/en/latest/
+
 
 
 ### HowTos & Tutorials
 * Example Flask Project(Template): https://github.com/xen/flask-project-template
+* Flask Example Projekct: https://github.com/imwilsonxu/fbone
 * Flask by Example: https://realpython.com/blog/python/flask-by-example-part-1-project-setup/
 * Flask Mega Tutorial: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 * GoogleMaps API: https://developers.google.com/maps/documentation/javascript/tutorial
