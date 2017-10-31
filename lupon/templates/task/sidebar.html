@@ -1,2 +1,32 @@
 {# defines sidebar searchable list #}
 
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+      
+       <div class="col-12 col-md-3 col-xl-2 bd-sidebar bg-light"  id=sideBarTask>
+       <h1 id="no_header">List</h1>
+       <ul class="bd-sidenav" id="no_list">
+            <li><a href="#/australia/">Atest</a></li>
+            <li><a href="#/australia/">bText</a></li>
+        </ul>         
+       <p id="header"></p>
+
+      <table class="table" id="list">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Contact</th>
+                    <th>Due Date</th>
+                    </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td><a href="{{ url_for('task') }}">Update Takslist!</a></td>
+                <td><a href="{{ url_for('task') }}">HP. Giger</a></td>
+                <td><a href="{{ url_for('task') }}">19.10.2019</a></td>
+                </tr>
+              </tbody>
+        </table>
+    </div>
+</div>
+</div>

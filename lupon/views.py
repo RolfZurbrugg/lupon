@@ -29,6 +29,9 @@ def index():
   app.config['BABEL_DEFAULT_LOCALE'] = get_locale()
   return render_template("index.html")
 
+@app.route('/task', methods=['GET','POST'])
+def task():
+  return render_template("task/body.html")
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
