@@ -161,16 +161,4 @@ psql -U lupon -d lupon -h 127.0.0.1 -W
 *
 *
 *
-### Product Backlog
-Florian
-* Send eMail on user registration
-* Administrator Interface
-* Customer management
-
-Rolf
-* Offer creation page
-    * AJAX
-* Search functionaliy
-    * Tasks
-    * Customers
-
+*
