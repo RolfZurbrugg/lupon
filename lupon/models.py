@@ -157,10 +157,9 @@ class Location(db.Model, CustomBase):
         self.coordinates = self.get_cordiantes()
 
 
-
-class Task(db.Model, CustomBase):
+class Workpackage(db.Model, CustomBase):
     
-    __tablename__ = 'task'
+    __tablename__ = 'workpackage'
     name = Column(String(256))
     description = Column(Text)
     due_date = Column(Date)
@@ -172,7 +171,7 @@ class Task(db.Model, CustomBase):
     comment = Column(Text)
     user_id = Column(Integer, ForeignKey('user.id'))
     contact_id = Column(Integer, ForeignKey('contact.id'))
-    tasks = relationship('Task', secondary=association_table)
+    tasks = relationship('Workpackage', secondary=association_table)
     
 
     def total_houres(self):
@@ -186,9 +185,9 @@ class Task(db.Model, CustomBase):
         pass
 
 
-class Workpackage(db.Model, CustomBase):
+class Task(db.Model, CustomBase):
     
-    __tablename__ = 'workpackage'
+    __tablename__ = 'task'
     name = Column(String(256)) #Name of the shit
     amount = Column(Float)  #How much shit
     unit = Column(String(256))  #Unit of shit

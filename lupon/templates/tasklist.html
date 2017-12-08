@@ -1,0 +1,28 @@
+{# lupon/templates/tasklist.html #}
+
+{% from "macros.html" import inputField, submitForm %}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="form" action="" method="post" enctype="multipart/form-data">
+    List of available tasklists
+</form>
+
+
+
+<form class="form" action="{{ url_for('task')}}" method="post" enctype="multipart/form-data">
+    {{ taskform.hidden_tag() }}
+    {{ inputField(taskform.name) }}
+    {{ inputField(taskform.amount) }}
+
+    {{ submitForm(taskform.add_task) }}
+
+</form>
+
+<form class="form" action="" method="post" enctype="multipart/form-data">
+    List of all tasks
+</form>
+
+{% endblock %}

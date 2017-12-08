@@ -6,8 +6,8 @@ from .extensions import babel
 import logging
 from config import LANGUAGES
 from lupon import app, db, flask_bcrypt
-from lupon.models import User, Contact
-from .forms import EmailPasswordForm, UserForm, LoginForm, UserProfileForm
+from lupon.models import User, Contact, Task
+from .forms import EmailPasswordForm, UserForm, LoginForm, UserProfileForm, TaskForm
 
 @babel.localeselector
 def get_locale():
@@ -106,3 +106,28 @@ def not_found_error(error):
 def internal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
+
+
+@app.route('/tasklist', methods=['GET','POST'])
+def task():
+    form = UserForm()
+    taskform = TaskForm()
+
+    # tasks = Task.query()
+
+    if taskform.validate_on_submit():
+        flash('valid')
+        try:
+            task2 = Task()
+            # taskform.populate_obj(task2)
+
+            db.session.add(task2)
+            db.session.commit()
+            flash("Task created!", 'success')
+
+        except Exception as e:
+            return e
+
+        return redirect(url_for('index'))
+    flash('nope')
+    return render_template("tasklist.html", taskform=taskform)
