@@ -158,7 +158,3 @@ psql -U lupon -d lupon -h 127.0.0.1 -W
 
 ### Snippets
 * Flask-WTF Tricks: https://goonan.io/flask-wtf-tricks/
-*
-*
-*
-*

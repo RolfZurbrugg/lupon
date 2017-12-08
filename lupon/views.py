@@ -9,6 +9,10 @@ from lupon import app, db, flask_bcrypt
 from lupon.models import User, Contact
 from .forms import EmailPasswordForm, UserForm, LoginForm, UserProfileForm
 
+from flask_googlemaps import GoogleMaps
+from flask_googlemaps import Map
+
+
 @babel.localeselector
 def get_locale():
   if request.args.get('lang'):
@@ -31,7 +35,13 @@ def index():
 
 @app.route('/task', methods=['GET','POST'])
 def task():
-  return render_template("task/body.html")
+    mymap = Map(
+        identifier="view-side",
+        lat=37.4419,
+        lng=-122.1419,
+        markers=[(37.4419, -122.1419)]
+    )
+    return render_template("task/body.html", mymap=mymap)
 
 @app.route('/register', methods=["GET", "POST"])
 def register():

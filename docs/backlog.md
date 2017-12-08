@@ -9,4 +9,4 @@ jsonify serializer
 domain model
 contact list
 blueprinting
-
+send mail when user is created

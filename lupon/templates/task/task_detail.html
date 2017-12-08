@@ -17,4 +17,31 @@
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFo2BixpwAQarIZu_EWiOMtihrGVc3b-c&callback=initMap">
 </script>
+<h1>Task Name</h1>
+<div class="form-group">
+  <label for="exampleFormControlTextarea1">Description</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>
+</form>
+
+<h2>Work Packages</h2>
+<table class="table">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Unit</th>
+          <th>Value</th>
+          </tr>
+  </thead>
+  <tbody>
+      {% for row in user %}
+      <tr>
+      <td><a href="">Do Stuff</a></td>
+      <td>hour</td>
+      <td>80.-</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
 
