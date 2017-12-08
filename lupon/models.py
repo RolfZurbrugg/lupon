@@ -24,8 +24,8 @@ class CustomBase(object):
     ''' Define base atribuetes for all table '''
     
     id = Column(Integer, primary_key=True)
-    create_date = Column(DateTime(timezone=True), default=datetime.datetime.utcnow)
-    modify_date = Column(DateTime())
+    create_date = Column(DateTime(timezone=False), default=sa.func.utcnow)
+    modify_date = Column(DateTime(timezone=False))
     create_by = Column(String(256), default="system")
     modify_by = Column(String(256))
 
@@ -97,6 +97,9 @@ class User(db.Model, UserMixin):
 
     def get_id(self):
         return self.id
+
+    def get_name(self):
+        return str(self.username)
 
 
 class Contact(db.Model, CustomBase):

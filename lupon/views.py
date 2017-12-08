@@ -116,13 +116,14 @@ def task():
         obj = Task.query.get(int(request.args['task_id']))
         taskform = TaskForm(obj=obj)
     else:
-       taskform = TaskForm()
+        taskform = TaskForm()
 
+    # ToDo: only display where user_id = current_user
     tasks = Task.query.all()
 
     if taskform.validate_on_submit():
         try:
-            task = Task(user_id=current_user.get_id())
+            task = Task(user_id=current_user.get_id(), create_by=current_user.get_name())
             taskform.populate_obj(task)
             db.session.add(task)
             db.session.commit()
