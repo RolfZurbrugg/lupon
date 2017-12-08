@@ -108,26 +108,35 @@ def internal_error(error):
     return render_template('500.html'), 500
 
 
-@app.route('/tasklist', methods=['GET','POST'])
+@app.route('/task', methods=['GET','POST'])
 def task():
-    form = UserForm()
-    taskform = TaskForm()
 
-    # tasks = Task.query()
+    # Prepoulate Form if task id is present in URL
+    if request.args.get('task_id'):
+        obj = Task.query.get(int(request.args['task_id']))
+        taskform = TaskForm(obj=obj)
+    else:
+       taskform = TaskForm()
+
+    tasks = Task.query.all()
 
     if taskform.validate_on_submit():
-        flash('valid')
         try:
-            task2 = Task()
-            # taskform.populate_obj(task2)
-
-            db.session.add(task2)
+            task = Task(user_id=current_user.get_id())
+            taskform.populate_obj(task)
+            db.session.add(task)
             db.session.commit()
             flash("Task created!", 'success')
 
         except Exception as e:
             return e
 
-        return redirect(url_for('index'))
-    flash('nope')
-    return render_template("tasklist.html", taskform=taskform)
+        return redirect(url_for('task'))
+    return render_template("task.html", taskform=taskform, tasks=tasks)
+
+
+@app.route('/admin', methods=["GET", "POST"])
+@login_required
+def admin():
+  users = User.query.all()
+  return render_template('admin.html', users=users)

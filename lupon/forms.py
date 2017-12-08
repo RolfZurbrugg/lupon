@@ -1,12 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, StringField, ValidationError, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, StringField, ValidationError, SubmitField, BooleanField, FloatField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, NumberRange
 
-from .models import Contact, User, Location
+from .models import Contact, User, Location, Task
 from lupon import db
 
 from flask_login import current_user
-
 
 class LoginForm(FlaskForm):
     email = StringField(
@@ -82,18 +81,10 @@ class ContactForm(FlaskForm):
 
 
 class TaskForm(FlaskForm):
-    name = StringField('Name', validators=[Length(min=3, max=255)], render_kw={"placeholder": "Name"})
-    amount = StringField('Amount', validators=[Length(min=1)], render_kw={"placeholder": "Amount"})
-    # unit = StringField('Unit', validators=[Length(min=3, max=255)], render_kw={"placeholder": "Unit"})
-    # description = StringField('Description', validators=[Length(min=3, max=255)], render_kw={"placeholder": "Description"})
-    # value = StringField('Value', validators=[Length(min=0)], render_kw={"placeholder": "Value"})
+    name = StringField('Name', validators=[Length(max=255)], render_kw={"placeholder": "Name"})
+    amount = FloatField('Amount', render_kw={"placeholder": "Amount"})
+    value = FloatField('Value', render_kw={"placeholder": "Value"})
+    unit = StringField('Unit', validators=[Length(max=255)], render_kw={"placeholder": "Unit"})
+    description = StringField('Description', render_kw={"placeholder": "Description"})
     add_task = SubmitField('Add Task')
-    # del_task = SubmitField('Delete Task')
-
-    # __tablename__ = 'task'
-    # name = Column(String(256)) #Name of the shit
-    # amount = Column(Float)  #How much shit
-    # unit = Column(String(256))  #Unit of shit
-    # description = Column(Text) # Shiti descripion
-    # value = Column(Float) #Cost of shit
-    # user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    del_task = SubmitField('Delete Task')

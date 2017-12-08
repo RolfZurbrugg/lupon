@@ -1,0 +1,27 @@
+{# lupon/templates/register.html #}
+
+{% from "macros.html" import inputField, submitForm %}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Email</th>
+            <th>Password</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for row in users %}
+        <tr>
+        <td><a href="{{ url_for('profile', id=row.id) }}">{{ row.id|safe }}</a></td>
+        <td>{{ row.email|safe }}</td>
+        <td>{{ row.password|safe }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -2,8 +2,9 @@
 This module contains all classes requeried for Database Model
 
 '''
-from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode, Date, Table
+from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode, DateTime, Table
 import requests
+import datetime
 from flask import g
 from flask_login import UserMixin
 from flask_sqlalchemy import Model, SQLAlchemy
@@ -23,12 +24,10 @@ class CustomBase(object):
     ''' Define base atribuetes for all table '''
     
     id = Column(Integer, primary_key=True)
-    create_date = Column(Date(), nullable=False)
-    modify_date = Column(Date())
-    creat_by = Column(String(256), nullable=False)
-    modify_by = Column(String(256), nullable=False)
-
-
+    create_date = Column(DateTime(timezone=True), default=datetime.datetime.utcnow)
+    modify_date = Column(DateTime())
+    create_by = Column(String(256), default="system")
+    modify_by = Column(String(256))
 
 class User(db.Model, UserMixin):
    
@@ -96,6 +95,9 @@ class User(db.Model, UserMixin):
         else:
             return False
 
+    def get_id(self):
+        return self.id
+
 
 class Contact(db.Model, CustomBase):
     ''' Contact Contact Datatable '''
@@ -162,8 +164,8 @@ class Workpackage(db.Model, CustomBase):
     __tablename__ = 'workpackage'
     name = Column(String(256))
     description = Column(Text)
-    due_date = Column(Date)
-    start_date = Column(Date)
+    due_date = Column(DateTime())
+    start_date = Column(DateTime())
     status = Column(String(256))
     location_id = Column(Integer, ForeignKey('location.id'))
     discoutn = Column(Float)
@@ -193,7 +195,4 @@ class Task(db.Model, CustomBase):
     unit = Column(String(256))  #Unit of shit
     description = Column(Text) # Shiti descripion
     value = Column(Float) #Cost of shit
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-
-
-
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=True)

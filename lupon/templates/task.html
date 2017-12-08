@@ -1,0 +1,62 @@
+{# lupon/templates/tasklist.html #}
+
+{% from "macros.html" import inputField, submitForm %}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="form" action="" method="post" enctype="multipart/form-data">
+    List of available tasklists
+</form>
+
+
+
+<form class="form" action="{{ url_for('task')}}" method="post" enctype="multipart/form-data">
+    {{ taskform.hidden_tag() }}
+    {{ inputField(taskform.name) }}
+    {{ inputField(taskform.amount) }}
+    {{ inputField(taskform.value) }}
+    {{ inputField(taskform.unit) }} <!--replace with dropdown-->
+    {{ inputField(taskform.description) }}
+    {{ submitForm(taskform.add_task) }}
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Create Date</th>
+            <th>Modify Date</th>
+            <th>Created by</th>
+            <th>Modyfied by</th>
+            <th>name</th>
+            <th>description</th>
+            <th>amount</th>
+            <th>unit</th>
+            <th>value</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for row in tasks %}
+        <tr>
+        <td><a href="{{ url_for('task', task_id=row.id) }}">{{ row.id|safe }}</a></td>
+        <td>{{ row.create_date|safe }}</td>
+        <td>{{ row.modify_date|safe }}</td>
+        <td>{{ row.create_by|safe }}</td>
+        <td>{{ row.modify_by|safe }}</td>
+        <td>{{ row.name|safe }}</td>
+        <td>{{ row.description|safe }}</td>
+        <td>{{ row.amount|safe }}</td>
+        <td>{{ row.unit|safe }}</td>
+        <td>{{ row.value|safe }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<form class="form" action="" method="post" enctype="multipart/form-data">
+    List of all tasks
+</form>
+
+{% endblock %}
