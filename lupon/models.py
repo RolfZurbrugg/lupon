@@ -30,31 +30,27 @@ class User(db.Model, UserMixin):
     id = Column(Integer, primary_key=True)
 
     email = Column(
-            String(100), 
+            String(120), 
             unique=True, 
-            nullable=False
+            nullable=False, 
+            info={'validators': Email(),
+                'label': 'Name' 
+            }
     )
     password = Column(
-            String(100),
-            nullable=False                              
+            String(80),
+            nullable=False,
+            info={ 'label': 'Password' }
     )
-
-    username = Column(
-            String(100),
-            nullable=False
-    )
-
-    firstname = Column(String(100))
-    lastname= Column(String(100))
-    street = Column(String(100))
-    city = Column(String(100))
-    state = Column(String(100))
-    number = Column(String(100))
-    zip_code = Column(String(100))
-
-    workpakages = relationship('Workpackage', backref='user', lazy=True)
-    contacts = relationship('Contact', backref='user', lazy=True)
-
+    
+    posts = db.relationship('Post', backref='user', lazy='dynamic')
+    
+    # locations = relationship('Location', backref='user', lazy='dynamic')
+     
+    def __init__(self, email, password):
+        self.email = email
+        self.password = flask_bcrypt.generate_password_hash(password)
+ 
     def __repr__(self):
         return '<User %r>' % self.email
 
@@ -64,28 +60,12 @@ class User(db.Model, UserMixin):
         else:
             return True
 
-    @classmethod
-    def authenticate(cls, login, password):
-        user = cls.query.filter(db.or_(User.username == login, User.email == login)).first()
+    
 
-        if user:
-            authenticated = user.check_password(password)
-        else:
-            authenticated = False
-
-        return user, authenticated
-
-    def check_password(self, password):
-        if self.password == password:
-            return True
-        else:
-            return False
-
-class Contact(db.Model, CustomBase):
-    ''' User Contact Datatable '''
-
-    __tablename__ = 'contact'
-
+class Customer(db.Model):
+    ''' Customer Contact Datatable '''
+    __tablename__ = 'customer'
+    id = Column(Integer, primary_key=True)
     is_active = Column(Boolean)
     firstname = Column(String(256), nullable=False)
     lastname = Column(String(256), nullable=False)
@@ -172,4 +152,24 @@ class Workpackage(db.Model, CustomBase):
     description = Column(Text) # Shiti descripion
     value = Column(Float) #Cost of shit
 
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+class Task(object):
+    pass
+
+'''
+@SOURCE http://zqsmm.qiniucdn.com/data/20140904220136/index.html
+'''
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), nullable=False)
+    body = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    created_at = db.Column(db.DateTime, default=db.func.now())
+ 
+    def __init__(self, title, body):
+        self.title = title
+        self.body = body
+        self.user_id = g.user.id
+ 
+    def __repr__(self):
+        return '<Post %r>' % self.title

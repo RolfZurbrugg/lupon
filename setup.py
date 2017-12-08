@@ -19,11 +19,12 @@ setup(
         'Flask-WTF',
         'Flask-SQLAlchemy',
         'Flask-Login',
-        'Flask-Bcrypt',
-	    'Psycopg2',
+        'Flask-Bcrypt==0.6.0',
+        'WTFlorms-Alchemy'
         'requests',
-        'passlib'
-        'requests'
+        'Flask-RESTful',
+        'Flask-HTTPAuth',
+        'marshmallow'
     ],
     classifiers=[
         'Environment :: Web Environment',

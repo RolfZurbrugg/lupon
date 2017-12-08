@@ -1,14 +1,15 @@
 # __init__.py
+
+import os
+
 from flask import Flask
+from flask.ext import restful
+from flask.ext.restful import reqparse, Api
+from flask_mail import Mail
 from flask_babel import Babel, gettext
-from flask_login import LoginManager
-from .extensions import babel, mail
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-
-db = SQLAlchemy()
-
+from flask.ext.httpauth import HTTPBasicAuth
 
 def create_app():
     app = Flask(__name__)
@@ -16,25 +17,37 @@ def create_app():
     db.init_app(app)
     babel.init_app(app)
     mail.init_app(app)
+    api = restful.Api(app)
     return app
 
+# Flsk-SQLAlchemy
+db = SQLAlchemy()
 
+# flask-restful
+api = restful.Api()
+ 
+# flask-httpauth
+auth = HTTPBasicAuth()
+
+# Flask-Babel
+babel = Babel()
+
+# Flask-Mail
+mail = Mail()
+
+# Init lupon
 app = create_app()
 app.app_context().push()
-# INIT EXTENSIONS
 
 # flask-bcrypt
 flask_bcrypt = Bcrypt(app)
 
-from .models import User
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    return response
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "login"
 
-@login_manager.user_loader
-def load_user(userid):
-    return User.query.filter(User.id==userid).first()
-
-# LOAD VIEWS
-from lupon import views, models
+from lupon import views
