@@ -24,7 +24,7 @@ class CustomBase(object):
     ''' Define base atribuetes for all table '''
     
     id = Column(Integer, primary_key=True)
-    create_date = Column(DateTime(timezone=False), default=sa.func.utcnow)
+    create_date = Column(DateTime(timezone=False), default=datetime.datetime.utcnow)
     modify_date = Column(DateTime(timezone=False))
     create_by = Column(String(256), default="system")
     modify_by = Column(String(256))
@@ -199,3 +199,20 @@ class Task(db.Model, CustomBase):
     description = Column(Text) # Shiti descripion
     value = Column(Float) #Cost of shit
     user_id = Column(Integer, ForeignKey('user.id'), nullable=True)
+
+    def update(self, id):
+        
+        try:
+            db.session.add(self)
+            db.session.commit()
+
+        except Exception as e:
+            return e
+
+        return True
+    
+    def task_exists(self):
+        if db.session.query(Task.id).filter_by(id=self.id).scalar() is not None:
+            return False
+        else:
+            return True

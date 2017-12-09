@@ -1,0 +1,351 @@
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 283-506-230
+INFO:werkzeug: * Detected change in '/home/rifl/github/lupon/lupon/models.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 283-506-230
+INFO:sqlalchemy.engine.base.Engine:select version()
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:select current_schema()
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:show standard_conforming_strings
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 21:59:49] "POST /task HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 21:59:57] "POST /task HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:root:task from validated
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:30] "POST /task HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:30] "GET /task?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:30] "GET /task?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:30] "GET /task?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:30] "GET /task?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:30] "GET /task?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:root:task from validated
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:50] "POST /task HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:50] "GET /task?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:50] "GET /task?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:50] "GET /task?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:50] "GET /task?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:50] "GET /task?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:52] "GET /task HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task 
+WHERE task.id = %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:54] "GET /task?task_id=1 HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:root:task from validated
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:55] "POST /task HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:55] "GET /task?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:55] "GET /task?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:55] "GET /task?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:55] "GET /task?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:00:55] "GET /task?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task 
+WHERE task.id = %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:06] "GET /task?task_id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:06] "GET /static/css/bootstrap.min.css HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:06] "GET /static/lib/font-awesome/css/font-awesome.min.css HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:06] "GET /static/css/style.css HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:06] "GET /static/js/popper.js HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:06] "GET /static/js/jquery.min.js HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:06] "GET /static/js/bootstrap.min.js HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:06] "GET /static/js/code.js HTTP/1.1" 304 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:09] "GET /task HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:11] "POST /task HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task 
+WHERE task.id = %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:13] "GET /task?task_id=1 HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:root:task from validated
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:13] "POST /task HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:13] "GET /task?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:13] "GET /task?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:14] "GET /task?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:14] "GET /task?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:02:14] "GET /task?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/rifl/github/lupon/lupon/models.py', reloading
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 283-506-230
+INFO:werkzeug: * Detected change in '/home/rifl/github/lupon/lupon/models.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 283-506-230
+INFO:sqlalchemy.engine.base.Engine:select version()
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:select current_schema()
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:show standard_conforming_strings
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:root:task from validated
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:08:28] "POST /task HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:08:28] "GET /task?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:08:28] "GET /task?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:08:28] "GET /task?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:08:28] "GET /task?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:08:28] "GET /task?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/rifl/github/lupon/lupon/views.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 283-506-230
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 283-506-230
+INFO:sqlalchemy.engine.base.Engine:select version()
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:select current_schema()
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:show standard_conforming_strings
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:09:44] "GET /task HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:09:47] "POST /task HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task 
+WHERE task.id = %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:09:50] "GET /task?task_id=1 HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:root:task from validated
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:INSERT INTO task (create_date, modify_date, create_by, modify_by, name, amount, unit, description, value, user_id) VALUES (%(create_date)s, %(modify_date)s, %(create_by)s, %(modify_by)s, %(name)s, %(amount)s, %(unit)s, %(description)s, %(value)s, %(user_id)s) RETURNING task.id
+INFO:sqlalchemy.engine.base.Engine:{'create_date': datetime.datetime(2017, 12, 8, 21, 9, 51, 277607), 'modify_date': None, 'create_by': 'lupon', 'modify_by': None, 'name': 'AA', 'amount': 1.0, 'unit': '', 'description': '', 'value': 1.0, 'user_id': 1}
+INFO:sqlalchemy.engine.base.Engine:COMMIT
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:09:51] "POST /task HTTP/1.1" 302 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:09:51] "GET /task HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task 
+WHERE task.id = %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:09:54] "GET /task?task_id=1 HTTP/1.1" 200 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:root:task from validated
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:INSERT INTO task (create_date, modify_date, create_by, modify_by, name, amount, unit, description, value, user_id) VALUES (%(create_date)s, %(modify_date)s, %(create_by)s, %(modify_by)s, %(name)s, %(amount)s, %(unit)s, %(description)s, %(value)s, %(user_id)s) RETURNING task.id
+INFO:sqlalchemy.engine.base.Engine:{'create_date': datetime.datetime(2017, 12, 8, 21, 9, 55, 486547), 'modify_date': None, 'create_by': 'lupon', 'modify_by': None, 'name': 'AA', 'amount': 1.0, 'unit': '', 'description': '', 'value': 1.0, 'user_id': 1}
+INFO:sqlalchemy.engine.base.Engine:COMMIT
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:09:55] "POST /task HTTP/1.1" 302 -
+INFO:sqlalchemy.engine.base.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.base.Engine:SELECT task.id AS task_id, task.create_date AS task_create_date, task.modify_date AS task_modify_date, task.create_by AS task_create_by, task.modify_by AS task_modify_by, task.name AS task_name, task.amount AS task_amount, task.unit AS task_unit, task.description AS task_description, task.value AS task_value, task.user_id AS task_user_id 
+FROM task
+INFO:sqlalchemy.engine.base.Engine:{}
+INFO:sqlalchemy.engine.base.Engine:SELECT "user".id AS user_id, "user".email AS user_email, "user".password AS user_password, "user".username AS user_username, "user".firstname AS user_firstname, "user".lastname AS user_lastname, "user".street AS user_street, "user".city AS user_city, "user".state AS user_state, "user".number AS user_number, "user".zip_code AS user_zip_code 
+FROM "user" 
+WHERE "user".id = %(id_1)s 
+ LIMIT %(param_1)s
+INFO:sqlalchemy.engine.base.Engine:{'id_1': '1', 'param_1': 1}
+INFO:sqlalchemy.engine.base.Engine:ROLLBACK
+INFO:werkzeug:127.0.0.1 - - [08/Dec/2017 22:09:55] "GET /task HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/rifl/github/lupon/run.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat

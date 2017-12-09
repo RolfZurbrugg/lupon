@@ -81,10 +81,15 @@ class ContactForm(FlaskForm):
 
 
 class TaskForm(FlaskForm):
-    name = StringField('Name', validators=[Length(max=255)], render_kw={"placeholder": "Name"})
+    name = StringField('Name', validators=[DataRequired(), Length(max=255)], render_kw={"placeholder": "Name"})
     amount = FloatField('Amount', render_kw={"placeholder": "Amount"})
     value = FloatField('Value', render_kw={"placeholder": "Value"})
     unit = StringField('Unit', validators=[Length(max=255)], render_kw={"placeholder": "Unit"})
     description = StringField('Description', render_kw={"placeholder": "Description"})
-    add_task = SubmitField('Add Task')
-    del_task = SubmitField('Delete Task')
+    add_task = SubmitField('Add')
+    update_task = SubmitField('Update')
+    del_task = SubmitField('Delete')
+
+    def validate_name(self, field):
+        if Task.query.filter_by(name=field.data, user_id=current_user.get_id()).first() is not None:
+            raise ValidationError(u'This name is taken')
