@@ -90,6 +90,6 @@ class TaskForm(FlaskForm):
     update_task = SubmitField('Update')
     del_task = SubmitField('Delete')
 
-    def validate_name(self, field):
-        if Task.query.filter_by(name=field.data, user_id=current_user.get_id()).first() is not None:
-            raise ValidationError(u'This name is taken')
+    #def validate_name(self, field):
+    #    if Task.query.filter_by(name=field.data, user_id=current_user.get_id()).first() is not None:
+    #        raise ValidationError(u'This name is taken')
