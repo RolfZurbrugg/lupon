@@ -7,7 +7,7 @@ import logging
 from config import LANGUAGES
 from lupon import app, db, flask_bcrypt
 from lupon.models import User, Contact, Task
-from .forms import EmailPasswordForm, UserForm, LoginForm, UserProfileForm, TaskForm
+from .forms import EmailPasswordForm, UserForm, LoginForm, UserProfileForm, TaskForm, ContactForm
 
 @babel.localeselector
 def get_locale():
@@ -121,7 +121,7 @@ def task():
         taskform = TaskForm()
 
     # ToDo: only display where user_id = current_user
-    tasks = Task.query.all()
+    tasks = Task.get_all(current_user.get_id())
     
     if taskform.validate_on_submit():
         logging.info('task from validated')
@@ -132,20 +132,18 @@ def task():
             tmp_task = Task.query.filter_by(name=task.name, user_id=current_user.get_id()).first()
             taskform.populate_obj(tmp_task)
             tmp_task.modify_by = current_user.get_id()
-            db.session.commit()
+            tmp_task.update()
             flash("Task Updated! "+ str(task.update_task) , 'success')
             
         elif task.add_task is True:
             task.user_id = current_user.get_id()
             task.create_by = current_user.get_name()
-            db.session.add(task)
-            db.session.commit()
+            task.add()
             flash("Task created! "+ str(task.add_task), 'success')
 
         elif task.del_task is True:
             tmp_task = Task.query.filter_by(name=task.name, user_id=current_user.get_id()).first()
-            db.session.delete(tmp_task)
-            db.session.commit()
+            tmp_task.delete()
             flash("Task deleted "+ str(task.del_task), 'warning')
         
         return redirect(url_for('task'))
@@ -157,3 +155,12 @@ def task():
 def admin():
     users = User.query.all()
     return render_template('admin.html', users=users)
+
+
+
+@app.route('/contact', methods=['GET','POST'])
+@login_required
+def contact():
+    contactform = ContactForm()
+    contacts = Contact.query.all()
+    return render_template('contact.html', contactform=contactform, contacts=contacts)

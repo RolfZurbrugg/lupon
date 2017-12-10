@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, StringField, ValidationError, SubmitField, BooleanField, FloatField
+from wtforms import StringField, PasswordField, SelectField, ValidationError, SubmitField, BooleanField, FloatField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, NumberRange
 
 from .models import Contact, User, Location, Task
@@ -72,7 +72,21 @@ class EmailPasswordForm(FlaskForm):
 
 class ContactForm(FlaskForm):
     firstname = StringField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
-    lastname= StringField('Lastname', validators=[Length(max=255)], render_kw={"placeholder": "Lastname"})
+    lastname = StringField('Lastname', validators=[Length(max=255)], render_kw={"placeholder": "Lastname"})
+    email = StringField('Email', validators=[Email()], render_kw={"placeholder": "Email", "type": "email"})
+    phone = StringField('Phone', validators=[Email()], render_kw={"placeholder": "Phone", "type": "tel"})
+    mobile = StringField('Mobile', validators=[Email()], render_kw={"placeholder": "Mobile", "type": "tel"})
+    fax = StringField('Fax', validators=[Email()], render_kw={"placeholder": "Fax", "type": "tel"})
+    title = StringField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
+    sex = SelectField('Sex', choices=[('m', 'Male'),('f', 'Female'),('n', 'None')], render_kw={"placeholder": "Sex"})
+    add_task = SubmitField('Create')
+    # homepage
+    # company
+    # discount
+    # user_id
+    # addresses
+
+class AddressForm(FlaskForm):
     street = StringField('Street', validators=[Length(max=255)], render_kw={"placeholder": "Street"})
     city = StringField('City', validators=[Length(max=255)], render_kw={"placeholder": "City"})
     state = StringField('State', validators=[Length(max=255)], render_kw={"placeholder": "State"})

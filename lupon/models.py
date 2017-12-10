@@ -11,7 +11,7 @@ from flask_sqlalchemy import Model, SQLAlchemy
 from sqlalchemy.orm import relationship
 import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declared_attr, has_inherited_table, declarative_base
-from . import app, flask_bcrypt, db
+from lupon import app, flask_bcrypt, db
 
 
 association_table = Table('workpackage_task',db.Model.metadata,
@@ -28,6 +28,40 @@ class CustomBase(object):
     modify_date = Column(DateTime(timezone=False))
     create_by = Column(String(256), default="system")
     modify_by = Column(String(256))
+
+    def get_id(self):
+        return self.id
+
+    def add(self):
+        try:
+            self.create_date(datetime.datetime.utcnow)
+            db.session.add(self)
+            db.session.commit()
+
+        except Exception as e:
+            return e
+
+        return
+    
+    def update(self):
+        try:
+            self.modify_date(datetime.datetime.utcnow)
+            db.session.commit()
+
+        except Exception as e:
+            return e
+
+        return
+
+    def delete(self):
+        try:
+            db.session.delete(self)
+            db.session.commit()
+
+        except Exception as e:
+            return e
+
+        return self
 
 class User(db.Model, UserMixin):
    
@@ -95,9 +129,6 @@ class User(db.Model, UserMixin):
         else:
             return False
 
-    def get_id(self):
-        return self.id
-
     def get_name(self):
         return str(self.username)
 
@@ -124,7 +155,6 @@ class Contact(db.Model, CustomBase):
         ''' DEBUG PRINT OUTPUT'''
         return '<Contact %r>' % (self.firstname+" "+self.lastname)
 
-
 class Location(db.Model, CustomBase):
     '''
      Methods defined here:
@@ -147,7 +177,7 @@ class Location(db.Model, CustomBase):
     city = Column(String(256))
     state = Column(String(256))
     zip = Column(String(256))
-    # coordinates = Column(JSON)
+    #coordinates = Column(JSON)
     #customer_id = Column(Integer, ForeignKey('customer.id'))
     #user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     contact_id = Column(Integer, ForeignKey('contact.id'), nullable=False)
@@ -191,7 +221,7 @@ class Workpackage(db.Model, CustomBase):
 
 
 class Task(db.Model, CustomBase):
-    
+
     __tablename__ = 'task'
     name = Column(String(256)) #Name of the shit
     amount = Column(Float)  #How much shit
@@ -200,19 +230,7 @@ class Task(db.Model, CustomBase):
     value = Column(Float) #Cost of shit
     user_id = Column(Integer, ForeignKey('user.id'), nullable=True)
 
-    def update(self, id):
-        
-        try:
-            db.session.add(self)
-            db.session.commit()
-
-        except Exception as e:
-            return e
-
-        return True
-    
-    def task_exists(self):
-        if db.session.query(Task.id).filter_by(id=self.id).scalar() is not None:
-            return False
-        else:
-            return True
+    @classmethod
+    # get all task filtered by user_id
+    def get_all(cls, user_id):
+        return Task.query.filter_by(user_id=user_id).all()

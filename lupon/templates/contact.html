@@ -1,0 +1,55 @@
+{# lupon/templates/contact.html #}
+
+{% from "macros.html" import inputField, submitForm %}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="form" action="{{ url_for('contact')}}" method="post" enctype="multipart/form-data">
+    {{ contactform.hidden_tag() }}
+    {{ inputField(contactform.firstname) }}
+    {{ inputField(contactform.lastname) }}
+    {{ inputField(contactform.email) }}
+    {{ inputField(contactform.phone) }} <!--replace with dropdown-->
+    {{ inputField(contactform.mobile) }}
+    {{ inputField(contactform.fax) }}
+    {{ inputField(contactform.title) }}
+    {{ inputField(contactform.sex) }}
+    {{ submitForm(contactform.add_task) }}
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Create Date</th>
+            <th>Modify Date</th>
+            <th>Created by</th>
+            <th>Modyfied by</th>
+            <th>name</th>
+            <th>description</th>
+            <th>amount</th>
+            <th>unit</th>
+            <th>value</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for row in contacts %}
+        <tr>
+        <td><a href="{{ url_for('task', task_id=row.id) }}">{{ row.id|safe }}</a></td>
+        <td>{{ row.create_date|safe }}</td>
+        <td>{{ row.modify_date|safe }}</td>
+        <td>{{ row.create_by|safe }}</td>
+        <td>{{ row.modify_by|safe }}</td>
+        <td>{{ row.name|safe }}</td>
+        <td>{{ row.description|safe }}</td>
+        <td>{{ row.amount|safe }}</td>
+        <td>{{ row.unit|safe }}</td>
+        <td>{{ row.value|safe }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
