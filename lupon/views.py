@@ -6,8 +6,8 @@ from .extensions import babel
 import logging
 from config import LANGUAGES
 from lupon import app, db, flask_bcrypt
-from lupon.models import User, Contact, Task
-from .forms import EmailPasswordForm, UserForm, LoginForm, UserProfileForm, TaskForm, ContactForm
+from lupon.models import User, Contact, Task, Location
+from .forms import EmailPasswordForm, UserForm, LoginForm, UserProfileForm, TaskForm, ContactForm, LocationForm
 
 @babel.localeselector
 def get_locale():
@@ -161,6 +161,43 @@ def admin():
 @app.route('/contact', methods=['GET','POST'])
 @login_required
 def contact():
-    contactform = ContactForm()
-    contacts = Contact.query.all()
-    return render_template('contact.html', contactform=contactform, contacts=contacts)
+    # contactform = ContactForm()
+    contacts = Contact.get_all(current_user.get_id())
+
+    
+        # Prepoulate Form if task id is present in URL
+    if request.args.get('contact_id'):
+        obj = contact.query.get(int(request.args['contact_id']))
+        contactform = ContactForm(obj=obj)
+        locationform = LocationForm(Location.query.filter_by(obj.get_id().first))
+
+    else:
+        contactform = ContactForm()
+        locationform = LocationForm()
+
+    if contactform.validate_on_submit():
+        logging.info('contact from validated')
+        contact = Contact()
+        contactform.populate_obj(contact)
+
+        if contact.update_contact is True:
+            tmp_contact = Contact.query.filter_by(name=contact.name, user_id=current_user.get_id()).first()
+            contactform.populate_obj(tmp_contact)
+            tmp_contact.modify_by = current_user.get_id()
+            tmp_contact.update()
+            flash("contact Updated! "+ str(contact.update_contact) , 'success')
+            
+        elif contact.add_contact is True:
+            contact.user_id = current_user.get_id()
+            contact.create_by = current_user.get_name()
+            contact.add()
+            flash("contact created! "+ str(contact.add_contact), 'success')
+
+        elif contact.del_contact is True:
+            tmp_contact = contact.query.filter_by(name=contact.name, user_id=current_user.get_id()).first()
+            tmp_contact.delete()
+            flash("contact deleted "+ str(contact.del_contact), 'warning')
+        
+        return redirect(url_for('contact'))
+
+    return render_template('contact.html', contactform=contactform, contacts=contacts, locationform=locationform)

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField, ValidationError, SubmitField, BooleanField, FloatField
-from wtforms.validators import DataRequired, Email, Length, EqualTo, NumberRange
+from wtforms import StringField, PasswordField, SelectField, ValidationError, SubmitField, BooleanField, FloatField, IntegerField
+from wtforms.validators import DataRequired, Email, Length, EqualTo, NumberRange, URL
 
 from .models import Contact, User, Location, Task
 from lupon import db
@@ -60,11 +60,6 @@ class UserProfileForm(FlaskForm):
     zip_code = StringField('Zip', validators=[Length(max=255)], render_kw={"placeholder": "Zip"})
     submit = SubmitField('Update Profile')
 
-
-class LocationForm(FlaskForm):
-    pass
-
-
 class EmailPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -74,25 +69,24 @@ class ContactForm(FlaskForm):
     firstname = StringField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
     lastname = StringField('Lastname', validators=[Length(max=255)], render_kw={"placeholder": "Lastname"})
     email = StringField('Email', validators=[Email()], render_kw={"placeholder": "Email", "type": "email"})
-    phone = StringField('Phone', validators=[Email()], render_kw={"placeholder": "Phone", "type": "tel"})
-    mobile = StringField('Mobile', validators=[Email()], render_kw={"placeholder": "Mobile", "type": "tel"})
-    fax = StringField('Fax', validators=[Email()], render_kw={"placeholder": "Fax", "type": "tel"})
-    title = StringField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
-    sex = SelectField('Sex', choices=[('m', 'Male'),('f', 'Female'),('n', 'None')], render_kw={"placeholder": "Sex"})
-    add_task = SubmitField('Create')
-    # homepage
-    # company
-    # discount
-    # user_id
-    # addresses
+    phone = StringField('Phone', render_kw={"placeholder": "Phone", "type": "tel"})
+    mobile = StringField('Mobile', render_kw={"placeholder": "Mobile", "type": "tel"})
+    fax = StringField('Fax', render_kw={"placeholder": "Fax", "type": "tel"})
+    title = StringField('Title', validators=[Length(max=255)], render_kw={"placeholder": "Title"})
+    sex = SelectField('Sex', choices=[('n', 'None'),('m', 'Male'),('f', 'Female')], render_kw={"placeholder": "Sex"})
+    homepage =  StringField('Homepage', validators=[Length(max=255)], render_kw={"placeholder": "Homepage"})
+    company = StringField('Company', validators=[URL()], render_kw={"placeholder": "Company"})
+    discount =  IntegerField('Discount', render_kw={"placeholder": "Discount in %"})
+    add_contact = SubmitField('Create')
+    update_contact = SubmitField('Update')
+    del_contact = SubmitField('Delete')
 
-class AddressForm(FlaskForm):
+class LocationForm(FlaskForm):
     street = StringField('Street', validators=[Length(max=255)], render_kw={"placeholder": "Street"})
     city = StringField('City', validators=[Length(max=255)], render_kw={"placeholder": "City"})
     state = StringField('State', validators=[Length(max=255)], render_kw={"placeholder": "State"})
-    number = StringField('Street No.', validators=[Length(max=255)], render_kw={"placeholder": "Street No."})
-    zip_code = StringField('Zip', validators=[Length(max=255)], render_kw={"placeholder": "Zip"})
-
+    streetNumber = StringField('Street No.', validators=[Length(max=255)], render_kw={"placeholder": "Street No."})
+    zip_code = IntegerField('Zip', render_kw={"placeholder": "Zip code"})
 
 class TaskForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(max=255)], render_kw={"placeholder": "Name"})

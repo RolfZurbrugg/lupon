@@ -11,12 +11,26 @@
     {{ inputField(contactform.firstname) }}
     {{ inputField(contactform.lastname) }}
     {{ inputField(contactform.email) }}
-    {{ inputField(contactform.phone) }} <!--replace with dropdown-->
+    {{ inputField(contactform.phone) }}
     {{ inputField(contactform.mobile) }}
     {{ inputField(contactform.fax) }}
     {{ inputField(contactform.title) }}
     {{ inputField(contactform.sex) }}
-    {{ submitForm(contactform.add_task) }}
+    {{ inputField(contactform.homepage) }}
+    {{ inputField(contactform.company) }}
+    {{ inputField(contactform.discount) }}
+    
+    {{ inputField(locationform.street) }}
+    {{ inputField(locationform.streetNumber) }}
+    {{ inputField(locationform.city) }}
+    {{ inputField(locationform.state) }}
+    {{ inputField(locationform.zip_code) }}
+
+    {{ submitForm(contactform.add_contact) }}
+    {{ submitForm(contactform.update_contact) }}
+    {{ submitForm(contactform.del_contact) }}
+
+
 </form>
 
 <table class="table">
@@ -42,11 +56,12 @@
         <td>{{ row.modify_date|safe }}</td>
         <td>{{ row.create_by|safe }}</td>
         <td>{{ row.modify_by|safe }}</td>
-        <td>{{ row.name|safe }}</td>
-        <td>{{ row.description|safe }}</td>
-        <td>{{ row.amount|safe }}</td>
-        <td>{{ row.unit|safe }}</td>
-        <td>{{ row.value|safe }}</td>
+        <td>{{ row.firstname|safe }}</td>
+        <td>{{ row.lastname|safe }}</td>
+        <td>{{ row.email|safe }}</td>
+        <td>{{ row.phone|safe }}</td>
+        <td>{{ row.mobile|safe }}</td>
+        <td>{{ row.fax|safe }}</td>
         </tr>
         {% endfor %}
     </tbody>

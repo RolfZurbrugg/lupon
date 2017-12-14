@@ -63,6 +63,8 @@ class CustomBase(object):
 
         return self
 
+
+
 class User(db.Model, UserMixin):
    
     __tablename__ = 'user'
@@ -154,6 +156,10 @@ class Contact(db.Model, CustomBase):
     def __repr__(self):
         ''' DEBUG PRINT OUTPUT'''
         return '<Contact %r>' % (self.firstname+" "+self.lastname)
+    
+    @classmethod
+    def get_all(cls, user_id):
+        return Contact.query.filter_by(user_id=user_id).all() 
 
 class Location(db.Model, CustomBase):
     '''
@@ -171,12 +177,11 @@ class Location(db.Model, CustomBase):
          # address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
     '''
     __tablename__ = 'location'
-    id = Column(Integer, primary_key=True)
     street = Column(String(256))
     streetNumber = Column(Integer)
     city = Column(String(256))
     state = Column(String(256))
-    zip = Column(String(256))
+    zip_code = Column(String(256))
     #coordinates = Column(JSON)
     #customer_id = Column(Integer, ForeignKey('customer.id'))
     #user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
@@ -218,7 +223,6 @@ class Workpackage(db.Model, CustomBase):
     def get_work_packages(self):
         #load all workpakages linked to this task
         pass
-
 
 class Task(db.Model, CustomBase):
 
