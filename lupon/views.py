@@ -129,16 +129,18 @@ def task():
         taskform.populate_obj(task)
 
         if task.update_task is True:
-            tmp_task = Task.query.filter_by(name=task.name, user_id=current_user.get_id()).first()
+            tmp_task = Task.query.filter_by(id=task.id).first()
             taskform.populate_obj(tmp_task)
             tmp_task.modify_by = current_user.get_id()
-            tmp_task.update()
+            db.session.commit()
             flash("Task Updated! "+ str(task.update_task) , 'success')
             
         elif task.add_task is True:
             task.user_id = current_user.get_id()
             task.create_by = current_user.get_name()
-            task.add()
+            task.id = None
+            db.session.add(task)
+            db.session.commit()
             flash("Task created! "+ str(task.add_task), 'success')
 
         elif task.del_task is True:

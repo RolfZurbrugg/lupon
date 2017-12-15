@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField, ValidationError, SubmitField, BooleanField, FloatField, IntegerField
+from wtforms import StringField, PasswordField, SelectField, ValidationError, SubmitField, BooleanField, FloatField, IntegerField, HiddenField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, NumberRange, URL
 
 from .models import Contact, User, Location, Task
@@ -89,6 +89,7 @@ class LocationForm(FlaskForm):
     zip_code = IntegerField('Zip', render_kw={"placeholder": "Zip code"})
 
 class TaskForm(FlaskForm):
+    id = HiddenField('id')
     name = StringField('Name', validators=[DataRequired(), Length(max=255)], render_kw={"placeholder": "Name"})
     amount = FloatField('Amount', render_kw={"placeholder": "Amount"})
     value = FloatField('Value', render_kw={"placeholder": "Value"})
