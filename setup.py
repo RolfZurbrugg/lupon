@@ -20,10 +20,11 @@ setup(
         'Flask-SQLAlchemy',
         'Flask-Login',
         'Flask-Bcrypt',
-	    'Psycopg2',
+        'Psycopg2',
         'requests',
         'passlib',
-        'requests'
+        'requests',
+        'Flask-Migrate'
     ],
     classifiers=[
         'Environment :: Web Environment',

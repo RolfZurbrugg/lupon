@@ -5,6 +5,7 @@ instance
 config.py
 venv
 _old
+run.log
 
 target/*
 .settings/*
