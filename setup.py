@@ -20,6 +20,7 @@ setup(
         'Flask-SQLAlchemy',
         'Flask-Login',
         'Flask-Bcrypt',
+        'Flask-Script',
         'Psycopg2',
         'requests',
         'passlib',
