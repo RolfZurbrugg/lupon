@@ -146,8 +146,6 @@ psql -U lupon -d lupon -h 127.0.0.1 -W
 * Jinja2 (Templateing): http://jinja.pocoo.org/docs/2.9/templates/#
 * Flask-Login: http://flask-login.readthedocs.io/en/latest/
 
-
-
 ### HowTos & Tutorials
 * Example Flask Project(Template): https://github.com/xen/flask-project-template
 * Flask Example Projekct: https://github.com/imwilsonxu/fbone
@@ -158,9 +156,7 @@ psql -U lupon -d lupon -h 127.0.0.1 -W
 
 ### Snippets
 * Flask-WTF Tricks: https://goonan.io/flask-wtf-tricks/
-*
-*
-*
+
 ### Product Backlog
 Florian
 * Send eMail on user registration
@@ -173,4 +169,3 @@ Rolf
 * Search functionaliy
     * Tasks
     * Customers
-

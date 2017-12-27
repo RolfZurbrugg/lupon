@@ -22,7 +22,7 @@ setup(
         'Flask-Bcrypt',
 	    'Psycopg2',
         'requests',
-        'passlib'
+        'passlib',
         'requests'
     ],
     classifiers=[
