@@ -41,6 +41,17 @@ h1 {
 .sidebar .nav-link {
   border-radius: 0;
 }
+
+#search-input {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+/**
+* FORMS
+**/
+
 .form-signin {
   max-width: 330px;
   padding: 15px;

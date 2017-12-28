@@ -1,0 +1,13 @@
+<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+        <form class="bd-search d-flex align-items-center">
+               <input type="search" class="form-control" id="search-input" placeholder="Filter..." aria-label="Search for..." autocomplete="off">
+               <!--button class="btn btn-link d-md-none p-0 ml-3" type="button" data-toggle="collapse" aria-expanded="false"></button-->
+        </form>
+    <ul class="nav nav-pills flex-column" id=contact_list>
+    {% for row in contacts %}   
+        <li class="nav-item">
+            <a class="nav-link {% if row.id == contactform.data.id %}active{% endif %}" href="{{ url_for('modify_contact', contact_id=row.id) }}">{{ row.firstname|safe }} {{ row.lastname|safe }}</a>
+        </li>
+    {% endfor %}   
+    </ul>
+</nav>

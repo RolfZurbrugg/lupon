@@ -1,0 +1,27 @@
+{# lupon/templates/contact.html #}
+
+{% from "macros.html" import inputField, submitForm %}
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    {% include "contact/sidebar.html" %}
+    <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+    <h1>Contact</h1>
+    <form class="form" action="{{ url_for('contact') }}" method="post" enctype="multipart/form-data">
+        <div class="row">
+        <div class="col-sm">
+            {% include "contact/contactform.html" %}
+        </div>
+        <div class="col-sm">
+            {% include "contact/locationform.html" %}
+        </div>
+    </div>
+    
+    {{ submitForm(contactform.add_contact) }}
+    </form>
+    </main>
+</div>
+
+{% endblock %}
