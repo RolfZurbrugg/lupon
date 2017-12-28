@@ -115,8 +115,8 @@ def task():
     # Prepoulate Form if task id is present in URL
     if request.args.get('task_id'):
         obj = Task.query.get(int(request.args['task_id']))
-        
         taskform = TaskForm(obj=obj)
+
     else:
         taskform = TaskForm()
 
@@ -144,7 +144,7 @@ def task():
             flash("Task created! "+ str(task.add_task), 'success')
 
         elif task.del_task is True:
-            tmp_task = Task.query.filter_by(name=task.name, user_id=current_user.get_id()).first()
+            tmp_task = Task.query.filter_by(id=task.id).first()
             tmp_task.delete()
             flash("Task deleted "+ str(task.del_task), 'warning')
         
@@ -163,41 +163,59 @@ def admin():
 @app.route('/contact', methods=['GET','POST'])
 @login_required
 def contact():
-    # contactform = ContactForm()
-    contacts = Contact.get_all(current_user.get_id())
 
-    
-        # Prepoulate Form if task id is present in URL
     if request.args.get('contact_id'):
-        obj = contact.query.get(int(request.args['contact_id']))
+        obj = Contact.query.get(int(request.args['contact_id']))
         contactform = ContactForm(obj=obj)
-        locationform = LocationForm(Location.query.filter_by(obj.get_id().first))
-
+        loc_obj = Location.query.filter_by(contact_id=obj.get_id()).first()
+        locationform = LocationForm(loc_obj)
+    
     else:
         contactform = ContactForm()
         locationform = LocationForm()
 
+    contacts = Contact.get_all(current_user.get_id())
+
     if contactform.validate_on_submit():
         logging.info('contact from validated')
-        contact = Contact()
+        
+        if obj is None:
+            contact = Contact()
+            location = Location(contact_id=contact.get_id())
+            logging.info('creating new contact and location')
+        
+        else:
+            contact = obj
+            location = Location.query.filter_by(contact_id=contact.id).first()
+            logging.info('query contact')
+        
         contactform.populate_obj(contact)
+        locationform.populate_obj(location)
 
         if contact.update_contact is True:
-            tmp_contact = Contact.query.filter_by(name=contact.name, user_id=current_user.get_id()).first()
+            tmp_contact = Contact.query.filter_by(id=contact.id).first()
+            if Location.query.filter_by(contact_id=contact.id).first() is not None:
+                locationform.populate_obj(Location.query.filter_by(contact_id=contact.id).first())
             contactform.populate_obj(tmp_contact)
             tmp_contact.modify_by = current_user.get_id()
-            tmp_contact.update()
+            db.session.commit()
             flash("contact Updated! "+ str(contact.update_contact) , 'success')
             
         elif contact.add_contact is True:
             contact.user_id = current_user.get_id()
             contact.create_by = current_user.get_name()
-            contact.add()
+            contact.id = None
+            db.session.add(contact)
+
+            db.session.commit()
             flash("contact created! "+ str(contact.add_contact), 'success')
 
         elif contact.del_contact is True:
-            tmp_contact = contact.query.filter_by(name=contact.name, user_id=current_user.get_id()).first()
-            tmp_contact.delete()
+            tmp_contact = Contact.query.filter_by(id=contact.id).first()
+            if Location.query.filter_by(contact_id=contact.id).first() is not None:
+                db.session.delete(Location.query.filter_by(contact_id=contact.id).first())
+            db.session.delete(tmp_contact)
+            db.session.commit()
             flash("contact deleted "+ str(contact.del_contact), 'warning')
         
         return redirect(url_for('contact'))

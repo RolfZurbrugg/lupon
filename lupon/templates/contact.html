@@ -5,8 +5,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<form class="form" action="{{ url_for('contact')}}" method="post" enctype="multipart/form-data">
+<div class="row">
+    <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+        <ul class="nav nav-pills flex-column">
+        {% for row in contacts %}   
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('task', task_id=row.id) }}">{{ row.firstname|safe }} {{ row.lastname|safe }}</a>
+            </li>
+        {% endfor %}   
+        </ul>
+    </nav>
+    <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+    <h1>Contact</h1>
+    <form class="form" action="{{ url_for('contact')}}" method="post" enctype="multipart/form-data">
     {{ contactform.hidden_tag() }}
     {{ inputField(contactform.firstname) }}
     {{ inputField(contactform.lastname) }}
@@ -29,10 +40,9 @@
     {{ submitForm(contactform.add_contact) }}
     {{ submitForm(contactform.update_contact) }}
     {{ submitForm(contactform.del_contact) }}
-
-
-</form>
-
+    </form>
+    </main>
+</div>
 <table class="table">
     <thead>
         <tr>

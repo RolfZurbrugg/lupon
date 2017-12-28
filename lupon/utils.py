@@ -29,6 +29,9 @@ def initDB():
     db_DropEverything(db)
     db.create_all()
 
+def initdb():
+    initDB()
+    
 def create_salt():
     return uuid.uuid4().hex
 

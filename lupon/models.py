@@ -157,9 +157,21 @@ class Contact(db.Model, CustomBase):
         ''' DEBUG PRINT OUTPUT'''
         return '<Contact %r>' % (self.firstname+" "+self.lastname)
     
+    def set_location(self, location):
+
+        if Location.query.filter_by(contact_id=self.id).first() is None:
+            location = Location(contact_id=self.id)
+            db.session.add(location)
+            db.sesson.commit()
+
+        else:
+            location = Location.query.filter_by(id=location.get_id())
+
+        return location
+
     @classmethod
     def get_all(cls, user_id):
-        return Contact.query.filter_by(user_id=user_id).all() 
+        return Contact.query.filter_by(user_id=user_id).all()
 
 class Location(db.Model, CustomBase):
     '''
@@ -178,7 +190,7 @@ class Location(db.Model, CustomBase):
     '''
     __tablename__ = 'location'
     street = Column(String(256))
-    streetNumber = Column(Integer)
+    streetNumber = Column(String(256))
     city = Column(String(256))
     state = Column(String(256))
     zip_code = Column(String(256))
@@ -189,13 +201,6 @@ class Location(db.Model, CustomBase):
 
     def __repr__(self):
         pass
-
-    def __init__(self, street, city, plz, contact_id):
-        self.street = street
-        self.city = city
-        self.plz = plz
-        self.coordinates = self.get_cordiantes()
-
 
 class Workpackage(db.Model, CustomBase):
     

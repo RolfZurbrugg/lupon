@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SelectField, ValidationError, SubmitField, BooleanField, FloatField, IntegerField, HiddenField
-from wtforms.validators import DataRequired, Email, Length, EqualTo, NumberRange, URL
+from wtforms.validators import DataRequired, Email, Length, EqualTo, NumberRange, URL, Optional
+from wtforms.fields.html5 import TelField
 
 from .models import Contact, User, Location, Task
 from lupon import db
@@ -66,22 +67,24 @@ class EmailPasswordForm(FlaskForm):
 
 
 class ContactForm(FlaskForm):
+    id = HiddenField('id')
     firstname = StringField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
     lastname = StringField('Lastname', validators=[Length(max=255)], render_kw={"placeholder": "Lastname"})
     email = StringField('Email', validators=[Email()], render_kw={"placeholder": "Email", "type": "email"})
-    phone = StringField('Phone', render_kw={"placeholder": "Phone", "type": "tel"})
-    mobile = StringField('Mobile', render_kw={"placeholder": "Mobile", "type": "tel"})
+    phone = TelField('Phone', render_kw={"placeholder": "Phone"})
+    mobile = TelField('Mobile', render_kw={"placeholder": "Mobile"})
     fax = StringField('Fax', render_kw={"placeholder": "Fax", "type": "tel"})
     title = StringField('Title', validators=[Length(max=255)], render_kw={"placeholder": "Title"})
     sex = SelectField('Sex', choices=[('n', 'None'),('m', 'Male'),('f', 'Female')], render_kw={"placeholder": "Sex"})
-    homepage =  StringField('Homepage', validators=[Length(max=255)], render_kw={"placeholder": "Homepage"})
-    company = StringField('Company', validators=[URL()], render_kw={"placeholder": "Company"})
-    discount =  IntegerField('Discount', render_kw={"placeholder": "Discount in %"})
+    homepage =  StringField('Homepage', validators=[URL(), Optional()], render_kw={"placeholder": "Homepage"})
+    company = StringField('Company', validators=[Length(max=255)], render_kw={"placeholder": "Company"})
+    discount =  FloatField('Discount',validators=[Optional()], render_kw={"placeholder": "Discount in %"})
     add_contact = SubmitField('Create')
     update_contact = SubmitField('Update')
     del_contact = SubmitField('Delete')
 
 class LocationForm(FlaskForm):
+    id = HiddenField('id')
     street = StringField('Street', validators=[Length(max=255)], render_kw={"placeholder": "Street"})
     city = StringField('City', validators=[Length(max=255)], render_kw={"placeholder": "City"})
     state = StringField('State', validators=[Length(max=255)], render_kw={"placeholder": "State"})
