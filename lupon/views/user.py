@@ -45,7 +45,7 @@ def register():
   return render_template('user/register.html', form=form)
 
 @app.route('/profile', methods=["GET", "POST"])
-@login_required
+#@login_required
 @check_confirmed
 def profile():
   form = UserProfileForm(obj=current_user)
