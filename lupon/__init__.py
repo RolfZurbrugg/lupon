@@ -41,5 +41,6 @@ login_manager.login_view = "login"
 def load_user(userid):
     return User.query.filter(User.id==userid).first()
 
+
 # LOAD VIEWS
 from lupon import views, models
