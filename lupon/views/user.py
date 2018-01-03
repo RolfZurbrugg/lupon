@@ -1,12 +1,18 @@
 import logging
+import datetime
 
 from flask import g
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, login_user, current_user, logout_user
 
+from lupon.token import generate_confirmation_token, confirm_token
 from lupon import app, db
 from lupon.models import User
 from lupon.forms import UserForm, LoginForm, UserProfileForm
+
+from lupon.token import generate_confirmation_token
+from lupon.email import send_email
+from lupon.decorators import check_confirmed
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -17,23 +23,31 @@ def register():
   
   if form.validate_on_submit():
 
-    try: 
-        user = User()
-        form.populate_obj(user)
+    user = User(confirmed=False)
+    form.populate_obj(user)
 
-        db.session.add(user)
-        db.session.commit()
-        flash("User successflly created!", 'success')
-    
-    except Exception as e:
-        return e
+    db.session.add(user)
+    db.session.commit()
+
+    token = generate_confirmation_token(user.email)
+    confirm_url = url_for('confirm_email', token=token, _external=True)
+    html = render_template('user/activate.html', confirm_url=confirm_url)
+    subject = "Please confirm your email"
+    send_email(user.email, subject, html)
+
+    login_user(user)
+
+    flash('A confirmation email has been sent via email.', 'success')
+    return redirect(url_for("index"))
 
     
-    return redirect(url_for('index'))
+    return redirect(url_for("user.unconfirmed"))
+
   return render_template('register.html', form=form)
 
 @app.route('/profile', methods=["GET", "POST"])
 @login_required
+@check_confirmed
 def profile():
   form = UserProfileForm(obj=current_user)
 
@@ -67,6 +81,34 @@ def login():
             flash('Sorry, invalid login', 'danger')
 
     return render_template('login.html', form=form)
+
+
+@app.route('/confirm/<token>')
+@login_required
+def confirm_email(token):
+    try:
+        email = confirm_token(token)
+    except:
+        flash('The confirmation link is invalid or has expired.', 'danger')
+    user = User.query.filter_by(email=email).first_or_404()
+    if user.confirmed:
+        flash('Account already confirmed. Please login.', 'success')
+    else:
+        user.confirmed = True
+        user.confirmed_on = datetime.datetime.now()
+        db.session.add(user)
+        db.session.commit()
+        flash('You have confirmed your account. Thanks!', 'success')
+    return redirect(url_for('index'))
+
+@app.route('/unconfirmed')
+@login_required
+def unconfirmed():
+    if current_user.confirmed:
+        return redirect('index')
+    flash('Please confirm your account!', 'warning')
+    return render_template('user/unconfirmed.html')
+
 
 @app.route('/logout')
 @login_required

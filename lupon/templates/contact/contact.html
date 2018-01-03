@@ -9,7 +9,33 @@
     {% include "contact/sidebar.html" %}
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
         <h1>Contacts Dashbaord</h1>
-
+        <table class="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>E-Mail</th>
+                        <th>Phone</th>
+                        <th>Mobile</th>
+                        <th>Fax</th>
+                        <th>Company</th>
+                        </tr>
+                </thead>
+                <tbody>
+                    {% for row in contacts  %}
+                    <tr>
+                    <td><a href="{{ url_for('profile', id=row.id) }}">{{ row.id|safe }}</a></td>
+                    <td>{{ row.firstname|safe }}</td>
+                    <td>{{ row.lastname|safe }}</td>
+                    <td>{{ row.email|safe }}</td>
+                    <td>{{ row.phone|safe }}</td>
+                    <td>{{ row.mobile|safe }}</td>
+                    <td>{{ row.fax|safe }}</td>
+                    <td>{{ row.company|safe }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
     </main>
 </div>
 

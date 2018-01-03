@@ -5,7 +5,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            {% if current_user.is_authenticated %}
+            {% if current_user.confirmed and current_user.is_authenticated %}
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item dropdown">
@@ -52,8 +52,10 @@
                         </div>
                     </li>
                 </ul>
-
-                {% endif %}
+                {% elif current_user.is_authenticated %}
+                <liclass="nav-item">
+                    <a class="nav-link" href="{{ url_for('unconfirmed') }}">Confirm</a></li>
+              {% endif %}
             </div>
             </div>
         </div>

@@ -153,6 +153,8 @@ psql -U lupon -d lupon -h 127.0.0.1 -W
 * Flask Mega Tutorial: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 * GoogleMaps API: https://developers.google.com/maps/documentation/javascript/tutorial
 * Explore Flask: http://exploreflask.com/en/latest/index.html
+* Email vonfirmation: https://realpython.com/blog/python/handling-email-confirmation-in-flask/
+
 
 ### Snippets
 * Flask-WTF Tricks: https://goonan.io/flask-wtf-tricks/

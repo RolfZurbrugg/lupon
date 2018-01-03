@@ -37,6 +37,9 @@ class User(db.Model, UserMixin):
     zip_code = Column(String(STRING_SIZE))
     workpakages = relationship('Workpackage', backref='user', lazy=True)
     contacts = relationship('Contact', backref='user', lazy=True)
+    admin = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed_on = db.Column(db.DateTime, nullable=True)
 
 
     '''

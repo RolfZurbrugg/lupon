@@ -50,7 +50,7 @@ def edit_contact(contact_id):
             db.session.commit()
             flash("Contact: "+contact.firstname +" "+ contact.lastname +" sucessfully deleted",  'success')
 
-            return redirect(url_for("add_contact"))
+            return redirect(url_for("contact_dashboard"))
 
     return render_template('contact/edit_contact.html', contactform=contactform, contacts=contacts, locationform=locationform, locations=locations)
 
