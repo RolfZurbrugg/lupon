@@ -18,6 +18,7 @@ setup(
         'Flask-Mail',
         'Flask-WTF',
         'Flask-SQLAlchemy',
+        'wtforms-sqlalchemy'
         'Flask-Login',
         'Flask-Bcrypt',
         'Flask-Script',

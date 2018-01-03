@@ -3,8 +3,12 @@ from wtforms import StringField, PasswordField, SelectField, ValidationError, Su
 from wtforms.validators import DataRequired, Email, Length, EqualTo, NumberRange, URL, Optional
 from wtforms.fields.html5 import TelField
 
-from .models import Contact, User, Location, Task
+from wtforms_sqlalchemy.fields import QuerySelectField
+from flask_login import login_required, login_user, current_user, logout_user
+
 from lupon import db
+from .models import Contact, User, Location, Task
+
 
 from flask_login import current_user
 
@@ -21,6 +25,7 @@ class LoginForm(FlaskForm):
 
 class UserForm(FlaskForm):
     email = StringField(
+        'E-Mail',
         validators=[
             Email(),
             DataRequired(),
@@ -28,27 +33,89 @@ class UserForm(FlaskForm):
         ],
         render_kw={"placeholder": "e@ma.il", "type": "email"}
     )
-    password = PasswordField('Password', validators=[DataRequired(), Length(max=255)])
-    password_repeat = PasswordField('Confirm Password', validators=[DataRequired(), Length(max=255), EqualTo('password', message='Passwords must match')])
-    username = StringField('Username',validators=[DataRequired(), Length(max=255)], render_kw={"placeholder": "Username"})
-    firstname = StringField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
-    lastname= StringField('Lastname', validators=[Length(max=255)], render_kw={"placeholder": "Lastname"})
-    street = StringField('Street', validators=[Length(max=255)], render_kw={"placeholder": "Street"})
-    city = StringField('City',validators=[Length(max=255)], render_kw={"placeholder": "City"})
-    state = StringField('State',validators=[Length(max=255)], render_kw={"placeholder": "State"})
-    number = StringField('Street No.',validators=[Length(max=255)], render_kw={"placeholder": "Street No."})
-    zip_code = StringField('Zip',validators=[Length(max=255)], render_kw={"placeholder": "Zip"})
+    password = PasswordField(
+        'Password', 
+        validators=[
+            DataRequired(),
+            Length(max=255)
+            ])
+
+    password_repeat = PasswordField(
+        'Confirm Password', 
+        validators=[
+            DataRequired(),
+            Length(max=255),
+            EqualTo('password',
+            message='Passwords must match')
+            ])
+
+    username = StringField(
+        'Username',
+        validators=[
+            DataRequired(),
+            Length(max=255)
+            ], 
+        render_kw={"placeholder": "Username"})
+
+    firstname = StringField(
+        'Firstname',
+        validators=[
+            Length(max=255)
+            ],
+        render_kw={"placeholder": "Firstname"})
+
+    lastname= StringField(
+        'Lastname',
+        validators=[
+            Length(max=255)
+            ],
+        render_kw={"placeholder": "Lastname"})
+
+    street = StringField(
+        'Street',
+        validators=[
+            Length(max=255)
+            ], 
+        render_kw={"placeholder": "Street"})
+
+    city = StringField(
+        'City',
+        validators=[
+            Length(max=255)
+            ], 
+        render_kw={"placeholder": "City"})
+
+    state = StringField(
+        'State',
+        validators=[
+            Length(max=255)
+            ],
+        render_kw={"placeholder": "State"})
+
+    number = StringField(
+        'Street No.',
+        validators=[
+            Length(max=255)
+            ],
+        render_kw={"placeholder": "Street No."})
+
+    zip_code = StringField(
+        'Zip',
+        validators=[
+            Length(max=255)
+            ], 
+        render_kw={"placeholder": "Zip"})
 
     eula = BooleanField('Accept License Agreement')
     submit = SubmitField('Signup!')
 
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first() is not None:
-            raise ValidationError(u'This username is taken')
+            raise ValidationError(u'This username is already taken')
     
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first() is not None:
-            raise ValidationError(u'This email is taken')
+            raise ValidationError(u'This email is already registered')
     
  
 class UserProfileForm(FlaskForm):
@@ -65,6 +132,8 @@ class EmailPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
 
+def location_query():
+    return Location.query.filter_by(contact_id=id)
 
 class ContactForm(FlaskForm):
     id = HiddenField('id')
@@ -79,9 +148,11 @@ class ContactForm(FlaskForm):
     homepage =  StringField('Homepage', validators=[URL(), Optional()], render_kw={"placeholder": "Homepage"})
     company = StringField('Company', validators=[Length(max=255)], render_kw={"placeholder": "Company"})
     discount =  FloatField('Discount',validators=[Optional()], render_kw={"placeholder": "Discount in %"})
+    location = QuerySelectField('Primary Location', allow_blank=True)
     add_contact = SubmitField('Create')
     update_contact = SubmitField('Update')
     del_contact = SubmitField('Delete')
+
 
 class LocationForm(FlaskForm):
     id = HiddenField('id')

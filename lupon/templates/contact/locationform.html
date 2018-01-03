@@ -1,5 +1,31 @@
+<h2>Contact Addresses</h2>
 {{ inputField(locationform.street) }}
 {{ inputField(locationform.streetNumber) }}
 {{ inputField(locationform.city) }}
 {{ inputField(locationform.state) }}
 {{ inputField(locationform.zip_code) }}
+{# inputField(contactform.location) #}
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Street</th>
+            <th>Street No.</th>
+            <th>City</th>
+            <th>Zip</th>
+            <th>State</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for row in locations  %}
+        <tr>
+        <td><a href="{{ url_for('profile', id=row.id) }}">{{ row.id|safe }}</a></td>
+        <td>{{ row.street|safe }}</td>
+        <td>{{ row.streetNumber|safe }}</td>
+        <td>{{ row.city|safe }}</td>
+        <td>{{ row.zip|safe }}</td>
+        <td>{{ row.state|safe }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
