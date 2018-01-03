@@ -9,7 +9,7 @@
     {% include "contact/sidebar.html" %}
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
     <h1>Contact</h1>
-    <form class="form" action="{{ url_for('contact') }}" method="post" enctype="multipart/form-data">
+    <form class="form" action="{{ url_for('add_contact') }}" method="post" enctype="multipart/form-data">
         <div class="row">
         <div class="col-sm">
             {% include "contact/contactform.html" %}

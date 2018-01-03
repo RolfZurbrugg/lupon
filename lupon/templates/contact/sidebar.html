@@ -6,7 +6,7 @@
     <ul class="nav nav-pills flex-column" id=contact_list>
     {% for row in contacts %}   
         <li class="nav-item">
-            <a class="nav-link {% if row.id == contactform.data.id %}active{% endif %}" href="{{ url_for('modify_contact', contact_id=row.id) }}">{{ row.firstname|safe }} {{ row.lastname|safe }}</a>
+            <a class="nav-link {% if row.id == contactform.data.id %}active{% endif %}" href="{{ url_for('edit_contact', contact_id=row.id) }}">{{ row.firstname|safe }} {{ row.lastname|safe }}</a>
         </li>
     {% endfor %}   
     </ul>
