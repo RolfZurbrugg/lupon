@@ -44,6 +44,7 @@ def profile():
 
   return render_template('profile.html', form=form)
 
+@app.route('/login')
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))

@@ -37,6 +37,13 @@ h2 {
   border-right: 1px solid #eee;
 }
 
+#add_button {
+  border-radius: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
 .sidebar .nav {
   margin-bottom: 20px;
 }

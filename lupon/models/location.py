@@ -37,4 +37,4 @@ class Location(db.Model, CustomBase):
 
     def __repr__(self):
         ''' DEBUG PRINT OUTPUT'''
-        return '<Location %r>' % (self.street+" "+self.id)
+        return '<Location %r>' % (self.street+" "+str(self.id))
