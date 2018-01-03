@@ -5,12 +5,11 @@ from flask import g
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, login_user, current_user, logout_user
 
-from lupon.token import generate_confirmation_token, confirm_token
 from lupon import app, db
 from lupon.models import User
 from lupon.forms import UserForm, LoginForm, UserProfileForm
 
-from lupon.token import generate_confirmation_token
+from lupon.token import generate_confirmation_token, confirm_token
 from lupon.email import send_email
 from lupon.decorators import check_confirmed
 
@@ -41,9 +40,9 @@ def register():
     return redirect(url_for("index"))
 
     
-    return redirect(url_for("user.unconfirmed"))
+    return redirect(url_for("unconfirmed"))
 
-  return render_template('register.html', form=form)
+  return render_template('user/register.html', form=form)
 
 @app.route('/profile', methods=["GET", "POST"])
 @login_required
@@ -56,16 +55,14 @@ def profile():
     db.session.commit()
     flash('Profile updated.', 'success')
 
-  return render_template('profile.html', form=form)
+  return render_template('user/profile.html', form=form)
 
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
 
     form = LoginForm()
-
-    flash('not authenticated', 'danger')
 
     if form.validate_on_submit():
         flash('form is valide', 'info')
@@ -75,12 +72,12 @@ def login():
         if user and authenticated:
             remember = request.form.get('remember') == 'y'
             if login_user(user, remember=remember):
-                flash("Logged in", 'success')
+                flash("You are now lgged ins", 'success')
             return redirect(url_for('index'))
         else:
             flash('Sorry, invalid login', 'danger')
 
-    return render_template('login.html', form=form)
+    return render_template('user/login.html', form=form)
 
 
 @app.route('/confirm/<token>')
