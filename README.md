@@ -25,6 +25,8 @@ scource bin/activate
 git clone https://github.com/RolfZurbrugg/lupon.git
 cd lupon
 pip install --editable .
+# OR
+pip install -r requirements.txt
 ```
 
 ## Flask-Script
