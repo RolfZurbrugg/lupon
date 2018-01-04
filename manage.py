@@ -8,7 +8,7 @@ from flask_script import Manager
 #from flask.ext.migrate import Migrate, MigrateCommand
 
 from lupon import app, db
-from lupon import models
+from lupon.models import User
 
 app.config.from_object('config')
 
@@ -17,8 +17,10 @@ manager = Manager(app)
 
 @manager.command
 def init():
+    '''Initializes database'''
     db_DropEverything(db)
     db.create_all()
+    create_admin()
 
 @manager.command
 def create_db():
@@ -35,7 +37,10 @@ def drop_db():
 @manager.command
 def create_admin():
     """Creates the admin user."""
-    db.session.add(User("ad@min.com", "admin"))
+    db.session.add(User(email='lupon@lupon.ch',
+                        password='lupon',
+                        username='lupon',
+                        confirmed=True))
     db.session.commit()
 
 def db_DropEverything(db):

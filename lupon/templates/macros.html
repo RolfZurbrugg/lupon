@@ -1,7 +1,7 @@
 {# Renders input field types with error messages #}
 
 {% macro inputField(field) %}
-<div class="form-group{% if field.errors %} is-invalid{% endif %} form-row">  
+<div class="form-group{% if field.errors %} is-invalid{% endif %} col-md-5 mb-3">  
     <label for="event_{{ field.id }}" class="col-form-label">{{ field.label }}</label>
 	{% if field.errors %}
         {{ field(class='form-control is-invalid') }}

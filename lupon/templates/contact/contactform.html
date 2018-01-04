@@ -1,13 +1,33 @@
 <h2>Contact Details</h2>
 {{ contactform.hidden_tag() }}
-{{ inputField(contactform.firstname) }}
-{{ inputField(contactform.lastname) }}
-{{ inputField(contactform.email) }}
-{{ inputField(contactform.phone) }}
-{{ inputField(contactform.mobile) }}
-{{ inputField(contactform.fax) }}
-{{ inputField(contactform.title) }}
-{{ inputField(contactform.sex) }}
-{{ inputField(contactform.homepage) }}
-{{ inputField(contactform.company) }}
-{{ inputField(contactform.discount) }}
+
+<div class="form-row">
+    {{ inputField(contactform.firstname) }}
+    {{ inputField(contactform.lastname) }}
+</div>
+
+<div class="form-row">
+    {{ inputField(contactform.email) }}
+    {{ inputField(contactform.company) }}
+</div>
+
+<div class="form-row">
+    {{ inputField(contactform.phone) }}
+    {{ inputField(contactform.mobile) }}
+</div>
+
+<div class="form-row">
+    {{ inputField(contactform.title) }}
+    {{ inputField(contactform.sex) }}
+</div>
+
+<div class="form-row">
+    {{ inputField(contactform.homepage) }}
+    {{ inputField(contactform.fax) }}
+</div>
+
+
+{# inputField(contactform.discount) #}
+
+
+

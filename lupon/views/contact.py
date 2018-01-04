@@ -11,7 +11,7 @@ def contact_dashbaord():
     contacts = Contact.get_all(current_user.get_id())
     return render_template('contact/contact.html', contacts=contacts )
 
-@app.route('/contact/<int:contact_id>', methods=["GET", "POST"])
+@app.route('/contact/<int:contact_id>/edit', methods=["GET", "POST"])
 @login_required
 def edit_contact(contact_id):
     logging.info('edit_contact with ID: '+ str(contact_id))
@@ -55,7 +55,7 @@ def edit_contact(contact_id):
     return render_template('contact/edit_contact.html', contactform=contactform, contacts=contacts, locationform=locationform, locations=locations)
 
 
-@app.route('/add_contact', methods=['GET','POST'])
+@app.route('/contact/add', methods=['GET','POST'])
 @login_required
 def add_contact():
     # create forms

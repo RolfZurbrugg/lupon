@@ -1,10 +1,22 @@
 <h2>Contact Addresses</h2>
-{{ inputField(locationform.street) }}
-{{ inputField(locationform.streetNumber) }}
-{{ inputField(locationform.city) }}
-{{ inputField(locationform.state) }}
-{{ inputField(locationform.zip_code) }}
+
+<div class="form-row">
+        {{ inputField(locationform.street) }}
+        {{ inputField(locationform.streetNumber) }}
+</div>
+
+<div class="form-row">
+        {{ inputField(locationform.city) }}
+        {{ inputField(locationform.zip_code) }}
+</div>
+
+<div class="form-row">
+        {{ inputField(locationform.state) }}
+</div>
+
 {# inputField(contactform.location) #}
+
+
 <table class="table">
     <thead>
         <tr>

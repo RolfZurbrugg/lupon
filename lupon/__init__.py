@@ -10,6 +10,8 @@ from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_babel import Babel
 
+from flask_debugtoolbar import DebugToolbarExtension
+
 db = SQLAlchemy()
 mail = Mail()
 babel = Babel()
@@ -20,7 +22,7 @@ def create_app():
     db.init_app(app)
     babel.init_app(app)
     mail.init_app(app)
-    migrate = Migrate(app, db)
+    toolbar = DebugToolbarExtension(app)
     return app
 
 

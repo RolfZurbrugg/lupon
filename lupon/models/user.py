@@ -2,7 +2,7 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import Model, SQLAlchemy
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Table
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Table, DateTime
 from lupon import db
 
 from .constants import STRING_SIZE
@@ -37,9 +37,9 @@ class User(db.Model, UserMixin):
     zip_code = Column(String(STRING_SIZE))
     workpakages = relationship('Workpackage', backref='user', lazy=True)
     contacts = relationship('Contact', backref='user', lazy=True)
-    admin = db.Column(db.Boolean, nullable=False, default=False)
-    confirmed = db.Column(db.Boolean, nullable=False, default=False)
-    confirmed_on = db.Column(db.DateTime, nullable=True)
+    admin = Column(Boolean, nullable=False, default=False)
+    confirmed = Column(Boolean, nullable=False, default=False)
+    confirmed_on = Column(DateTime, nullable=True)
 
 
     '''
