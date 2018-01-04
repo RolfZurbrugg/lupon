@@ -41,13 +41,6 @@ class User(db.Model, UserMixin):
     confirmed = Column(Boolean, nullable=False, default=False)
     confirmed_on = Column(DateTime, nullable=True)
 
-
-    '''
-    def __init__(self, email, password, username):
-        self.email = email
-        self.password = password
-        self.username = username
-    '''
     def __repr__(self):
         return '<User %r>' % self.email
 

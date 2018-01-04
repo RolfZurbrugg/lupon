@@ -9,12 +9,15 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_babel import Babel
+from flask_restful import Resource, Api
 
 from flask_debugtoolbar import DebugToolbarExtension
 
 db = SQLAlchemy()
 mail = Mail()
 babel = Babel()
+api = Api()
+toolbar = DebugToolbarExtension()
 
 def create_app():
     app = Flask(__name__)
@@ -22,14 +25,15 @@ def create_app():
     db.init_app(app)
     babel.init_app(app)
     mail.init_app(app)
-    toolbar = DebugToolbarExtension(app)
+    toolbar.init_app(app)
+    api.init_app(app)
     return app
 
 
 app = create_app()
 app.app_context().push()
-# INIT EXTENSIONS
 
+# INIT EXTENSIONS
 # flask-bcrypt
 flask_bcrypt = Bcrypt(app)
 
@@ -42,7 +46,6 @@ login_manager.login_view = "login"
 @login_manager.user_loader
 def load_user(userid):
     return User.query.filter(User.id==userid).first()
-
 
 # LOAD VIEWS
 from lupon import views, models
