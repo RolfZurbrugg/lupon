@@ -26,13 +26,12 @@ class Workpackage(db.Model, CustomBase):
     contact_id = Column(Integer, ForeignKey('contact.id'))
     tasks = relationship('Workpackage', secondary=association_table)
     
-
     def total_houres(self):
         pass
 
     def total_value(self):
         pass
 
-    def get_work_packages(self):
+    def get_tasks(self):
         #load all workpakages linked to this task
         pass

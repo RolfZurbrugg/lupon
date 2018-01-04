@@ -6,6 +6,7 @@
 - virtualenv
 - git
 - PostgreSQL
+- some kind of OS with root access
 
 ## Installation
 
@@ -284,9 +285,8 @@ sudo crontab -e -u root
 * ...
 ## Database
 * Psycopg2
-* Flask-MySQLdb
 * Flask-SQLAlchemy
-* Flask-Migrate
+* ...
 
 
 ## Documentation References
@@ -315,7 +315,7 @@ sudo crontab -e -u root
 ### Snippets
 * Flask-WTF Tricks: https://goonan.io/flask-wtf-tricks/
 
-### Product Backlog
+## Product Backlog
 Florian
 * Send eMail on user registration
 * Administrator Interface
