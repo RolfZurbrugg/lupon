@@ -51,16 +51,18 @@
                             {% endif %}
                         </div>
                     </li>
-               
-                {% elif current_user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('unconfirmed') }}">Confirm</a>
-                </li>
-                {% elif not current_user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-                </li>
-                {% endif %}
+                    {% elif current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('unconfirmed') }}">Confirm</a>
+                    </li>
+                    {% elif not current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
             </div>

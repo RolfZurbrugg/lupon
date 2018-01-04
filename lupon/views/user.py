@@ -1,8 +1,7 @@
 import logging
 import datetime
 
-from flask import g
-from flask import render_template, request, redirect, url_for, flash, jsonify
+from flask import render_template, request, redirect, url_for, flash, g
 from flask_login import login_required, login_user, current_user, logout_user
 
 from lupon import app, db
