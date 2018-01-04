@@ -2,7 +2,7 @@ import logging
 import datetime
 
 from flask import g
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, login_user, current_user, logout_user
 
 from lupon import app, db
@@ -29,7 +29,7 @@ def register():
     db.session.commit()
 
     token = generate_confirmation_token(user.email)
-    confirm_url = url_for('confirm_email', token=token, _external=True)
+    confirm_url = url_for('confirm_email', token=token, _external=True, _scheme='https')
     html = render_template('user/activate.html', confirm_url=confirm_url)
     subject = "Please confirm your email"
     send_email(user.email, subject, html)
@@ -110,7 +110,7 @@ def unconfirmed():
 @login_required
 def resend_confirmation():
     token = generate_confirmation_token(current_user.email)
-    confirm_url = url_for('confirm_email', token=token, _external=True)
+    confirm_url = url_for('confirm_email', token=token, _external=True, _scheme='https')
     html = render_template('user/activate.html', confirm_url=confirm_url)
     subject = "Please confirm your email"
     send_email(current_user.email, subject, html)

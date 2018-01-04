@@ -1,9 +1,20 @@
-from lupon import api
-from flask_restful import Resource
+from flask import request
+from lupon import app
 
-class ContactList(Resource):
-    def get(self, id):
-        return {'task': 'Say "Hello, World!"'}
+@app.route('/api/v1.0/contact', methods = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+def api_contact():
+    
+    if request.method == 'GET':
+        return "ECHO: GET\n"
 
+    elif request.method == 'POST':
+        return "ECHO: POST\n"
 
-api.add_resource(ContactList, '/api/v1.0/contact', endpoint='contact')
+    elif request.method == 'PATCH':
+        return "ECHO: PACTH\n"
+
+    elif request.method == 'PUT':
+        return "ECHO: PUT\n"
+
+    elif request.method == 'DELETE':
+        return "ECHO: DELETE"

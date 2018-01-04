@@ -1,15 +1,21 @@
 import logging
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from lupon import app, db
 from lupon.models import Contact, Location
 from lupon.forms import ContactForm, LocationForm
 
+@app.route('/api/v2.0/contact', methods=["GET", "POST"])
+@login_required
+def contact_api():
+    return Contact.tojson(current_user.get_id())
+    
+
 @app.route('/contact', methods=["GET", "POST"])
 @login_required
 def contact_dashbaord():
     contacts = Contact.get_all(current_user.get_id())
-    return render_template('contact/contact.html', contacts=contacts )
+    return render_template('contact/contact.html', contacts=contacts, jcon=jcon)
 
 @app.route('/contact/<int:contact_id>/edit', methods=["GET", "POST"])
 @login_required

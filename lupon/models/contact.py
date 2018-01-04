@@ -1,6 +1,8 @@
 from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode, DateTime, Table
 from sqlalchemy.orm import relationship
 from lupon import db
+import json
+from flask import jsonify
 
 from .base import CustomBase
 from .location import Location
@@ -47,7 +49,28 @@ class Contact(db.Model, CustomBase):
 
     def get_primary_location(self):
         return Location.query.filter_by(contact_id=self.id, is_primary = True).first()
+    
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        return {
+            'firstname': self.firstname, 
+            'lastname': self.lastname,
+            'email': self.email,
+            'phone': self.phone,
+            'mobile': self.mobile,
+            'fax': self.fax,
+            'title': self.title,
+            'sex': self.sex,
+            'homepage': self.hompage,
+            'company': self.company,
+            'discount': self.discount,
+        }
 
+    @classmethod
+    def tojson(self, user_id):
+        return jsonify(json_list=[i.serialize for i in Contact.get_all(user_id)])
+    
     @classmethod
     def get_all(cls, user_id):
         return Contact.query.filter_by(user_id=user_id).all()
