@@ -18,10 +18,6 @@ class Location(db.Model, CustomBase):
     __repr__(self)
         pass
 
-    get_coordinates(self)
-        // in developent
-        GoogleMaps API Request to get geolocation data as JSON
-         # address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
     '''
     __tablename__ = 'location'
     street = Column(String(STRING_SIZE))

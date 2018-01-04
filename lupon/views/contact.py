@@ -11,11 +11,11 @@ def contact_api():
     return Contact.tojson(current_user.get_id())
     
 
-@app.route('/contact', methods=["GET", "POST"])
+@app.route('/contact')
 @login_required
 def contact_dashbaord():
     contacts = Contact.get_all(current_user.get_id())
-    return render_template('contact/contact.html', contacts=contacts, jcon=jcon)
+    return render_template('contact/contact.html', contacts=contacts)
 
 @app.route('/contact/<int:contact_id>/edit', methods=["GET", "POST"])
 @login_required
