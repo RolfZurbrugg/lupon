@@ -15,7 +15,6 @@ from flask_debugtoolbar import DebugToolbarExtension
 db = SQLAlchemy()
 mail = Mail()
 babel = Babel()
-api = Api()
 toolbar = DebugToolbarExtension()
 
 def create_app():
@@ -25,7 +24,6 @@ def create_app():
     babel.init_app(app)
     mail.init_app(app)
     toolbar.init_app(app)
-    api.init_app(app)
     return app
 
 
