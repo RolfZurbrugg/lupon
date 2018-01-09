@@ -20,7 +20,7 @@ class Contact(db.Model, CustomBase):
     fax = Column(String(STRING_SIZE))
     title = Column(String(STRING_SIZE))
     sex = Column(String(STRING_SIZE))
-    hompage = Column(String(STRING_SIZE))
+    homepage = Column(String(STRING_SIZE))
     company = Column(String(STRING_SIZE))
     discount = Column(Float)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
@@ -62,7 +62,7 @@ class Contact(db.Model, CustomBase):
             'fax': self.fax,
             'title': self.title,
             'sex': self.sex,
-            'homepage': self.hompage,
+            'homepage': self.homepage,
             'company': self.company,
             'discount': self.discount,
         }

@@ -120,7 +120,7 @@ su postgres
 cd /var/lib/pgsql/data
 vi pg_hba.conf
 ```
-
+@ https://www.depesz.com/2007/10/04/ident/
 Edit /var/lib/pgsql/data/pg_hba.conf and change peer/ident to trust
 ```conf
 # "local" is for Unix domain socket connections only
@@ -228,6 +228,8 @@ http {
 
 ```
 
+
+
 ### Let's Encrypt
 
 1. Create Standalonecertificate as per default nginx will not answer on https port without certificate
@@ -275,6 +277,15 @@ sudo crontab -e -u root
 ...
 ```
 
+## Docker
+
+yum install docker
+systemctl enable docker
+systemctl start docker
+
+docker build -t lupon .
+docker run -it --rm --name flaskapp -v "$PWD":/usr/src/app -w /usr/src/app -e LANG=C.UTF-8 -e FLASK_APP=lupon -p 5000:5000 lupon
+
 ## Dependencies
 
 * Flask
@@ -312,7 +323,7 @@ sudo crontab -e -u root
 * GoogleMaps API: https://developers.google.com/maps/documentation/javascript/tutorial
 * Explore Flask: http://exploreflask.com/en/latest/index.html
 * Email vonfirmation: https://realpython.com/blog/python/handling-email-confirmation-in-flask/
-
+* http://blog.luisrei.com/articles/flaskrest.html
 
 ### Snippets
 * Flask-WTF Tricks: https://goonan.io/flask-wtf-tricks/
