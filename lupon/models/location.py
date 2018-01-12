@@ -27,7 +27,7 @@ class Location(db.Model, CustomBase):
     zip_code = Column(String(STRING_SIZE))
     #coordinates = Column(JSON)
     #customer_id = Column(Integer, ForeignKey('customer.id'))
-    #user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     contact_id = Column(Integer, ForeignKey('contact.id'), nullable=False)
     is_primary = Column(Boolean)
 

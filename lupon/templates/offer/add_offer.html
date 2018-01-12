@@ -1,0 +1,23 @@
+{# lupon/templates/contact.html #}
+
+{% from "macros.html" import inputField, submitForm %}
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    {% include "offer/sidebar.html" %}
+    <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+    <h1>Create new Offer</h1>
+    <form class="form" action="{{ url_for('add_offer') }}" method="post" enctype="multipart/form-data">
+        <div class="row">
+        <div class="col-sm">
+            {% include "offer/form.html" %}
+        </div>
+    </div>
+    {{ submitForm(offerform.add_offer) }}
+    </form>
+    </main>
+</div>
+
+{% endblock %}

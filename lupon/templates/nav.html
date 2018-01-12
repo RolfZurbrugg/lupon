@@ -9,26 +9,24 @@
                 <ul class="nav navbar-nav mr-auto">
                     {% if current_user.confirmed and current_user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/dashboard" id="navDropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; {{ _('Dashboard') }}</a>
+                        <a class="nav-link dropdown-toggle" href="/offer" id="navDropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; {{ _('Offers') }}</a>
                         <div class="dropdown-menu" aria-labelledby="navDropdown01">
-                            <a class="dropdown-item" href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; {{ _('Opportunities') }}</a>
-                            <a class="dropdown-item" href="#"><i class="fa fa-car" aria-hidden="true"></i>&nbsp; {{ _('Offers') }}</a>
-                            <a class="dropdown-item" href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp; {{ _('Bills') }}</a>
+                            <a class="dropdown-item" href="{{ url_for('add_offer') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; {{ _('New Offer') }}</a>
+                            <a class="dropdown-item" href="{{ url_for('offer_dashboard') }}"><i class="fa fa-car" aria-hidden="true"></i>&nbsp; {{ _('Manage Offers') }}</a>
+                            <!--a class="dropdown-item" href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp; {{ _('Bills') }}</a-->
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact"><i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; {{ _('Contacts') }}</a>
                     </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-car" aria-hidden="true"></i>&nbsp; {{ _('Services') }}</a>
-                    </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="/task"><i class="fa fa-car" aria-hidden="true"></i>&nbsp; {{ _('Task List') }}</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/task" id="navDropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; {{ _('Services') }}</a>
+                        <div class="dropdown-menu" aria-labelledby="navDropdown01">
+                            <a class="dropdown-item" href="{{ url_for('task') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; {{ _('New Task') }}</a>
+                            <a class="dropdown-item" href="{{ url_for('task_dashboard') }}"><i class="fa fa-car" aria-hidden="true"></i>&nbsp; {{ _('Manage Tasks') }}</a>
+                        </div>
                     </li>
                 </ul>
-                
-                <small class="text-light">Logged in as: <a class="text-light" href="{{ url_for('profile') }}">{{ current_user.email }}</a></small>
-
                 <ul class="nav navbar-nav my-2 my-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navDropdown02" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-globe" aria-hidden="true"></i></a>
@@ -44,13 +42,11 @@
                         <div class="dropdown-menu" aria-labelledby="navDropdown03">
                             <a class="dropdown-item" href="#">{{ _('User Profil') }}</a>
                             <a class="dropdown-item" href="#">{{ _('Password Reset') }}</a>
-                            {% if current_user.is_authenticated %}
-                            <a class="dropdown-item" href="{{ url_for('logout') }}">{{ _('Logout') }}</a>
-                            {% else %}
-                            <a class="dropdown-item" href="{{ url_for('login') }}">{{ _('Login') }}</a>
-                            {% endif %}
                         </div>
                     </li>
+                </ul>
+                <small class="text-light"><a class="text-light" href="{{ url_for('profile') }}">{{ current_user.email }}</a> [<a class="text-light" href="{{ url_for('logout') }}">{{ _('Logout') }}</a>]</small>
+                
                     {% elif current_user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('unconfirmed') }}">Confirm</a>

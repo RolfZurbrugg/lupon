@@ -9,7 +9,6 @@ from lupon.forms import ContactForm, LocationForm
 @login_required
 def contact_api():
     return Contact.tojson(current_user.get_id())
-    
 
 @app.route('/contact')
 @login_required
@@ -72,7 +71,8 @@ def add_contact():
 
     if contactform.validate_on_submit():
         # Create location object
-        location = Location(is_primary=True)
+        location = Location(is_primary=True,
+                            user_id=current_user.get_id())
         locationform.populate_obj(location)
         location.id = None
         # Create contact

@@ -132,9 +132,6 @@ class EmailPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
 
-def location_query():
-    return Location.query.filter_by(contact_id=id)
-
 class ContactForm(FlaskForm):
     id = HiddenField('id')
     firstname = StringField('Firstname', validators=[Length(max=255)], render_kw={"placeholder": "Firstname"})
@@ -152,7 +149,6 @@ class ContactForm(FlaskForm):
     add_contact = SubmitField('Create')
     update_contact = SubmitField('Update')
     del_contact = SubmitField('Delete')
-
 
 class LocationForm(FlaskForm):
     id = HiddenField('id')
@@ -176,3 +172,9 @@ class TaskForm(FlaskForm):
     #def validate_name(self, field):
     #    if Task.query.filter_by(name=field.data, user_id=current_user.get_id()).first() is not None:
     #        raise ValidationError(u'This name is taken')
+
+class OfferForm(FlaskForm):
+    id = HiddenField('id')
+    location = QuerySelectField('Location', allow_blank=True)
+    contact = QuerySelectField('Contact', allow_blank=True)
+    add_offer = SubmitField('Add new Offer')

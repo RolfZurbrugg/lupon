@@ -5,6 +5,12 @@ from lupon import app, db
 from lupon.models import Task
 from lupon.forms import TaskForm
 
+
+@app.route('/task_db', methods=['GET','POST'])
+@login_required
+def task_dashboard():
+    pass
+
 @app.route('/task', methods=['GET','POST'])
 @login_required
 def task():

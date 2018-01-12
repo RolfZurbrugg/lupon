@@ -10,22 +10,21 @@ association_table = Table('workpackage_task', db.Model.metadata,
     Column('task_id', Integer, ForeignKey('task.id'))
 )
 
-class Workpackage(db.Model, CustomBase):
+class Offer(db.Model, CustomBase):
     
-    __tablename__ = 'workpackage'
+    __tablename__ = 'offer'
     name = Column(String(STRING_SIZE))
     description = Column(Text)
     due_date = Column(DateTime())
     start_date = Column(DateTime())
     status = Column(String(STRING_SIZE))
-    is_active = Column(Boolean)
+    location_id = Column(Integer, ForeignKey('location.id'))
     discoutn = Column(Float)
     priority = Column(String(STRING_SIZE))
     comment = Column(Text)
-    location_id = Column(Integer, ForeignKey('location.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
     contact_id = Column(Integer, ForeignKey('contact.id'))
-    tasks = relationship('Workpackage', secondary=association_table)
+    tasks = relationship('Offer', secondary=association_table)
     
     def total_houres(self):
         pass
@@ -36,7 +35,3 @@ class Workpackage(db.Model, CustomBase):
     def get_tasks(self):
         #load all workpakages linked to this task
         pass
-
-    @classmethod
-    def get_all(cls, user_id):
-        return Workpackage.query.filter_by(user_id=user_id, is_active=True).all()
