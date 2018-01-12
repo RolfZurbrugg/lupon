@@ -1,7 +1,7 @@
 from flask import request
 from lupon import app
 
-@app.route('/api/v1.0/contact', methods = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+''' @app.route('/api/v1.0/contact', methods = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def api_contact():
     
     if request.method == 'GET':
@@ -18,3 +18,4 @@ def api_contact():
 
     elif request.method == 'DELETE':
         return "ECHO: DELETE"
+ '''

@@ -5,7 +5,7 @@ from lupon import app, db
 from lupon.models import Contact, Location
 from lupon.forms import ContactForm, LocationForm
 
-@app.route('/api/v2.0/contact', methods=["GET", "POST"])
+@app.route('/api/v1.0/contact', methods=["GET", "POST"])
 @login_required
 def contact_api():
     return Contact.tojson(current_user.get_id())

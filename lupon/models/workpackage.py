@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode, DateTime, Table
 from sqlalchemy.orm import relationship
 from lupon import db
+from flask import jsonify
 
 from .base import CustomBase
 from .constants import STRING_SIZE
@@ -34,8 +35,7 @@ class Workpackage(db.Model, CustomBase):
         pass
 
     def get_tasks(self):
-        #load all workpakages linked to this task
-        pass
+        return jsonify(self.tasks)
 
     @classmethod
     def get_all(cls, user_id):
