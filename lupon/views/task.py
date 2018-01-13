@@ -53,3 +53,27 @@ def task():
         
         return redirect(url_for('task'))
     return render_template("task.html", taskform=taskform, tasks=tasks)
+
+
+# demo code added by rolf
+from flask import Flask, jsonify, render_template, request
+
+@app.route('/task', methods=['GET','POST'])
+@login_required
+def add_task():
+    task.user_id = current_user.get_id()
+    task.create_by = current_user.get_name()
+    task.id = None
+    db.session.add(task)
+    db.session.commit()
+    return True
+    #flash("Task created! "+ str(task.add_task), 'success')
+
+
+@app.route('/_add_numbers')
+def add_numbers():
+    logging.info('im herer')
+    a = request.args.get('a', 0, type=int)
+    b = request.args.get('b', 0, type=int)
+    logging.info('im herer')
+    return jsonify(result=a + b)

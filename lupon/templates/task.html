@@ -6,13 +6,64 @@
 
 {% block content %}
 
+<!--code added by rolf-->
+<script type=text/javascript>
+    $(function() {
+        $('a#calculate').bind('click', function() {
+            $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
+                a: $('input[name="a"]').val(),
+                b: $('input[name="b"]').val()
+            }, function(data) {
+                $("#result").text(data.result);
+            });
+            return false;
+        });
+    });
+</script>
+<h1>jQuery Example</h1>
+<p><input type=text size=5 name=a> +
+    <input type=text size=5 name=b> =
+    <span id=result>?</span>
+<p><a href=# id=calculate>calculate server side</a>
+
+<!--end of demo code by rolf-->
+
 <form class="form" action="" method="post" enctype="multipart/form-data">
     List of available tasklists
 </form>
 
+<script type="text/javascript">
+    //ajax binds
+    $(function () {
+        $('#add_task').bind('click', add_task);
+        return false;
+    });
 
 
-<form class="form" action="{{ url_for('task')}}" method="post" enctype="multipart/form-data">
+    //ajax function add
+    var add_task = function () {
+        console.log('here rolf');
+        $.ajax({
+            method:"POST",
+            url: $SCRIPT_ROOT + '/add_task',
+            data: {
+                name: $('#name').val(),
+                amount: $('#amount').val(),
+                value: $('#amount').val(),
+                unit: $('#unit').val(),
+                dcription: $('#description').val()
+            }
+        }).done(function (msg) {
+            alert("data Saved: "+ msg);
+        })
+    }
+    //ajax function update
+
+    //ajax function delete
+
+</script>
+
+<form class="form">
     {{ taskform.hidden_tag() }}
     {{ inputField(taskform.name) }}
     {{ inputField(taskform.amount) }}
