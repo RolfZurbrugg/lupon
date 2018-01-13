@@ -1,18 +1,18 @@
 // THIS IS OUR JS CODE FILE
-console.log('java script is active');
-window.onload = function () {
-    console.log('page has loaded bitch');
-    document.getElementById('add_task').addEventListener("click",intercept);
-    console.log('dom manipulated')
-    document.getElementById('search-input').addEventListener("change",listFilter);
-    console.log('dom manipulated')
-}
+// console.log('java script is active');
+// window.onload = function () {
+//     console.log('page has loaded bitch');
+//     document.getElementById('add_task').addEventListener("click",intercept);
+//     console.log('dom manipulated')
+//     document.getElementById('search-input').addEventListener("change",listFilter);
+//     console.log('dom manipulated')
+// }
 
-
-
-function intercept() {
-    alert('action was intercepted');
-}
+//
+//
+// function intercept() {
+//     alert('action was intercepted');
+// }
 
 // SOURCE : https://kilianvalkhof.com/2010/javascript/how-to-build-a-fast-simple-list-filter-with-jquery/
 (function ($) {
