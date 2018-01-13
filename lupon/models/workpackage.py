@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from lupon import db
 from flask import jsonify
 
-from .base import CustomBase, association_table
+from .base import CustomBase
 from .constants import STRING_SIZE
 
 
