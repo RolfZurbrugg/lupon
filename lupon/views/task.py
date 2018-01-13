@@ -1,5 +1,5 @@
 import logging
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from lupon import app, db
 from lupon.models import Task
@@ -56,17 +56,25 @@ def task():
 
 
 # demo code added by rolf
-from flask import Flask, jsonify, render_template, request
+# from flask import Flask, jsonify, render_template, request
 
-@app.route('/task', methods=['GET','POST'])
+@app.route('/add_task', methods=['GET','POST'])
 @login_required
 def add_task():
-    task.user_id = current_user.get_id()
-    task.create_by = current_user.get_name()
-    task.id = None
+    logging.info('post success')
+    task = Task(name=request.values.get('name'),
+                amount=request.values.get('amount'),
+                value=request.values.get('value'),
+                unit=request.values.get('unit'),
+                description=request.values.get('description'),
+                user_id=current_user.get_id())
+    # temp = request.form()
+    # task.user_id = current_user.get_id()
+    # task.create_by = current_user.get_name()
+    # task.id = None
     db.session.add(task)
     db.session.commit()
-    return True
+    return jsonify('succes python ');
     #flash("Task created! "+ str(task.add_task), 'success')
 
 

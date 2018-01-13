@@ -43,7 +43,7 @@
     //ajax function add
     var add_task = function () {
         console.log('here rolf');
-        $.ajax({
+        $.getJSON({
             method:"POST",
             url: $SCRIPT_ROOT + '/add_task',
             data: {
@@ -63,14 +63,15 @@
 
 </script>
 
-<form class="form">
+<form class="form" enctype="multipart/form-data">
     {{ taskform.hidden_tag() }}
     {{ inputField(taskform.name) }}
     {{ inputField(taskform.amount) }}
     {{ inputField(taskform.value) }}
     {{ inputField(taskform.unit) }} <!--replace with dropdown-->
     {{ inputField(taskform.description) }}
-    {{ submitForm(taskform.add_task) }}
+    <!--{{ submitForm(taskform.add_task) }}-->
+    <a href=# id="add_task">add shit</a>
     {{ submitForm(taskform.update_task) }}
     {{ submitForm(taskform.del_task) }}
 </form>
