@@ -110,10 +110,20 @@ h2 {
    height:60px;
 } */
 
+#stupid_button{
+    background: white;
+    color: black;
+}
+
+#light-grey-background{
+    background: lightgrey;
+    margin-top: 5%;
+}
+
 .error-page {padding: 40px 15px;text-align: center;}
 
 .error-actions {margin-top:15px;margin-bottom:15px;}
 
 .error-actions .btn { margin-right:10px; }
 
-h1.404error { font-size: 100px !important; }
+/*h1.404error { font-size: 100px !important; }*/
