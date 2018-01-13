@@ -4,10 +4,10 @@ from flask import render_template, redirect, url_for, flash, jsonify, request
 from flask_login import login_required, current_user
 from lupon import app, db
 from lupon.models import Workpackage, Location, Contact, Task
-from lupon.forms import OfferForm
+from lupon.forms import OfferForm, OfferEditForm
 
 
-@app.route('/offer')
+@app.route('/offer', methods=['GET','POST'])
 @login_required
 def offer_dashboard():
     offers = Workpackage.get_all(current_user.get_id())
@@ -36,16 +36,34 @@ def add_offer():
 
     return render_template('offer/add_offer.html', offerform=offerform)
 
-@app.route('/offer/<int:offer_id>/edit', methods=['GET','POST'])
+@app.route('/offer/edit/<int:offer_id>', methods=['GET','POST'])
 @login_required
-def edit_offer():
-    pass
+def edit_offer(offer_id):
+    
+    offer = Workpackage.query.filter_by(id=offer_id).first()
+    form = OfferEditForm(obj=offer)
+    form.task.query = Task.query.filter_by(user_id=current_user.get_id())
+    offers = Workpackage.get_all(current_user.get_id())
+    logging.info('edit_offer with ID: '+ str(offer_id))
+
+    if form.validate_on_submit():
+        logging.info('edit_offer, form validation successfull for ID: '+ str(offer_id))
+        if form.add_task is True:
+            task = Task()
+            offer.tasks.append(task)
+            db.session.commit()
+            return url_for('edit_offer', offer_id=offer_id)
+
+    return render_template('offer/edit_offer.html', offers=offers, form=form)
+
 
 @app.route('/api/v1.0/offer/get/<int:offer_id>', methods=["GET"])
 @login_required
 def offer_api_get(offer_id):
     if request.method == 'GET':
         return Workpackage.query.filter_by(id=offer_id).first().get_tasks()
+    
+    return json.dumps({'success':False}), 500, {'ContentType':'application/json'} 
 
 @app.route('/api/v1.0/offer/edit/<int:offer_id>/<int:task_id>', methods=["GET", "POST"])
 @login_required

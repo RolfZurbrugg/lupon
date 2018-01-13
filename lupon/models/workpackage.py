@@ -27,7 +27,7 @@ class Workpackage(db.Model, CustomBase):
     location_id = Column(Integer, ForeignKey('location.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
     contact_id = Column(Integer, ForeignKey('contact.id'))
-    tasks = relationship('Workpackage', secondary=association_table)
+    tasks = relationship('Workpackage', secondary=association_table, uselist=False,  backref='task')
     
     def total_houres(self):
         pass
