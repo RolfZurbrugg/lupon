@@ -20,9 +20,10 @@ class Workpackage(db.Model, CustomBase):
     start_date = Column(DateTime())
     status = Column(String(STRING_SIZE))
     is_active = Column(Boolean)
-    discoutn = Column(Float)
+    discount = Column(Float)
     priority = Column(String(STRING_SIZE))
-    comment = Column(Text)
+    # comment = Column(Text)
+    # location_id = Column(Integer, ForeignKey('location.id'))
     location_id = Column(Integer, ForeignKey('location.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
     contact_id = Column(Integer, ForeignKey('contact.id'))
@@ -39,4 +40,4 @@ class Workpackage(db.Model, CustomBase):
 
     @classmethod
     def get_all(cls, user_id):
-        return Workpackage.query.filter_by(user_id=user_id, is_active=True).all()
+        return Workpackage.query.filter_by(user_id=user_id).all()
