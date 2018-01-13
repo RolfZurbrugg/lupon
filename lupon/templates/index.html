@@ -1,31 +1,79 @@
-
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron">
-        <div class="container">
-          <h1 class="display-3">{{ _('Welcome') }}</h1>
-          <p>Register today and get an exta free month of access.</p>
-          <p><a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login &raquo;</a> or <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Register Now &raquo;</a></p>
+<!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
+
+<script type="text/javascript">
+    (function () {
+        document.body.style.backgroundColor = 'lightgrey';
+    }());
+
+</script>
+<!--<div class="jumbotron">-->
+<!--<div class="container">-->
+<!--<h1 class="display-3">{{ _('Welcome') }}</h1>-->
+<!--<p>Register today and get an exta free month of access.</p>-->
+<!--<p><a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login &raquo;</a> or <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Register Now &raquo;</a></p>-->
+<!--</div>-->
+<!--</div>-->
+
+<section class="" id="light-grey-background">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-sm-8 mx-auto text-center">
+        <h3 class="text-white">Welcome</h3>
+      </div>
+    </div>
+    <div class="row mt-4 text-center">
+      <div class="col-sm-12">
+        <div class="card-group">
+          <div class="card bg-alt mt-3">
+            <div class="card-body">
+              <h5 class="card-title pt-4 text-orange">Starter</h5>
+              <h3 class="card-title text-primary pt-4"><sup>$</sup> 89.99</h3>
+              <p class="card-text text-muted pb-3 border-bottom">per month</p>
+              <ul class="list-unstyled pricing-list">
+                <li><b>1</b> User</li>
+                <li><b></b> No Suport</li>
+                <li><b></b> Monthly Back Up</li>
+                <li><b></b> No Offline Capability</li>
+                <li><b></b> Access To User Forum</li>
+              </ul>
+              <a href="{{ url_for('register') }}" class="btn btn-primary btn-radius">Order Now</a>
+            </div>
+          </div>
+          <div class="card card-outline-primary bg-primary text-white">
+            <div class="card-body">
+              <h5 class="card-title pt-4 text-white">Standard</h5>
+              <h3 class="card-title text-orange pt-4"><sup>$</sup> 149.99</h3>
+              <p class="card-text text-muted pb-3 border-bottom">per month</p>
+              <ul class="list-unstyled pricing-list">
+                <li><b>5</b> Users</li>
+                <li><b></b> Support During Business Hours</li>
+                <li><b></b> Weekly Back Up</li>
+                <li><b></b> No Offline Capability</li>
+                <li><b></b> Access To User Forum</li>
+              </ul>
+              <a href="{{ url_for('register') }}" id="stupid_button" class="btn btn-white btn-radius">Order Now</a>
+            </div>
+          </div>
+          <div class="card bg-alt mt-3">
+            <div class="card-body">
+              <h5 class="card-title pt-4 text-orange">Advanced</h5>
+              <h3 class="card-title text-primary pt-4"><sup>$</sup> 199.99</h3>
+              <p class="card-text text-muted pb-3 border-bottom">per month</p>
+              <ul class="list-unstyled pricing-list">
+                <li><b>Unlimited</b> Users</li>
+                <li><b></b> 24/7 Suport</li>
+                <li><b></b> Daily Backup</li>
+                <li><b></b> Full Offline Capability</li>
+                <li><b></b> Access To User Forum</li>
+              </ul>
+              <a href="{{ url_for('register') }}" class="btn btn-primary btn-radius">Order Now</a>
+            </div>
+          </div>
         </div>
       </div>
-  
-      <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-        </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
