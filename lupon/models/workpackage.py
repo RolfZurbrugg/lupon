@@ -23,6 +23,7 @@ class Workpackage(db.Model, CustomBase):
     discoutn = Column(Float)
     priority = Column(String(STRING_SIZE))
     comment = Column(Text)
+    # location_id = Column(Integer, ForeignKey('location.id'))
     location_id = Column(Integer, ForeignKey('location.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
     contact_id = Column(Integer, ForeignKey('contact.id'))

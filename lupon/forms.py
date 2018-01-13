@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField, ValidationError, SubmitField, BooleanField, FloatField, IntegerField, HiddenField
+from wtforms import StringField, PasswordField, SelectField, ValidationError, SubmitField, BooleanField, FloatField, IntegerField, HiddenField, TextField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, NumberRange, URL, Optional
 from wtforms.fields.html5 import TelField
 
@@ -175,6 +175,11 @@ class TaskForm(FlaskForm):
 
 class OfferForm(FlaskForm):
     id = HiddenField('id')
+    description = TextField('Description', render_kw={"placeholder": "Name"})
     location = QuerySelectField('Location', allow_blank=True)
     contact = QuerySelectField('Contact', allow_blank=True)
     add_offer = SubmitField('Add new Offer')
+
+
+class OfferEditForm(FlaskForm):
+    id = HiddenField('id')

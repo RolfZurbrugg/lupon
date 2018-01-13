@@ -24,13 +24,15 @@ def add_offer():
     if offerform.validate_on_submit():
         # Create offer
         offer = Workpackage(user_id=current_user.get_id(),
-                            create_by=current_user.get_name())
+                            create_by=current_user.get_name(),
+                            location_id=offerform.location.data.id,
+                            contact_id=offerform.location.data.id)
         offerform.populate_obj(offer)
         offer.id = None
         # Add & Commit transacton
         db.session.add(offer)
         db.session.commit()
-        return redirect(url_for('offer_dashbaord'))
+        return redirect(url_for('offer_dashboard'))
 
     return render_template('offer/add_offer.html', offerform=offerform)
 
@@ -38,7 +40,6 @@ def add_offer():
 @login_required
 def edit_offer():
     pass
-
 
 @app.route('/api/v1.0/offer/get/<int:offer_id>', methods=["GET"])
 @login_required
