@@ -39,22 +39,23 @@ def add_offer():
 @app.route('/offer/edit/<int:offer_id>', methods=['GET','POST'])
 @login_required
 def edit_offer(offer_id):
-    
     offer = Workpackage.query.filter_by(id=offer_id).first()
     form = OfferEditForm(obj=offer)
     form.task.query = Task.query.filter_by(user_id=current_user.get_id())
     offers = Workpackage.get_all(current_user.get_id())
     logging.info('edit_offer with ID: '+ str(offer_id))
-
+    tasks = offer.get_tasks()
+    
     if form.validate_on_submit():
         logging.info('edit_offer, form validation successfull for ID: '+ str(offer_id))
-        if form.add_task is True:
-            task = Task()
+        form.populate_obj(offer)
+        if offer.add_task is True:
+            task = Task.query.get(form.task.data.id)
             offer.tasks.append(task)
             db.session.commit()
-            return url_for('edit_offer', offer_id=offer_id)
-
-    return render_template('offer/edit_offer.html', offers=offers, form=form)
+            return redirect(url_for('edit_offer', offer_id=offer_id))
+        
+    return render_template('offer/edit_offer.html', offers=offers, form=form, tasks=tasks)
 
 
 @app.route('/api/v1.0/offer/get/<int:offer_id>', methods=["GET"])

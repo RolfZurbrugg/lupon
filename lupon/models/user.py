@@ -4,7 +4,6 @@ from flask_sqlalchemy import Model, SQLAlchemy
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Table, DateTime
 from lupon import db
-
 from .constants import STRING_SIZE
 
 class User(db.Model, UserMixin):

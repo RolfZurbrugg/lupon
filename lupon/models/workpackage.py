@@ -1,15 +1,22 @@
-from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode, DateTime, Table
+from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode, DateTime, Table, PrimaryKeyConstraint
 from sqlalchemy.orm import relationship
 from lupon import db
 from flask import jsonify
 
-from .base import CustomBase
+from .base import CustomBase, association_table
 from .constants import STRING_SIZE
 
-association_table = Table('workpackage_task', db.Model.metadata,
-    Column('workpackage_id', Integer, ForeignKey('workpackage.id')),
-    Column('task_id', Integer, ForeignKey('task.id'))
+
+association_table = Table('association', db.Model.metadata,
+    Column('workpackage_id', Integer, ForeignKey('workpackage.id'), primary_key=True),
+    Column('task_id', Integer, ForeignKey('task.id'), primary_key=True)
 )
+
+''' association_table = Table('workpackage_task', Base.metadata,
+    Column('workpackage_id', Integer, ForeignKey('workpackage.id')),
+    Column('task_id', Integer, ForeignKey('task.id')) ) '''
+
+
 
 class Workpackage(db.Model, CustomBase):
     
@@ -23,11 +30,11 @@ class Workpackage(db.Model, CustomBase):
     discount = Column(Float)
     priority = Column(String(STRING_SIZE))
     # comment = Column(Text)
-    # location_id = Column(Integer, ForeignKey('location.id'))
     location_id = Column(Integer, ForeignKey('location.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
     contact_id = Column(Integer, ForeignKey('contact.id'))
-    tasks = relationship('Workpackage', secondary=association_table, uselist=False,  backref='task')
+    tasks = relationship('Task', secondary=association_table, lazy='subquery',
+        backref=db.backref('workpackage', lazy=True))
     
     def total_houres(self):
         pass
@@ -36,7 +43,7 @@ class Workpackage(db.Model, CustomBase):
         pass
 
     def get_tasks(self):
-        return jsonify(self.tasks)
+        return self.tasks
 
     @classmethod
     def get_all(cls, user_id):
