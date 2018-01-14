@@ -4,7 +4,7 @@ from flask import render_template, redirect, url_for, flash, jsonify, request
 from flask_login import login_required, current_user
 from lupon import app, db
 from lupon.models import Workpackage, Location, Contact, Task
-from lupon.forms import OfferForm, OfferEditForm
+from lupon.forms import OfferForm, OfferEditForm, TaskForm
 
 
 @app.route('/offer', methods=['GET','POST'])
@@ -44,19 +44,53 @@ def edit_offer(offer_id):
     form.task.query = Task.query.filter_by(user_id=current_user.get_id())
     offers = Workpackage.get_all(current_user.get_id())
     logging.info('edit_offer with ID: '+ str(offer_id))
+    
     tasks = offer.get_tasks()
+    task = Task()
+    taskform = TaskForm()
     
     if form.validate_on_submit():
         logging.info('edit_offer, form validation successfull for ID: '+ str(offer_id))
         form.populate_obj(offer)
-        if offer.add_task is True:
+        taskform.populate_obj(task)
+        
+        if offer.assosiate_task is True:
             task = Task.query.get(form.task.data.id)
             offer.tasks.append(task)
             db.session.commit()
             return redirect(url_for('edit_offer', offer_id=offer_id))
-        
-    return render_template('offer/edit_offer.html', offers=offers, form=form, tasks=tasks)
 
+    if taskform.validate_on_submit():
+        taskform.populate_obj(task)
+        if task.add_task is True:
+            t = Task(user_id=current_user.get_id(),
+                    create_by=current_user.get_name(),
+                    name=request.values.get('name'),
+                    amount=request.values.get('amount'),
+                    value=request.values.get('value'),
+                    unit=request.values.get('unit'),
+                    description=request.values.get('description'))
+            task.id = None
+            db.session.add(t)
+            offer.tasks.append(t)
+            db.session.commit()
+            return redirect(url_for('edit_offer', offer_id=offer_id))
+
+        if task.del_task is True:
+            offer.tasks.remove(task)
+            db.session.commit()
+            return redirect(url_for('edit_offer', offer_id=offer_id))
+        
+    return render_template('offer/edit_offer.html', offers=offers, form=form, tasks=tasks, taskform=taskform)
+
+@app.route('/api/v1.0/offer/get/<int:offer_id>/<int:task_id>', methods=["GET", "POST"])
+@login_required
+def offer_remove_task(offer_id, task_id):
+    offer = Workpackage.query.get(offer_id)
+    task = Task.query.get(task_id)
+    offer.tasks.remove(task)
+    db.session.commit()
+    return redirect(url_for('edit_offer', offer_id=offer_id))
 
 @app.route('/api/v1.0/offer/get/<int:offer_id>', methods=["GET"])
 @login_required

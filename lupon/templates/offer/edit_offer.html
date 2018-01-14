@@ -1,6 +1,6 @@
 {# lupon/templates/contact.html #}
 
-{% from "macros.html" import inputField, submitForm %}
+{% from "macros.html" import inputField, submitForm, simpleInputField %}
 
 {% extends "base.html" %}
 
@@ -19,23 +19,38 @@
     </div>
     {{ submitForm(form.update_offer) }}
     {{ submitForm(form.del_offer) }}
-    {{ submitForm(form.add_task) }}
+    {{ submitForm(form.assosiate_task) }}
     </form>
-
+    <form class="form" action="{{ url_for('edit_offer', offer_id=form.data.id) }}" method="post" enctype="multipart/form-data">
+    {% include "task/taskform.html" %}
+    
 <h2>Assiciated Tasks</h2>
 <table class="table">
     <thead>
         <tr>
             <th>id</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Unit</th>
+            <th>Description</th>
+            <th>Value</th>
+            <th>Action</th>
             </tr>
     </thead>
     <tbody>
         {% for row in tasks  %}
         <tr>
         <td><a href="{{ url_for('task', id=row.id) }}">{{ row.id|safe }}</a></td>
+        <td>{{ row.name|safe }}</td>
+        <td>{{ row.amount|safe }}</td>
+        <td>{{ row.unit|safe }}</td>
+        <td>{{ row.description|safe }}</td>
+        <td>{{ row.value|safe }}</td>
+        <td><a class="btn-primary btn" href="{{ url_for('offer_remove_task', task_id=row.id, offer_id=form.data.id) }}">Remove</a></td>
         </tr>
         {% endfor %}
     </tbody>
+</form>
     </main>
 </div>
 

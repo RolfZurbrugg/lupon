@@ -1,0 +1,9 @@
+{{ taskform.hidden_tag() }}
+<div class="row justify-content-md-center">
+    {{ simpleInputField(taskform.name) }}
+    {{ simpleInputField(taskform.amount) }}
+    {{ simpleInputField(taskform.value) }}
+    {{ simpleInputField(taskform.unit) }}
+    {{ simpleInputField(taskform.description) }}
+    {{ submitForm(taskform.add_task) }}
+</div>

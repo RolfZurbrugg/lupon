@@ -9,7 +9,8 @@ from lupon.forms import TaskForm
 @app.route('/task_db', methods=['GET','POST'])
 @login_required
 def task_dashboard():
-    pass
+    tasks = Task.get_all(current_user.get_id())
+    return render_template("task/task.html", tasks=tasks)
 
 @app.route('/task', methods=['GET','POST'])
 @login_required

@@ -191,6 +191,6 @@ class OfferEditForm(FlaskForm):
     # due_date = DateField('Due Date')
     # start_date = DateField('Start Date')
     task = QuerySelectField('Tasks', allow_blank=True)
-    add_task = SubmitField('Add Task to Offer')
+    assosiate_task = SubmitField('Add Task to Offer')
     update_offer = SubmitField('Update')
     del_offer = SubmitField('Delete')
