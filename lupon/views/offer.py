@@ -60,7 +60,8 @@ def edit_offer(offer_id):
             db.session.commit()
             return redirect(url_for('edit_offer', offer_id=offer_id))
 
-    if taskform.validate_on_submit():    
+    if taskform.validate_on_submit():
+        taskform.populate_obj(task)
         if task.add_task is True:
             t = Task(user_id=current_user.get_id(),
                     create_by=current_user.get_name(),
@@ -74,9 +75,22 @@ def edit_offer(offer_id):
             offer.tasks.append(t)
             db.session.commit()
             return redirect(url_for('edit_offer', offer_id=offer_id))
+
+        if task.del_task is True:
+            offer.tasks.remove(task)
+            db.session.commit()
+            return redirect(url_for('edit_offer', offer_id=offer_id))
         
     return render_template('offer/edit_offer.html', offers=offers, form=form, tasks=tasks, taskform=taskform)
 
+@app.route('/api/v1.0/offer/get/<int:offer_id>/<int:task_id>', methods=["GET", "POST"])
+@login_required
+def offer_remove_task(offer_id, task_id):
+    offer = Workpackage.query.get(offer_id)
+    task = Task.query.get(task_id)
+    offer.tasks.remove(task)
+    db.session.commit()
+    return redirect(url_for('edit_offer', offer_id=offer_id))
 
 @app.route('/api/v1.0/offer/get/<int:offer_id>', methods=["GET"])
 @login_required
