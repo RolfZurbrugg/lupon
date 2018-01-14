@@ -16,9 +16,17 @@
                             <!--a class="dropdown-item" href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp; {{ _('Bills') }}</a-->
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact"><i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; {{ _('Contacts') }}</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/contact" id="navDropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; {{ _('Contacts') }}</a>
+                        <div class="dropdown-menu" aria-labelledby="navDropdown01">
+                            <a class="dropdown-item" href="{{ url_for('add_contact') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; {{ _('New Contact') }}</a>
+                            <a class="dropdown-item" href="{{ url_for('contact_dashboard') }}"><i class="fa fa-car" aria-hidden="true"></i>&nbsp; {{ _('Manage Contacts') }}</a>
+                            <!--a class="dropdown-item" href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp; {{ _('Bills') }}</a-->
+                        </div>
                     </li>
+<!--                     <li class="nav-item">
+                        <a class="nav-link" href="/contact"><i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; {{ _('Contacts') }}</a>
+                    </li> -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/task" id="navDropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; {{ _('Services') }}</a>
                         <div class="dropdown-menu" aria-labelledby="navDropdown01">
@@ -40,7 +48,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navDropdown03" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
                         <div class="dropdown-menu" aria-labelledby="navDropdown03">
-                            <a class="dropdown-item" href="#">{{ _('User Profil') }}</a>
+                            <a class="dropdown-item" href="{{ url_for('profile') }}">{{ _('User Profil') }}</a>
                             <a class="dropdown-item" href="#">{{ _('Password Reset') }}</a>
                         </div>
                     </li>

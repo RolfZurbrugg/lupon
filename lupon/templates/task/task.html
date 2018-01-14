@@ -1,0 +1,37 @@
+{# lupon/templates/contact.html #}
+
+{% from "macros.html" import inputField, submitForm %}
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    {% include "task/sidebar.html" %}
+    <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+        <h1>Task Dashbaord</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>amount</th>
+                    <th>Unit</th>
+                    <th>Description</th>
+                    <th>Value</th>
+                    </tr>
+            </thead>
+            <tbody>
+                {% for row in tasks  %}
+                <tr>
+                <td><a href="{{ url_for('task', id=row.id) }}">{{ row.id|safe }}</a></td>
+                <td>{{ row.name|safe }}</td>
+                <td>{{ row.amount|safe }}</td>
+                <td>{{ row.unit|safe }}</td>
+                <td>{{ row.description|safe }}</td>
+                <td>{{ row.value|safe }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+</main>
+</div>
+{% endblock %}

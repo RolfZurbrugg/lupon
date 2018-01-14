@@ -12,7 +12,7 @@ def contact_api():
 
 @app.route('/contact')
 @login_required
-def contact_dashbaord():
+def contact_dashboard():
     contacts = Contact.get_all(current_user.get_id())
     return render_template('contact/contact.html', contacts=contacts)
 
