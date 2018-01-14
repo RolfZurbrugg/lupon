@@ -3,7 +3,7 @@
     <form class="bd-search d-flex align-items-center">
                <input type="search" class="form-control" id="search-input" placeholder="Filter..." aria-label="Search for..." autocomplete="off"><a id="add_button" class="btn btn-primary btn-lgt" href="{{ url_for('add_contact') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
         </form>
-    <ul class="nav nav-pills flex-column" id=contact_list>
+    <ul class="nav nav-pills flex-column" id=filter_list>
     {% for row in contacts %}   
         <li class="nav-item">
             {% if contactform is defined %}

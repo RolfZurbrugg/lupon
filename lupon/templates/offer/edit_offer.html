@@ -11,20 +11,30 @@
     <h1>Edit Offer</h1>
     <form class="form" action="{{ url_for('edit_offer', offer_id=form.data.id) }}" method="post" enctype="multipart/form-data">
         <div class="row">
+                {{ form.hidden_tag() }}
         <div class="col-sm">
-            {{ form.hidden_tag() }}
             {{ inputField(form.description) }}
             {{ inputField(form.task) }}
         </div>
+        <div class="col-sm">
+            {{ inputField(form.discount) }}
+        </div>
+
     </div>
     {{ submitForm(form.update_offer) }}
     {{ submitForm(form.del_offer) }}
     {{ submitForm(form.assosiate_task) }}
     </form>
-    <form class="form" action="{{ url_for('edit_offer', offer_id=form.data.id) }}" method="post" enctype="multipart/form-data">
-    {% include "task/taskform.html" %}
+  
     
 <h2>Assiciated Tasks</h2>
+
+<div class="form-row">
+        <form class="form" action="{{ url_for('edit_offer', offer_id=form.data.id) }}" method="post" enctype="multipart/form-data">
+            {% include "task/taskform.html" %}
+        </form>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -45,12 +55,23 @@
         <td>{{ row.amount|safe }}</td>
         <td>{{ row.unit|safe }}</td>
         <td>{{ row.description|safe }}</td>
-        <td>{{ row.value|safe }}</td>
+        <td>{{ "$%.2f"|format(row.value)|safe }}</td>
         <td><a class="btn-primary btn" href="{{ url_for('offer_remove_task', task_id=row.id, offer_id=form.data.id) }}">Remove</a></td>
         </tr>
         {% endfor %}
+        <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>{{ "$%.2f"|format(total) }}</b></td>
+                <td></td>
+                </tr>
     </tbody>
-</form>
+</table>
+
+
     </main>
 </div>
 

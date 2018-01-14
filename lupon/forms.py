@@ -177,8 +177,8 @@ class OfferForm(FlaskForm):
     id = HiddenField('id')
     # name = StringField('Name', validators=[DataRequired(), Length(max=255)], render_kw={"placeholder": "Name"})
     description = TextField('Description', render_kw={"placeholder": "Name"})
-    location = QuerySelectField('Location', allow_blank=True)
-    contact = QuerySelectField('Contact', allow_blank=True)
+    location = QuerySelectField('Location', allow_blank=False)
+    contact = QuerySelectField('Contact', allow_blank=False)
     add_offer = SubmitField('Add new Offer')
 
 
@@ -188,9 +188,10 @@ class OfferEditForm(FlaskForm):
     description = TextField('Description', render_kw={"placeholder": "Name"})
     location = QuerySelectField('Location', allow_blank=True)
     contact = QuerySelectField('Contact', allow_blank=True)
+    discount =  FloatField('Discount',validators=[Optional()], render_kw={"placeholder": "Discount in %"})
     # due_date = DateField('Due Date')
     # start_date = DateField('Start Date')
-    task = QuerySelectField('Tasks', allow_blank=True)
+    task = QuerySelectField('Tasks', allow_blank=False)
     assosiate_task = SubmitField('Add Task to Offer')
     update_offer = SubmitField('Update')
     del_offer = SubmitField('Delete')

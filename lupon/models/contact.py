@@ -22,7 +22,7 @@ class Contact(db.Model, CustomBase):
     sex = Column(String(STRING_SIZE))
     homepage = Column(String(STRING_SIZE))
     company = Column(String(STRING_SIZE))
-    discount = Column(Float)
+    discount = Column(Float, default=0)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     address = relationship('Location', backref='contact', lazy=True)
 

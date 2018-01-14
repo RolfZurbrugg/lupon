@@ -7,7 +7,7 @@ from lupon.models import Workpackage, Location, Contact, Task
 from lupon.forms import OfferForm, OfferEditForm, TaskForm
 
 
-@app.route('/offer', methods=['GET','POST'])
+@app.route('/offer')
 @login_required
 def offer_dashboard():
     offers = Workpackage.get_all(current_user.get_id())
@@ -20,6 +20,8 @@ def add_offer():
     offerform = OfferForm()
     offerform.location.query = Location.query.filter_by(user_id=current_user.get_id())
     offerform.contact.query = Contact.query.filter_by(user_id=current_user.get_id())
+
+    offers = Workpackage.get_all(current_user.get_id())
 
     if offerform.validate_on_submit():
         # Create offer
@@ -34,54 +36,47 @@ def add_offer():
         db.session.commit()
         return redirect(url_for('offer_dashboard'))
 
-    return render_template('offer/add_offer.html', offerform=offerform)
+    return render_template('offer/add_offer.html', offerform=offerform, offers=offers)
 
 @app.route('/offer/edit/<int:offer_id>', methods=['GET','POST'])
 @login_required
 def edit_offer(offer_id):
+    logging.info('edit_offer with ID: '+ str(offer_id))
     offer = Workpackage.query.filter_by(id=offer_id).first()
     form = OfferEditForm(obj=offer)
     form.task.query = Task.query.filter_by(user_id=current_user.get_id())
     offers = Workpackage.get_all(current_user.get_id())
-    logging.info('edit_offer with ID: '+ str(offer_id))
-    
-    tasks = offer.get_tasks()
-    task = Task()
+    tasks = offer.get_tasks()  
     taskform = TaskForm()
     
     if form.validate_on_submit():
         logging.info('edit_offer, form validation successfull for ID: '+ str(offer_id))
         form.populate_obj(offer)
-        taskform.populate_obj(task)
+        # taskform.populate_obj(task)
         
         if offer.assosiate_task is True:
             task = Task.query.get(form.task.data.id)
             offer.tasks.append(task)
             db.session.commit()
+            
             return redirect(url_for('edit_offer', offer_id=offer_id))
 
     if taskform.validate_on_submit():
+        task = Task(user_id=current_user.get_id(),
+                    create_by=current_user.get_name())
         taskform.populate_obj(task)
-        if task.add_task is True:
-            t = Task(user_id=current_user.get_id(),
-                    create_by=current_user.get_name(),
-                    name=request.values.get('name'),
-                    amount=request.values.get('amount'),
-                    value=request.values.get('value'),
-                    unit=request.values.get('unit'),
-                    description=request.values.get('description'))
-            task.id = None
-            db.session.add(t)
-            offer.tasks.append(t)
-            db.session.commit()
-            return redirect(url_for('edit_offer', offer_id=offer_id))
+        task.id = None
 
-        if task.del_task is True:
-            offer.tasks.remove(task)
+        logging.info('adding Task: '+ str(task.id)+str(task.name))
+        if task.add_task is True:
+            
+            db.session.add(task)
+            offer.tasks.append(task)
             db.session.commit()
+            
             return redirect(url_for('edit_offer', offer_id=offer_id))
         
-    return render_template('offer/edit_offer.html', offers=offers, form=form, tasks=tasks, taskform=taskform)
+    return render_template('offer/edit_offer.html', offers=offers, form=form, tasks=tasks, taskform=taskform, total=offer.total_value())
 
 @app.route('/api/v1.0/offer/get/<int:offer_id>/<int:task_id>', methods=["GET", "POST"])
 @login_required
@@ -90,7 +85,12 @@ def offer_remove_task(offer_id, task_id):
     task = Task.query.get(task_id)
     offer.tasks.remove(task)
     db.session.commit()
+    
     return redirect(url_for('edit_offer', offer_id=offer_id))
+
+
+
+
 
 @app.route('/api/v1.0/offer/get/<int:offer_id>', methods=["GET"])
 @login_required

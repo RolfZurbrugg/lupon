@@ -21,17 +21,17 @@
       return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase())>=0;
   };
 
-  function listFilter(contact_list) {
+  function listFilter(filter_list) {
     $(document.getElementById('search-input'))
       .change( function () {
         var filter = $(this).val();
         if(filter) {
           // this finds all links in a list that contain the input,
           // and hide the ones not containing the input while showing the ones that do
-          $(contact_list).find("a:not(:Contains(" + filter + "))").parent().slideUp();
-          $(contact_list).find("a:Contains(" + filter + ")").parent().slideDown();
+          $(filter_list).find("a:not(:Contains(" + filter + "))").parent().slideUp();
+          $(filter_list).find("a:Contains(" + filter + ")").parent().slideDown();
         } else {
-          $(contact_list).find("li").slideDown();
+          $(filter_list).find("li").slideDown();
         }
         return false;
       })
@@ -42,6 +42,6 @@
   }
  //ondomready
  $(function () {
-  listFilter($("#contact_list"));
+  listFilter($("#filter_list"));
  });
 }(jQuery));

@@ -3,14 +3,14 @@
     <form class="bd-search d-flex align-items-center">
                <input type="search" class="form-control" id="search-input" placeholder="Filter..." aria-label="Search for..." autocomplete="off"><a id="add_button" class="btn btn-primary btn-lgt" href="{{ url_for('add_offer') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
         </form>
-    <ul class="nav nav-pills flex-column" id=offer_list>
+    <ul class="nav nav-pills flex-column" id=filter_list>
     {% for row in offers %}   
         <li class="nav-item">
             {% if offerform is defined %}
-            <a class="nav-link {% if row.id == offerform.data.id %}active{% endif %}" href="{{ url_for('edit_offer', offer_id=row.id) }}">{{ row.firstname|safe }} {{ row.lastname|safe }}</a>
+            <a class="nav-link {% if row.id == offerform.data.id %}active{% endif %}" href="{{ url_for('edit_offer', offer_id=row.id) }}">{{ row.id|safe }}: {{ row.description|safe }}</a>
 
             {% else %}
-            <a class="nav-link" href="{{ url_for('edit_offer', offer_id=row.id) }}">{{ row.name|safe }} {{ row.id|safe }}</a>
+            <a class="nav-link" href="{{ url_for('edit_offer', offer_id=row.id) }}">{{ row.id|safe }}: {{ row.description|safe }} </a>
 
             {% endif %}
         </li>

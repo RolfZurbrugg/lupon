@@ -1,8 +1,8 @@
-from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode, DateTime, Table, PrimaryKeyConstraint
+from sqlalchemy import Column, String, ForeignKey, Integer, Text, Float, JSON, Boolean, Unicode, DateTime, Table, PrimaryKeyConstraint, func
 from sqlalchemy.orm import relationship
 from lupon import db
+from lupon.models import Contact
 from flask import jsonify
-
 from .base import CustomBase
 from .constants import STRING_SIZE
 
@@ -27,7 +27,7 @@ class Workpackage(db.Model, CustomBase):
     start_date = Column(DateTime())
     status = Column(String(STRING_SIZE))
     is_active = Column(Boolean)
-    discount = Column(Float)
+    discount = Column(Float, default=0)
     priority = Column(String(STRING_SIZE))
     # comment = Column(Text)
     location_id = Column(Integer, ForeignKey('location.id'))
@@ -40,7 +40,13 @@ class Workpackage(db.Model, CustomBase):
         pass
 
     def total_value(self):
-        pass
+        total_value = 0
+        base_discount = Contact.query.get(self.contact_id).discount
+        
+        for task in self.tasks:
+            total_value += task.value
+        
+        return total_value - (total_value * ((self.discount + base_discount) / 100))
 
     def get_tasks(self):
         return self.tasks
