@@ -16,6 +16,20 @@
 </div>
 {% endmacro %}
 
+
+{% macro simpleInputField(field) %}
+<div class="col">
+<div class="form{% if field.errors %} is-invalid{% endif %}">  
+    {% if field.errors %}
+        {{ field(class='form-control is-invalid') }}
+    {% else %}
+        {{ field(class='form-control') }}
+    {% endif %}
+</div>
+</div>
+{% endmacro %}
+
+
 {# Renders Action #}
 {% macro submitForm(field) %}
     {{ field(class_="btn btn-primary") }}

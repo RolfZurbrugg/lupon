@@ -1,6 +1,6 @@
 {# lupon/templates/contact.html #}
 
-{% from "macros.html" import inputField, submitForm %}
+{% from "macros.html" import inputField, submitForm, simpleInputField %}
 
 {% extends "base.html" %}
 
@@ -19,9 +19,11 @@
     </div>
     {{ submitForm(form.update_offer) }}
     {{ submitForm(form.del_offer) }}
-    {{ submitForm(form.add_task) }}
+    {{ submitForm(form.assosiate_task) }}
     </form>
-
+    <form class="form" action="{{ url_for('edit_offer', offer_id=form.data.id) }}" method="post" enctype="multipart/form-data">
+    {% include "task/taskform.html" %}
+    </form>
 <h2>Assiciated Tasks</h2>
 <table class="table">
     <thead>
