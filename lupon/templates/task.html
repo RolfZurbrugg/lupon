@@ -7,10 +7,6 @@
 {% block content %}
 
 
-<form class="form" action="" method="post" enctype="multipart/form-data">
-    <h2>Mange Tasks</h2>
-</form>
-
 <script type="text/javascript">
 
     window.onload = function () {
@@ -55,7 +51,7 @@
     //ajax function delete
 
 </script>
-
+<h2>Mange Tasks</h2>
 <form class="form" method="post" enctype="multipart/form-data">
     {{ taskform.hidden_tag() }}
     {{ inputField(taskform.name) }}
