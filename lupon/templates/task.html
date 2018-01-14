@@ -6,38 +6,30 @@
 
 {% block content %}
 
-<!--code added by rolf-->
-<script type=text/javascript>
-    $(function() {
-        $('a#calculate').bind('click', function() {
-            $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
-                a: $('input[name="a"]').val(),
-                b: $('input[name="b"]').val()
-            }, function(data) {
-                $("#result").text(data.result);
-            });
-            return false;
-        });
-    });
-</script>
-<h1>jQuery Example</h1>
-<p><input type=text size=5 name=a> +
-    <input type=text size=5 name=b> =
-    <span id=result>?</span>
-<p><a href=# id=calculate>calculate server side</a>
-
-<!--end of demo code by rolf-->
 
 <form class="form" action="" method="post" enctype="multipart/form-data">
-    List of available tasklists
+    <h2>Mange Tasks</h2>
 </form>
 
 <script type="text/javascript">
-    //ajax binds
-    $(function () {
-        $('#add_task').bind('click', add_task);
-        return false;
-    });
+
+    window.onload = function () {
+        //replace buttons with links if js is active
+        $('#add_task').replaceWith('<a href=# class="btn btn-primary btn-radius" id="add_task">Add</a>');
+
+
+        console.log('replaced buttons with links');
+
+        //ajax binds
+        //bind add_task
+        $(function () {
+            $('#add_task').bind('click', add_task);
+            console.log('binded click');
+            return false;
+        });
+
+    };
+
 
 
     //ajax function add
@@ -51,27 +43,27 @@
                 amount: $('#amount').val(),
                 value: $('#amount').val(),
                 unit: $('#unit').val(),
-                dcription: $('#description').val()
+                description: $('#description').val()
             }
         }).done(function (msg) {
             alert("data Saved: "+ msg);
         })
     }
+
     //ajax function update
 
     //ajax function delete
 
 </script>
 
-<form class="form" enctype="multipart/form-data">
+<form class="form" method="post" enctype="multipart/form-data">
     {{ taskform.hidden_tag() }}
     {{ inputField(taskform.name) }}
     {{ inputField(taskform.amount) }}
     {{ inputField(taskform.value) }}
     {{ inputField(taskform.unit) }} <!--replace with dropdown-->
     {{ inputField(taskform.description) }}
-    <!--{{ submitForm(taskform.add_task) }}-->
-    <a href=# id="add_task">add shit</a>
+    {{ submitForm(taskform.add_task) }}
     {{ submitForm(taskform.update_task) }}
     {{ submitForm(taskform.del_task) }}
 </form>
