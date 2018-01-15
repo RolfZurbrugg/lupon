@@ -64,7 +64,6 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        flash('form is valide', 'info')
         user, authenticated = User.authenticate(form.email.data,
                                     form.password.data)
 

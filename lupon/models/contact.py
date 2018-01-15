@@ -28,7 +28,8 @@ class Contact(db.Model, CustomBase):
 
     def __repr__(self):
         ''' DEBUG PRINT OUTPUT'''
-        return '<Contact %r>' % (self.firstname+" "+self.lastname)
+        #return '<Contact %r>' % (self.firstname+" "+self.lastname)
+        return '{} {}, {}'.format(self.firstname, self.lastname, self.email) 
     
     def set_location(self, location):
         '''' update or create new location for self '''

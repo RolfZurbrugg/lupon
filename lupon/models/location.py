@@ -34,7 +34,7 @@ class Location(db.Model, CustomBase):
     def __repr__(self):
         ''' DEBUG PRINT OUTPUT'''
         # return '<Location %r>' % (self.street+" "+str(self.id))
-        return str(self.id)
+        return '{} {}, {} {}'.format(self.street, self.streetNumber, self.city, self.zip_code) 
 
     @property
     def serialize(self):
