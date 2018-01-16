@@ -49,7 +49,8 @@ def task():
 
         elif task.del_task is True:
             tmp_task = Task.query.filter_by(id=task.id).first()
-            tmp_task.delete()
+            db.session.delete(tmp_task)
+            db.session.commit()
             flash("Task deleted "+ str(task.del_task), 'warning')
         
         return redirect(url_for('task'))
@@ -66,7 +67,10 @@ def add_task():
                 unit=request.values.get('unit'),
                 description=request.values.get('description'),
                 user_id=current_user.get_id())
+    task_add.create_by = current_user.get_name()
     db.session.add(task_add)
     db.session.commit()
-    return jsonify('succes python ')
+    # flash("Task created! "+ str(task.add_task), 'success')
+    t = task_add.serialize
+    return jsonify(t)
 

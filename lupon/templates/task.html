@@ -41,8 +41,24 @@
                 unit: $('#unit').val(),
                 description: $('#description').val()
             }
-        }).done(function (msg) {
-            alert("data Saved: "+ msg);
+        }).done(function (task) {
+            //add task to table
+            console.log(task);
+            var table_row = "<tr>"+
+                "<td><a href='/task?task_id="+task.id+ "'>"+task.id+"</a></td>"+
+                "<td>"+task.create_date+"</td>"+
+                "<td>"+task.modify_date+"</td>"+
+                "<td>"+task.created_by+"</td>"+
+                "<td>"+task.modify_by+"</td>"+
+                "<td>"+task.name+"</td>"+
+                "<td>"+task.description+"</td>"+
+                "<td>"+task.amount+"</td>"+
+                "<td>"+task.unit+"</td>"+
+                "<td>"+task.value+"</td>"+
+            "</tr>";
+            console.log(table_row);
+            //add table row to toable
+            $('#task_table tbody').append(table_row);
         })
     }
 
@@ -64,7 +80,7 @@
     {{ submitForm(taskform.del_task) }}
 </form>
 
-<table class="table">
+<table class="table" id="task_table">
     <thead>
         <tr>
             <th>id</th>
