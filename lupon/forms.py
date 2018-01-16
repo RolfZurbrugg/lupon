@@ -185,9 +185,9 @@ class OfferForm(FlaskForm):
 class OfferEditForm(FlaskForm):
     id = HiddenField('id')
     # name = StringField('Name', validators=[DataRequired(), Length(max=255)], render_kw={"placeholder": "Name"})
-    name = TextField('Name', render_kw={"placeholder": "Name"})
-    location = QuerySelectField('Location', allow_blank=True)
-    contact = QuerySelectField('Contact', allow_blank=True)
+    name = TextField('Name', validators=[DataRequired(), Length(max=255)], render_kw={"placeholder": "Name"})
+    # location = QuerySelectField('Location', allow_blank=True)
+    # contact = QuerySelectField('Contact', allow_blank=True)
     discount =  FloatField('Discount',validators=[Optional(), NumberRange(min=0, max=100)], render_kw={"placeholder": "Discount in %"})
     # due_date = DateField('Due Date')
     # start_date = DateField('Start Date')

@@ -65,11 +65,19 @@ def edit_offer(offer_id):
             
             return redirect(url_for('edit_offer', offer_id=offer_id))
 
+        elif offer.update_offer is True:
+            logging.info('edit_offer, action Update offer with ID: '+ str(offer_id))
+            db.session.commit()
+            flash("Offer sucessfully Updated",  'success')
+
+            return redirect(url_for('edit_offer', offer_id=offer_id))
+
         elif offer.del_offer is True:
             logging.info('edit_offer, action Delete offer with ID: '+ str(offer_id))
             db.session.delete(offer)
             db.session.commit()
             flash("Offer sucessfully deleted",  'success')
+            
             return redirect(url_for('offer_dashboard'))
 
     if taskform.validate_on_submit():
