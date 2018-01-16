@@ -21,6 +21,7 @@ def add_offer():
     offerform.location.query = Location.query.filter_by(user_id=current_user.get_id())
     offerform.contact.query = Contact.query.filter_by(user_id=current_user.get_id())
 
+  
     offers = Workpackage.get_all(current_user.get_id())
 
     if offerform.validate_on_submit():
@@ -49,6 +50,9 @@ def edit_offer(offer_id):
     tasks = offer.get_tasks()  
     taskform = TaskForm()
     
+    contact = Contact.query.get(offer.contact_id)
+    location = Location.query.get(offer.location_id)
+
     if form.validate_on_submit():
         logging.info('edit_offer, form validation successfull for ID: '+ str(offer_id))
         form.populate_obj(offer)
@@ -60,6 +64,13 @@ def edit_offer(offer_id):
             db.session.commit()
             
             return redirect(url_for('edit_offer', offer_id=offer_id))
+
+        elif offer.del_offer is True:
+            logging.info('edit_offer, action Delete offer with ID: '+ str(offer_id))
+            db.session.delete(offer)
+            db.session.commit()
+            flash("Offer sucessfully deleted",  'success')
+            return redirect(url_for('offer_dashboard'))
 
     if taskform.validate_on_submit():
         task = Task(user_id=current_user.get_id(),
@@ -76,7 +87,7 @@ def edit_offer(offer_id):
             
             return redirect(url_for('edit_offer', offer_id=offer_id))
         
-    return render_template('offer/edit_offer.html', offers=offers, form=form, tasks=tasks, taskform=taskform, total=offer.total_value())
+    return render_template('offer/edit_offer.html', offers=offers, form=form, tasks=tasks, taskform=taskform, total=offer.total_value(), contact=contact, location=location)
 
 @app.route('/api/v1.0/offer/get/<int:offer_id>/<int:task_id>', methods=["GET", "POST"])
 @login_required

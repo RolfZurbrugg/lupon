@@ -44,6 +44,16 @@ python manage.py runserver
 cp config-example.py config.py
 ```
 
+Disable debug Toolbar and/or redirect interception
+```python
+DEBUG_TB_INTERCEPT_REDIRECTS = False
+DEBUG_TB_ENABLED = False
+```
+
+If https is used, please set preferred URL SCHEME which affects all url_for() calls
+```python
+PREFERRED_URL_SCHEME = 'https'
+```
 
 ```python
 # DATABASE MySQL (deprecated but maybe still working) => you will need to install "pip install mysqlclient"

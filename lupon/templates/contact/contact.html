@@ -25,7 +25,7 @@
                 <tbody>
                     {% for row in contacts  %}
                     <tr>
-                    <td><a href="{{ url_for('profile', id=row.id) }}">{{ row.id|safe }}</a></td>
+                    <td><a href="{{ url_for('edit_contact', id=row.id) }}">{{ row.id|safe }}</a></td>
                     <td>{{ row.firstname|safe }}</td>
                     <td>{{ row.lastname|safe }}</td>
                     <td>{{ row.email|safe }}</td>
