@@ -15,6 +15,11 @@ class Task(db.Model, CustomBase):
     value = Column(Float) #Cost of shit
     user_id = Column(Integer, ForeignKey('user.id'), nullable=True)
 
+    def __repr__(self):
+        ''' DEBUG PRINT OUTPUT'''
+        #return '<Contact %r>' % (self.firstname+" "+self.lastname)
+        return '{}'.format(self.name)
+
     @classmethod
     # get all task filtered by user_id
     def get_all(cls, user_id):
