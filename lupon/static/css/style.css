@@ -110,6 +110,10 @@ h2 {
    height:60px;
 } */
 
+#stupid_button {
+    background: white;
+}
+
 .error-page {padding: 40px 15px;text-align: center;}
 
 .error-actions {margin-top:15px;margin-bottom:15px;}
